@@ -64,6 +64,7 @@
 
 - (void)addStrokeFromPoint:(CGPoint)a toPoint:(CGPoint)b
 {
+    /*
     CGContextRef pc = CGLayerGetContext(paintLayer);
     CGContextSetFillColorWithColor(pc, [strokeColor CGColor]);
     
@@ -91,6 +92,7 @@
     CGRect bRect = CGRectMake(b.x - rad, b.y - rad, rad * 2, rad * 2);
 
     [self setNeedsDisplayInRect: CGRectUnion(aRect, bRect)];
+    */
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

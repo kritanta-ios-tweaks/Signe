@@ -1,5 +1,9 @@
 #include "BGNumberCanvas.h"
+#include "Signe.h"
+#include "SigneManager.h"
 #import <AudioToolbox/AudioToolbox.h>
+
+static NSDictionary *prefs;
 
 @interface UISystemGestureView : UIView
 
@@ -82,6 +86,8 @@
     if (!self.injected) 
     {
 		self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+		self.BGCanvas.hidden = YES;
+		[self addSubview:self.BGCanvas];
     	[self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
@@ -92,19 +98,19 @@
 %new
 - (void)activateSigne
 {
+	[self.BGCanvas removeFromSuperview];
+	self.BGCanvas = nil;
 	self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
 	[self addSubview:self.BGCanvas];
-	//self.BGCanvas.hidden = NO;
+    [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
+	self.BGCanvas.hidden = NO;
 }
 
 %new
 - (void)deactivateSigne
 {
     [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-	[self.BGCanvas clear];
-	[self.BGCanvas removeFromSuperview];
-	self.BGCanvas = nil;
+	self.BGCanvas.hidden = YES;
 }
 
 
@@ -170,3 +176,67 @@
 }
 
 %end
+
+
+
+static void *observer = NULL;
+
+static void reloadPrefs() 
+{
+    if ([NSHomeDirectory() isEqualToString:@"/var/mobile"]) 
+    {
+        CFArrayRef keyList = CFPreferencesCopyKeyList((CFStringRef)kIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost);
+
+        if (keyList) 
+        {
+            prefs = (NSDictionary *)CFBridgingRelease(CFPreferencesCopyMultiple(keyList, (CFStringRef)kIdentifier, kCFPreferencesCurrentUser, kCFPreferencesAnyHost));
+
+            if (!prefs) 
+            {
+                prefs = [NSDictionary new];
+            }
+            CFRelease(keyList);
+        }
+    } 
+    else 
+    {
+        prefs = [NSDictionary dictionaryWithContentsOfFile:kSettingsPath];
+    }
+}
+
+
+static BOOL boolValueForKey(NSString *key, BOOL defaultValue) 
+{
+    return (prefs && [prefs objectForKey:key]) ? [[prefs objectForKey:key] boolValue] : defaultValue;
+}
+
+static void preferencesChanged() 
+{
+    CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
+    //reloadPrefs();
+
+	[[SigneManager sharedManager] setBundleToOpen:@"com.atebits.Tweetie2" forKey:@"2"]; //twitter
+	[[SigneManager sharedManager] setBundleToOpen:@"com.hammerandchisel.discord" forKey:@"3"]; //discord
+	[[SigneManager sharedManager] setURLToOpen:@"https://patreon.com/kritantadev" forKey:@"5"]; //krit patreon
+	[[SigneManager sharedManager] setURLToOpen:@"https://www.buymeacoff.ee/tr1fecta" forKey:@"6"]; //tr1 bmac
+	[[SigneManager sharedManager] setBundleToOpen:@"com.christianselig.Apollo" forKey:@"9"]; //rebbit
+}
+
+#pragma mark ctor
+
+%ctor 
+{
+    [SigneManager sharedManager];
+
+    preferencesChanged();
+
+    CFNotificationCenterAddObserver(
+        CFNotificationCenterGetDarwinNotifyCenter(),
+        &observer,
+        (CFNotificationCallback)preferencesChanged,
+        (CFStringRef)@"me.kritanta.signeprefs/Prefs",
+        NULL,
+        CFNotificationSuspensionBehaviorDeliverImmediately
+    );
+
+}

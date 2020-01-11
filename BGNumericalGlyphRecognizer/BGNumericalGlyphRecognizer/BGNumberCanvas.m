@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#include "SigneManager.h"
 #import "BGNumberCanvas.h"
 #import "DetectedNumber.h"
 #import "CJSONSerializer.h"
@@ -98,9 +99,6 @@
         [currentStrokePoints removeAllObjects];
         return;
     }
-
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DeactivateSigne" object:nil];
-    [UIApplication sharedApplication].signeActive = NO;
     
     NSMutableArray * arr = [NSMutableArray arrayWithArray: currentStrokePoints];
     [self touchesEndedProcess:arr];
@@ -110,9 +108,9 @@
 
 - (void)touchesEndedProcess:(NSMutableArray*)newStrokePoints
 {
-    NSLog(@"[Signe] Waiting to start detection. Previous is %@", [prevDetectedNumber description]);
+    //NSLog(@"[Signe] Waiting to start detection. Previous is %@", [prevDetectedNumber description]);
     [glyphDetectorLock lock];
-    NSLog(@"[Signe] Starting detection %@ %@", [prevDetectedNumber description], [prevDetectedNumber glyphName]);
+    //NSLog(@"[Signe] Starting detection %@ %@", [prevDetectedNumber description], [prevDetectedNumber glyphName]);
     
     NSString * detected = nil;
     int count = [newStrokePoints count];
@@ -290,7 +288,7 @@
             
             // If our shape has a sufficiently large radius and doesn't have sections
             // going in the wrong direction, we're good: it's a zero.
-            NSLog(@"[Signe] %f, %d < %d / 8?", mean, wrong, count);
+            //NSLog(@"[Signe] %f, %d < %d / 8?", mean, wrong, count);
             if ((mean > 15) && (wrong <= fmaxf(1, count / 8)))
                 detected = @"0";
         }
@@ -339,7 +337,7 @@
         float yDiff = fabs(prevCenter.y - detectedCenter.y);
         
         if ((yDiff < [prevDetectedNumber rect].size.height / 2) && (xDiff < [prevDetectedNumber rect].size.width / 3.2)) {        
-            NSLog(@"[Signe] Detected  a dash7");
+            //NSLog(@"[Signe] Detected  a dash7");
             [glyphDetectorLock unlock];
 
             // do nothing. We've got a 7 with a dash through the middle, not a -7 or a 7-.
@@ -348,7 +346,7 @@
     }
 
     if (!likelySameCharacter) {
-        NSLog(@"[Signe] New Character %@", detected);
+        //NSLog(@"[Signe] New Character %@", detected);
         
         // Write the glyph points to disk, just so we can see them.
         if (SHOW_LETTERS) [self writeStrokeToDisk: [self mirroredStroke: newStrokePoints]];
@@ -366,7 +364,7 @@
         }
 
     } else {
-        NSLog(@"[Signe] Likely part of %@ character? Detected as %@ so far.", [prevDetectedNumber glyphName], detected);
+        //NSLog(@"[Signe] Likely part of %@ character? Detected as %@ so far.", [prevDetectedNumber glyphName], detected);
         
         // the last character was a partial and this one is either 1 or -...
         if ([[[prevDetectedNumber glyphName] substringToIndex: 2] isEqualToString:@"p4"] && ([detected isEqualToString:@"1"])) {
@@ -409,7 +407,7 @@
             
             // Merge the point data
             [newStrokePoints addObjectsFromArray: prevStrokePoints];
-            NSLog(@"[Signe] Writing combined");
+            //NSLog(@"[Signe] Writing combined");
             // Write the glyph points to disk, just so we can see them.
             [self writeStrokeToDisk: [self mirroredStroke: newStrokePoints]];
 
@@ -457,7 +455,7 @@
     prevStrokePoints = [NSMutableArray arrayWithArray: newStrokePoints];
     prevStrokeDate = [NSDate date];
     
-    NSLog(@"[Signe] Finished detection");
+    //NSLog(@"[Signe] Finished detection");
 
     [glyphDetectorLock unlock];
 }
@@ -466,7 +464,7 @@
 
 - (void)destroyLastGlyph
 {
-    NSLog(@"[Signe] Destroying last glyph!");
+    //NSLog(@"[Signe] Destroying last glyph!");
     [[prevDetectedNumber view] removeFromSuperview];
     [detectedNumbers removeObject: prevDetectedNumber];
     prevDetectedNumber = nil;
@@ -499,7 +497,7 @@
             if (([num isEqualToString: [n value]] == YES) || ([[result objectForKey:@"score"] doubleValue] < 1.5))
                 continue;
             [n setValueSecondary: num];
-            NSLog(@"[Signe] Set secondary: %@", num);
+            //NSLog(@"[Signe] Set secondary: %@", num);
             break;
         }
     }
@@ -507,24 +505,13 @@
 
 - (void)numberDetected:(DetectedNumber*)n inPaintRect:(CGRect)r
 {
-    NSLog(@"[Signe] !!! %@", n.value); 
+    //NSLog(@"[Signe] !!! %@", n.value); 
 
-    if ([n.value isEqualToString:@"2"]) 
-    {
-        //[[UIApplication sharedApplication] activateTouchRecognizer];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.patreon.com/kritantadev"] options:@{} completionHandler:nil];
-    }
-    else if ([n.value isEqualToString:@"3"])
-    {
-        //[[UIApplication sharedApplication] activateTouchRecognizer];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.buymeacoff.ee/tr1fecta"] options:@{} completionHandler:nil];
-    }
-    else if ([n.value isEqualToString:@"5"])
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[UIApplication sharedApplication] launchApplicationWithIdentifier:@"com.hammerandchisel.discord" suspended:NO];
-        });
-    }
+    [[SigneManager sharedManager] performActionForKey:n.value];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DeactivateSigne" object:nil];
+        [UIApplication sharedApplication].signeActive = NO;
+    });
 }
 
 #pragma mark Convenience Methods
@@ -560,7 +547,7 @@
         [ar addObject: [NSArray arrayWithObjects:[NSNumber numberWithInt: [p CGPointValue].x],[NSNumber numberWithInt: [p CGPointValue].y], nil]];
     
     NSData * data = [n serializeArray:[NSArray arrayWithObject: ar] error:nil];
-    NSLog(@"[Signe] %@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    //NSLog(@"[Signe] %@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
 }
 
 - (NSMutableArray*)mirroredStroke:(NSMutableArray*)input
@@ -605,7 +592,7 @@
 - (BOOL)collectContainedLetters:(CGRect)bounds
 {
     NSMutableArray * containedLetters = [NSMutableArray array];
-    NSLog(@"[Signe] Submitting Answer with characters:");
+    //NSLog(@"[Signe] Submitting Answer with characters:");
     
     for (int ii = [detectedNumbers count]-1; ii >= 0; ii--) {
         CGRect other = [[detectedNumbers objectAtIndex: ii] rect];
@@ -648,7 +635,7 @@
         DetectedNumber * d = [sortedLetters objectAtIndex: ii];
         r = CGRectUnion(r, [d rect]);
         
-        NSLog(@"[Signe] (%@ or %@)", [d value], [d valueSecondary]);
+        //NSLog(@"[Signe] (%@ or %@)", [d value], [d valueSecondary]);
     }
     
     // Compute the screen coordinates of the inscribing circle and send that along too.
@@ -684,7 +671,7 @@
     }
     rVariance /= [line count];
     
-    NSLog(@"[Signe] Detecting straight line: %f < 0.21?", rVariance);
+    //NSLog(@"[Signe] Detecting straight line: %f < 0.21?", rVariance);
     if (fabs(rVariance) < 0.21)
         return YES;
     return NO;

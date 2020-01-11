@@ -24,13 +24,14 @@ _IMPORTS +=  $(shell /bin/ls -d ./BGNumericalGlyphRecognizer/*/*/*/)
 _IMPORTS +=  $(shell /bin/ls -d ./BGNumericalGlyphRecognizer/*/*/*/*/)
 _IMPORTS +=  $(shell /bin/ls -d ./BGNumericalGlyphRecognizer/*/*/*/*/*/)
 _IMPORTS +=  $(shell /bin/ls -d ./BGNumericalGlyphRecognizer/*/*/*/*/*/*/)
+_IMPORTS +=  $(shell /bin/ls -d ./SigneManager/)
 _IMPORTS += $(shell /bin/ls -d ./)
 IMPORTS = -I$./BGNumericalGlyphRecognizer $(call dtoim, $(_IMPORTS))
 
 # This code treats any .m file as a source file for the tweak and compiles/links it. 
 
 SOURCES = $(shell find BGNumericalGlyphRecognizer -name '*.m')
-#SOURCES += $(shell find BGNumericalGlyphRecognizer -name '*.json')
+SOURCES += $(shell find Signemanager -name '*.m')
 
 
 Signe_FILES = Signe.xm ${SOURCES}
