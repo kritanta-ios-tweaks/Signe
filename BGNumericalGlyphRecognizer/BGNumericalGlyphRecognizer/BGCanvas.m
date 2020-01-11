@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Foundry376. All rights reserved.
 //
 
+#include "SigneManager.h"
 #import "BGCanvas.h"
 
 @implementation BGCanvas
@@ -35,14 +36,16 @@
 
 - (void)setup
 {
-    self.strokeColor = [UIColor colorWithWhite:0.0 alpha:0.4];
-    self.strokeSize = 12;
+    self.strokeColor = [[SigneManager sharedManager] strokeColor];
+    self.strokeSize = [[SigneManager sharedManager] strokeSize];
 }
 
 - (void)clear
 {
     CGContextRef c = CGLayerGetContext(paintLayer);
     CGContextClearRect(c, self.bounds);
+    paintLayer = nil;
+    paintLayer = CGLayerCreateWithContext(c, [self bounds].size, NULL);
     [self setNeedsDisplay];
 }
 
@@ -64,7 +67,7 @@
 
 - (void)addStrokeFromPoint:(CGPoint)a toPoint:(CGPoint)b
 {
-    /*
+    if (![[SigneManager sharedManager] shouldDrawCharacters]) return;
     CGContextRef pc = CGLayerGetContext(paintLayer);
     CGContextSetFillColorWithColor(pc, [strokeColor CGColor]);
     
@@ -92,7 +95,6 @@
     CGRect bRect = CGRectMake(b.x - rad, b.y - rad, rad * 2, rad * 2);
 
     [self setNeedsDisplayInRect: CGRectUnion(aRect, bRect)];
-    */
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

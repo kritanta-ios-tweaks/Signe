@@ -26,6 +26,7 @@
     if (self) {
         self.actions = [[NSMutableDictionary alloc] init];
         self.actionLocations = [[NSMutableDictionary alloc] init];
+        self.shouldDrawCharacters = YES;
     }
 
     return self;

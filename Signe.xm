@@ -4,6 +4,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 static NSDictionary *prefs;
+static BOOL activationStyle = 0;
 
 @interface UISystemGestureView : UIView
 
@@ -26,6 +27,7 @@ static NSDictionary *prefs;
 @interface UIApplication (Signe)
 -(volb *)volumeHardwareButton;
 @end
+
 %hook UISystemGestureView 
 
 // iOS 13+ Support
@@ -33,52 +35,7 @@ static NSDictionary *prefs;
 /* ([[[[UIApplication sharedApplication] volumeHardwareButton] buttonActions] _handleVolumeIncreaseUp] && [[[[UIApplication sharedApplication] volumeHardwareButton] buttonActions] _handleVolumeDecreaseUp]) */
 
 %property (nonatomic, retain) BGNumberCanvas *BGCanvas;
-%property (nonatomic, assign) BOOL injected; // im lazy, yes so i've seen
-
-
-- (void)layoutSubviews
-{
-    %orig;
-    if (!self.injected) 
-    {
-		self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    	[self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
-		self.injected = YES;
-    }
-}
-
-%new
-- (void)activateSigne
-{
-    [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
-	[self addSubview:self.BGCanvas];
-	//self.BGCanvas.hidden = NO;
-}
-
-%new
-- (void)deactivateSigne
-{
-    [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-	[self.BGCanvas clear];
-	[self.BGCanvas removeFromSuperview];
-	self.BGCanvas = nil;
-	self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-}
-
-
-%end
-
-
-
-%hook FBSystemGestureView 
-
-// <= iOS 12 Support
-
-
-%property (nonatomic, retain) BGNumberCanvas *BGCanvas;
-%property (nonatomic, assign) BOOL injected; // im lazy, yes so i've seen
+%property (nonatomic, assign) BOOL injected;  
 
 - (void)layoutSubviews
 {
@@ -98,10 +55,49 @@ static NSDictionary *prefs;
 %new
 - (void)activateSigne
 {
-	[self.BGCanvas removeFromSuperview];
-	self.BGCanvas = nil;
-	self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	[self addSubview:self.BGCanvas];
+    [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
+	self.BGCanvas.hidden = NO;
+	//
+}
+
+%new
+- (void)deactivateSigne
+{
+    [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
+	self.BGCanvas.hidden = YES;
+}
+
+
+%end
+
+
+
+%hook FBSystemGestureView 
+
+// <= iOS 12 Support
+
+
+%property (nonatomic, retain) BGNumberCanvas *BGCanvas;
+%property (nonatomic, assign) BOOL injected; 
+
+- (void)layoutSubviews
+{
+    %orig;
+    if (!self.injected) 
+    {
+		self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+		self.BGCanvas.hidden = YES;
+		[self addSubview:self.BGCanvas];
+    	[self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
+		self.injected = YES;
+    }
+}
+
+%new
+- (void)activateSigne
+{
     [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
 	self.BGCanvas.hidden = NO;
 }
@@ -117,9 +113,11 @@ static NSDictionary *prefs;
 %end
 
 
-@interface SpringBoard : NSObject
+@interface SpringBoard : UIApplication
 -(BOOL)_handlePhysicalButtonEvent:(id)arg1;
+- (void)activateTouchRecognizer;
 @property (nonatomic, assign) BOOL signeActive;
+@property (nonatomic, assign) BOOL volDownActive;
 @property (nonatomic, retain) NSTimer *pressedTimer;
 @end
 
@@ -127,11 +125,14 @@ static NSDictionary *prefs;
 
 %property (nonatomic, assign) BOOL signeActive;
 %property (nonatomic, retain) NSTimer *pressedTimer;
+%property (nonatomic, assign) BOOL volDownActive;
 
 -(_Bool)_handlePhysicalButtonEvent:(UIPressesEvent *)arg1 
 {
 	int type = arg1.allPresses.allObjects[0].type; 
 	int force = arg1.allPresses.allObjects[0].force;
+
+	NSLog(@"Signe: %d - %d", type, force);
 
 	// type = 101 -> Home button
 	// type = 102 -> vol up
@@ -141,8 +142,14 @@ static NSDictionary *prefs;
 
 	// force = 0 -> button released
 	// force = 1 -> button pressed
-	
-	if (type == 103 && force == 1) //Power PRESSED
+	if ([arg1.allPresses.allObjects count] <= 1) return %orig;
+	if (arg1.allPresses.allObjects[0].type == 103 && force == 1 && arg1.allPresses.allObjects[1].type == 104 && arg1.allPresses.allObjects[1].force == 1) //Power PRESSED
+	{
+		[self activateTouchRecognizer];
+		return NO;
+	}
+
+	/* 	if (type == 103 && force == 1) //Power PRESSED
 	{
 		if (self.pressedTimer == nil) self.pressedTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(activateTouchRecognizer) userInfo:nil repeats:NO];
 	}
@@ -153,15 +160,18 @@ static NSDictionary *prefs;
 			[self.pressedTimer invalidate];
 			self.pressedTimer = nil;
 		}
-	}
+	} */
 
 	return %orig;
 }
 
 %new 
+-(void)volup{}
+
+%new 
 - (void)activateTouchRecognizer
 {
-	if (!self.signeActive) // If signe not active
+	if (!self.signeActive || self.signeActive == nil) // If signe not active
 	{
 		self.signeActive = YES;
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"ActivateSigne" object:nil];
@@ -220,6 +230,10 @@ static void preferencesChanged()
 	[[SigneManager sharedManager] setURLToOpen:@"https://patreon.com/kritantadev" forKey:@"5"]; //krit patreon
 	[[SigneManager sharedManager] setURLToOpen:@"https://www.buymeacoff.ee/tr1fecta" forKey:@"6"]; //tr1 bmac
 	[[SigneManager sharedManager] setBundleToOpen:@"com.christianselig.Apollo" forKey:@"9"]; //rebbit
+
+	[[SigneManager sharedManager] setShouldDrawCharacters:NO];
+	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];
+	[[SigneManager sharedManager] setStrokeSize:10];
 }
 
 #pragma mark ctor

@@ -507,11 +507,11 @@
 {
     //NSLog(@"[Signe] !!! %@", n.value); 
 
-    [[SigneManager sharedManager] performActionForKey:n.value];
+    [self clear];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"DeactivateSigne" object:nil];
-        [UIApplication sharedApplication].signeActive = NO;
+		[[UIApplication sharedApplication] activateTouchRecognizer];
     });
+    [[SigneManager sharedManager] performActionForKey:n.value];
 }
 
 #pragma mark Convenience Methods
