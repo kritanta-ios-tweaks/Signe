@@ -44,6 +44,7 @@
 @interface UIApplication (Signe)
 - (void)activateTouchRecognizer;
 @property (nonatomic, assign) BOOL signeActive;
+- (BOOL)launchApplicationWithIdentifier:(id)arg suspended:(BOOL)arg2;
 @end
 
 @implementation BGNumberCanvas
@@ -97,11 +98,15 @@
         [currentStrokePoints removeAllObjects];
         return;
     }
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"DeactivateSigne" object:nil];
+    [UIApplication sharedApplication].signeActive = NO;
     
     NSMutableArray * arr = [NSMutableArray arrayWithArray: currentStrokePoints];
     [self performSelectorInBackground:@selector(touchesEndedProcess:) withObject: arr];
     [currentStrokePoints removeAllObjects];
 }
+
 
 - (void)touchesEndedProcess:(NSMutableArray*)newStrokePoints
 {
@@ -454,8 +459,6 @@
     
     NSLog(@"[Signe] Finished detection");
 
-    
-
     [glyphDetectorLock unlock];
 }
 
@@ -506,17 +509,19 @@
 {
     NSLog(@"[Signe] !!! %@", n.value); 
 
-    if ([n.value isEqualToString:@"3"]) 
+    if ([n.value isEqualToString:@"2"]) 
     {
         //[[UIApplication sharedApplication] activateTouchRecognizer];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.patreon.com/kritantadev"] options:@{} completionHandler:nil];
-        [self removeFromSuperview];
     }
-    else if ([n.value isEqualToString:@"2"])
+    else if ([n.value isEqualToString:@"3"])
     {
         //[[UIApplication sharedApplication] activateTouchRecognizer];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.buymeacoff.ee/tr1fecta"] options:@{} completionHandler:nil];
-        [self removeFromSuperview];
+    }
+    else if ([n.value isEqualToString:@"4"])
+    {
+        [[UIApplication sharedApplication] launchApplicationWithIdentifier:@"com.hammerandchisel.discord" suspended:NO];
     }
 }
 

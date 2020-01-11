@@ -76,7 +76,6 @@
 %property (nonatomic, retain) BGNumberCanvas *BGCanvas;
 %property (nonatomic, assign) BOOL injected; // im lazy, yes so i've seen
 
-
 - (void)layoutSubviews
 {
     %orig;
@@ -84,7 +83,6 @@
     {
 		self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     	[self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-		[self addSubview:self.BGCanvas];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
 		self.injected = YES;
@@ -94,8 +92,10 @@
 %new
 - (void)activateSigne
 {
+	self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
-	self.BGCanvas.hidden = NO;
+	[self addSubview:self.BGCanvas];
+	//self.BGCanvas.hidden = NO;
 }
 
 %new
@@ -103,9 +103,9 @@
 {
     [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
 	[self.BGCanvas clear];
-	[self.BGCanvas setHidden:YES];
+	[self.BGCanvas removeFromSuperview];
+	self.BGCanvas = nil;
 }
-
 
 
 %end
