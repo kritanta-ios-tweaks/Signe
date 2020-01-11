@@ -103,7 +103,7 @@
     [UIApplication sharedApplication].signeActive = NO;
     
     NSMutableArray * arr = [NSMutableArray arrayWithArray: currentStrokePoints];
-    [self performSelectorInBackground:@selector(touchesEndedProcess:) withObject: arr];
+    [self touchesEndedProcess:arr];
     [currentStrokePoints removeAllObjects];
 }
 
@@ -519,9 +519,11 @@
         //[[UIApplication sharedApplication] activateTouchRecognizer];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString: @"https://www.buymeacoff.ee/tr1fecta"] options:@{} completionHandler:nil];
     }
-    else if ([n.value isEqualToString:@"4"])
+    else if ([n.value isEqualToString:@"5"])
     {
-        [[UIApplication sharedApplication] launchApplicationWithIdentifier:@"com.hammerandchisel.discord" suspended:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] launchApplicationWithIdentifier:@"com.hammerandchisel.discord" suspended:NO];
+        });
     }
 }
 
