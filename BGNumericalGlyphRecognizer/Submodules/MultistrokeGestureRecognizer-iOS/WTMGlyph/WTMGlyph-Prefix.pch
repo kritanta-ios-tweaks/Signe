@@ -1,0 +1,16 @@
+//
+// Prefix header for all source files of the 'WTMGlyph' target in the 'WTMGlyph' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
+
+#import "WTMGlyphDefaults.h"
+
+#ifdef WTMGLYPH_DEBUG
+#define DebugLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define DebugLog( s, ... ) 
+#endif

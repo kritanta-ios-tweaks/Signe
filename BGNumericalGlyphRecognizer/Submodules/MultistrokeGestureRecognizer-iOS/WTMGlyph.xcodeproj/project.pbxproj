@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EA1BA9AC138E71BF00D9A7B9 /* CDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA994138E71BF00D9A7B9 /* CDataScanner.h */; };
+		EA1BA9AD138E71BF00D9A7B9 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA995138E71BF00D9A7B9 /* CDataScanner.m */; };
+		EA1BA9AE138E71BF00D9A7B9 /* CFilteringJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA997138E71BF00D9A7B9 /* CFilteringJSONSerializer.h */; };
+		EA1BA9AF138E71BF00D9A7B9 /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA998138E71BF00D9A7B9 /* CFilteringJSONSerializer.m */; };
+		EA1BA9B0138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA999138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.h */; };
+		EA1BA9B1138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA99A138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.m */; };
+		EA1BA9B2138E71BF00D9A7B9 /* CJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA99B138E71BF00D9A7B9 /* CJSONSerialization.h */; };
+		EA1BA9B3138E71BF00D9A7B9 /* CJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA99C138E71BF00D9A7B9 /* CJSONSerialization.m */; };
+		EA1BA9B4138E71BF00D9A7B9 /* CJSONSerializedData.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA99D138E71BF00D9A7B9 /* CJSONSerializedData.h */; };
+		EA1BA9B5138E71BF00D9A7B9 /* CJSONSerializedData.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA99E138E71BF00D9A7B9 /* CJSONSerializedData.m */; };
+		EA1BA9B6138E71BF00D9A7B9 /* CDataScanner_Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA9A0138E71BF00D9A7B9 /* CDataScanner_Extensions.h */; };
+		EA1BA9B7138E71BF00D9A7B9 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA9A1138E71BF00D9A7B9 /* CDataScanner_Extensions.m */; };
+		EA1BA9B8138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA9A2138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.h */; };
+		EA1BA9B9138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA9A3138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.m */; };
+		EA1BA9BA138E71BF00D9A7B9 /* CJSONDeserializer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA9A5138E71BF00D9A7B9 /* CJSONDeserializer.h */; };
+		EA1BA9BB138E71BF00D9A7B9 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA9A6138E71BF00D9A7B9 /* CJSONDeserializer.m */; };
+		EA1BA9BC138E71BF00D9A7B9 /* CJSONScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA9A7138E71BF00D9A7B9 /* CJSONScanner.h */; };
+		EA1BA9BD138E71BF00D9A7B9 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA9A8138E71BF00D9A7B9 /* CJSONScanner.m */; };
+		EA1BA9BE138E71BF00D9A7B9 /* CJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA9A9138E71BF00D9A7B9 /* CJSONSerializer.h */; };
+		EA1BA9BF138E71BF00D9A7B9 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = EA1BA9AA138E71BF00D9A7B9 /* CJSONSerializer.m */; };
+		EA1BA9C0138E71BF00D9A7B9 /* JSONRepresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = EA1BA9AB138E71BF00D9A7B9 /* JSONRepresentation.h */; };
+		EA27804A136DAD6A00E3065A /* WTMGlyphDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA278049136DAD6A00E3065A /* WTMGlyphDelegate.h */; };
+		EA278050136DB9D400E3065A /* WTMGlyphDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = EA27804E136DB9D400E3065A /* WTMGlyphDefaults.h */; };
+		EA278051136DB9D400E3065A /* WTMGlyphDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = EA27804F136DB9D400E3065A /* WTMGlyphDefaults.m */; };
+		EA4860ED1380411900E40C6C /* WTMGlyphUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = EA4860EB1380411900E40C6C /* WTMGlyphUtilities.h */; };
+		EA4860EE1380411900E40C6C /* WTMGlyphUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = EA4860EC1380411900E40C6C /* WTMGlyphUtilities.m */; };
+		EA5836FE137F6BDF0074BB72 /* WTMGlyphStroke.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5836FC137F6BDF0074BB72 /* WTMGlyphStroke.h */; };
+		EA5836FF137F6BDF0074BB72 /* WTMGlyphStroke.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5836FD137F6BDF0074BB72 /* WTMGlyphStroke.m */; };
+		EA583703138015020074BB72 /* WTMGlyphTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = EA583701138015020074BB72 /* WTMGlyphTemplate.h */; };
+		EA583704138015020074BB72 /* WTMGlyphTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = EA583702138015020074BB72 /* WTMGlyphTemplate.m */; };
+		EA6C92FA136DA457008AD709 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6C92F9136DA457008AD709 /* Foundation.framework */; };
+		EA6C9305136DA457008AD709 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6C9304136DA457008AD709 /* UIKit.framework */; };
+		EA6C9306136DA457008AD709 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6C92F9136DA457008AD709 /* Foundation.framework */; };
+		EA6C9308136DA457008AD709 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6C9307136DA457008AD709 /* CoreGraphics.framework */; };
+		EA6C930B136DA457008AD709 /* libWTMGlyph.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6C92F6136DA457008AD709 /* libWTMGlyph.a */; };
+		EA6C9311136DA457008AD709 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EA6C930F136DA457008AD709 /* InfoPlist.strings */; };
+		EA6C9314136DA457008AD709 /* WTMGlyphTests.h in Resources */ = {isa = PBXBuildFile; fileRef = EA6C9313136DA457008AD709 /* WTMGlyphTests.h */; };
+		EA6C9316136DA457008AD709 /* WTMGlyphTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6C9315136DA457008AD709 /* WTMGlyphTests.m */; };
+		EA6C9321136DA48E008AD709 /* WTMGlyph.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6C931F136DA48E008AD709 /* WTMGlyph.h */; };
+		EA6C9322136DA48E008AD709 /* WTMGlyph.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6C9320136DA48E008AD709 /* WTMGlyph.m */; };
+		EA6C9325136DA5CE008AD709 /* WTMGlyphDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = EA6C9323136DA5CE008AD709 /* WTMGlyphDetector.h */; };
+		EA6C9326136DA5CE008AD709 /* WTMGlyphDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA6C9324136DA5CE008AD709 /* WTMGlyphDetector.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EA6C9309136DA457008AD709 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EA6C92ED136DA457008AD709 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EA6C92F5136DA457008AD709;
+			remoteInfo = WTMGlyph;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EA1BA994138E71BF00D9A7B9 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
+		EA1BA995138E71BF00D9A7B9 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
+		EA1BA997138E71BF00D9A7B9 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
+		EA1BA998138E71BF00D9A7B9 /* CFilteringJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFilteringJSONSerializer.m; sourceTree = "<group>"; };
+		EA1BA999138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
+		EA1BA99A138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer_BlocksExtensions.m; sourceTree = "<group>"; };
+		EA1BA99B138E71BF00D9A7B9 /* CJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerialization.h; sourceTree = "<group>"; };
+		EA1BA99C138E71BF00D9A7B9 /* CJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerialization.m; sourceTree = "<group>"; };
+		EA1BA99D138E71BF00D9A7B9 /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
+		EA1BA99E138E71BF00D9A7B9 /* CJSONSerializedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializedData.m; sourceTree = "<group>"; };
+		EA1BA9A0138E71BF00D9A7B9 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
+		EA1BA9A1138E71BF00D9A7B9 /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
+		EA1BA9A2138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		EA1BA9A3138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
+		EA1BA9A5138E71BF00D9A7B9 /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
+		EA1BA9A6138E71BF00D9A7B9 /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
+		EA1BA9A7138E71BF00D9A7B9 /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
+		EA1BA9A8138E71BF00D9A7B9 /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
+		EA1BA9A9138E71BF00D9A7B9 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		EA1BA9AA138E71BF00D9A7B9 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
+		EA1BA9AB138E71BF00D9A7B9 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+		EA278049136DAD6A00E3065A /* WTMGlyphDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGlyphDelegate.h; sourceTree = "<group>"; };
+		EA27804E136DB9D400E3065A /* WTMGlyphDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGlyphDefaults.h; sourceTree = "<group>"; };
+		EA27804F136DB9D400E3065A /* WTMGlyphDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGlyphDefaults.m; sourceTree = "<group>"; };
+		EA3A7869137602AB0092E7D0 /* ndollar.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ndollar.js; sourceTree = "<group>"; };
+		EA4860EB1380411900E40C6C /* WTMGlyphUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGlyphUtilities.h; sourceTree = "<group>"; };
+		EA4860EC1380411900E40C6C /* WTMGlyphUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGlyphUtilities.m; sourceTree = "<group>"; };
+		EA5836FC137F6BDF0074BB72 /* WTMGlyphStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGlyphStroke.h; sourceTree = "<group>"; };
+		EA5836FD137F6BDF0074BB72 /* WTMGlyphStroke.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGlyphStroke.m; sourceTree = "<group>"; };
+		EA583701138015020074BB72 /* WTMGlyphTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGlyphTemplate.h; sourceTree = "<group>"; };
+		EA583702138015020074BB72 /* WTMGlyphTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGlyphTemplate.m; sourceTree = "<group>"; };
+		EA6C92F6136DA457008AD709 /* libWTMGlyph.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libWTMGlyph.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA6C92F9136DA457008AD709 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EA6C92FD136DA457008AD709 /* WTMGlyph-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WTMGlyph-Prefix.pch"; sourceTree = "<group>"; };
+		EA6C9303136DA457008AD709 /* WTMGlyphTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WTMGlyphTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA6C9304136DA457008AD709 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EA6C9307136DA457008AD709 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EA6C930E136DA457008AD709 /* WTMGlyphTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WTMGlyphTests-Info.plist"; sourceTree = "<group>"; };
+		EA6C9310136DA457008AD709 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EA6C9312136DA457008AD709 /* WTMGlyphTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WTMGlyphTests-Prefix.pch"; sourceTree = "<group>"; };
+		EA6C9313136DA457008AD709 /* WTMGlyphTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WTMGlyphTests.h; sourceTree = "<group>"; };
+		EA6C9315136DA457008AD709 /* WTMGlyphTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WTMGlyphTests.m; sourceTree = "<group>"; };
+		EA6C931F136DA48E008AD709 /* WTMGlyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGlyph.h; sourceTree = "<group>"; };
+		EA6C9320136DA48E008AD709 /* WTMGlyph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGlyph.m; sourceTree = "<group>"; };
+		EA6C9323136DA5CE008AD709 /* WTMGlyphDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTMGlyphDetector.h; sourceTree = "<group>"; };
+		EA6C9324136DA5CE008AD709 /* WTMGlyphDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTMGlyphDetector.m; sourceTree = "<group>"; };
+		EAB3542713AC2DA10045B3EB /* D.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = D.json; sourceTree = "<group>"; };
+		EAB3542813AC2F0A0045B3EB /* T.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = T.json; sourceTree = "<group>"; };
+		EAB3542913AC2F110045B3EB /* N.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = N.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.javascript; };
+		EAB3542A13AC30220045B3EB /* P.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = P.json; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EA6C92F3136DA457008AD709 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6C92FA136DA457008AD709 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA6C92FF136DA457008AD709 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6C9305136DA457008AD709 /* UIKit.framework in Frameworks */,
+				EA6C9306136DA457008AD709 /* Foundation.framework in Frameworks */,
+				EA6C9308136DA457008AD709 /* CoreGraphics.framework in Frameworks */,
+				EA6C930B136DA457008AD709 /* libWTMGlyph.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EA1BA993138E71AA00D9A7B9 /* TouchJSON */ = {
+			isa = PBXGroup;
+			children = (
+				EA1BA994138E71BF00D9A7B9 /* CDataScanner.h */,
+				EA1BA995138E71BF00D9A7B9 /* CDataScanner.m */,
+				EA1BA996138E71BF00D9A7B9 /* Experimental */,
+				EA1BA99F138E71BF00D9A7B9 /* Extensions */,
+				EA1BA9A4138E71BF00D9A7B9 /* JSON */,
+			);
+			name = TouchJSON;
+			sourceTree = "<group>";
+		};
+		EA1BA996138E71BF00D9A7B9 /* Experimental */ = {
+			isa = PBXGroup;
+			children = (
+				EA1BA997138E71BF00D9A7B9 /* CFilteringJSONSerializer.h */,
+				EA1BA998138E71BF00D9A7B9 /* CFilteringJSONSerializer.m */,
+				EA1BA999138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.h */,
+				EA1BA99A138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.m */,
+				EA1BA99B138E71BF00D9A7B9 /* CJSONSerialization.h */,
+				EA1BA99C138E71BF00D9A7B9 /* CJSONSerialization.m */,
+				EA1BA99D138E71BF00D9A7B9 /* CJSONSerializedData.h */,
+				EA1BA99E138E71BF00D9A7B9 /* CJSONSerializedData.m */,
+			);
+			path = Experimental;
+			sourceTree = "<group>";
+		};
+		EA1BA99F138E71BF00D9A7B9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EA1BA9A0138E71BF00D9A7B9 /* CDataScanner_Extensions.h */,
+				EA1BA9A1138E71BF00D9A7B9 /* CDataScanner_Extensions.m */,
+				EA1BA9A2138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.h */,
+				EA1BA9A3138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EA1BA9A4138E71BF00D9A7B9 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				EA1BA9A5138E71BF00D9A7B9 /* CJSONDeserializer.h */,
+				EA1BA9A6138E71BF00D9A7B9 /* CJSONDeserializer.m */,
+				EA1BA9A7138E71BF00D9A7B9 /* CJSONScanner.h */,
+				EA1BA9A8138E71BF00D9A7B9 /* CJSONScanner.m */,
+				EA1BA9A9138E71BF00D9A7B9 /* CJSONSerializer.h */,
+				EA1BA9AA138E71BF00D9A7B9 /* CJSONSerializer.m */,
+				EA1BA9AB138E71BF00D9A7B9 /* JSONRepresentation.h */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		EA6C92EB136DA457008AD709 = {
+			isa = PBXGroup;
+			children = (
+				EA6C92FB136DA457008AD709 /* WTMGlyph */,
+				EA6C930C136DA457008AD709 /* WTMGlyphTests */,
+				EA6C92F8136DA457008AD709 /* Frameworks */,
+				EA6C92F7136DA457008AD709 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EA6C92F7136DA457008AD709 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EA6C92F6136DA457008AD709 /* libWTMGlyph.a */,
+				EA6C9303136DA457008AD709 /* WTMGlyphTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EA6C92F8136DA457008AD709 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EA6C92F9136DA457008AD709 /* Foundation.framework */,
+				EA6C9304136DA457008AD709 /* UIKit.framework */,
+				EA6C9307136DA457008AD709 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA6C92FB136DA457008AD709 /* WTMGlyph */ = {
+			isa = PBXGroup;
+			children = (
+				EA1BA993138E71AA00D9A7B9 /* TouchJSON */,
+				EABB80E4138027DE0062CB2C /* Resources */,
+				EA6C92FC136DA457008AD709 /* Supporting Files */,
+				EA6C931F136DA48E008AD709 /* WTMGlyph.h */,
+				EA6C9320136DA48E008AD709 /* WTMGlyph.m */,
+				EA6C9323136DA5CE008AD709 /* WTMGlyphDetector.h */,
+				EA6C9324136DA5CE008AD709 /* WTMGlyphDetector.m */,
+				EA278049136DAD6A00E3065A /* WTMGlyphDelegate.h */,
+				EA27804E136DB9D400E3065A /* WTMGlyphDefaults.h */,
+				EA27804F136DB9D400E3065A /* WTMGlyphDefaults.m */,
+				EA5836FC137F6BDF0074BB72 /* WTMGlyphStroke.h */,
+				EA5836FD137F6BDF0074BB72 /* WTMGlyphStroke.m */,
+				EA583701138015020074BB72 /* WTMGlyphTemplate.h */,
+				EA583702138015020074BB72 /* WTMGlyphTemplate.m */,
+				EA4860EB1380411900E40C6C /* WTMGlyphUtilities.h */,
+				EA4860EC1380411900E40C6C /* WTMGlyphUtilities.m */,
+			);
+			path = WTMGlyph;
+			sourceTree = "<group>";
+		};
+		EA6C92FC136DA457008AD709 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA3A7869137602AB0092E7D0 /* ndollar.js */,
+				EA6C92FD136DA457008AD709 /* WTMGlyph-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EA6C930C136DA457008AD709 /* WTMGlyphTests */ = {
+			isa = PBXGroup;
+			children = (
+				EA6C9313136DA457008AD709 /* WTMGlyphTests.h */,
+				EA6C9315136DA457008AD709 /* WTMGlyphTests.m */,
+				EA6C930D136DA457008AD709 /* Supporting Files */,
+			);
+			path = WTMGlyphTests;
+			sourceTree = "<group>";
+		};
+		EA6C930D136DA457008AD709 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EA6C930E136DA457008AD709 /* WTMGlyphTests-Info.plist */,
+				EA6C930F136DA457008AD709 /* InfoPlist.strings */,
+				EA6C9312136DA457008AD709 /* WTMGlyphTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EABB80E4138027DE0062CB2C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EAB3542713AC2DA10045B3EB /* D.json */,
+				EAB3542813AC2F0A0045B3EB /* T.json */,
+				EAB3542913AC2F110045B3EB /* N.json */,
+				EAB3542A13AC30220045B3EB /* P.json */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		EA6C92F4136DA457008AD709 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6C9321136DA48E008AD709 /* WTMGlyph.h in Headers */,
+				EA6C9325136DA5CE008AD709 /* WTMGlyphDetector.h in Headers */,
+				EA27804A136DAD6A00E3065A /* WTMGlyphDelegate.h in Headers */,
+				EA278050136DB9D400E3065A /* WTMGlyphDefaults.h in Headers */,
+				EA5836FE137F6BDF0074BB72 /* WTMGlyphStroke.h in Headers */,
+				EA583703138015020074BB72 /* WTMGlyphTemplate.h in Headers */,
+				EA4860ED1380411900E40C6C /* WTMGlyphUtilities.h in Headers */,
+				EA1BA9AC138E71BF00D9A7B9 /* CDataScanner.h in Headers */,
+				EA1BA9AE138E71BF00D9A7B9 /* CFilteringJSONSerializer.h in Headers */,
+				EA1BA9B0138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.h in Headers */,
+				EA1BA9B2138E71BF00D9A7B9 /* CJSONSerialization.h in Headers */,
+				EA1BA9B4138E71BF00D9A7B9 /* CJSONSerializedData.h in Headers */,
+				EA1BA9B6138E71BF00D9A7B9 /* CDataScanner_Extensions.h in Headers */,
+				EA1BA9B8138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.h in Headers */,
+				EA1BA9BA138E71BF00D9A7B9 /* CJSONDeserializer.h in Headers */,
+				EA1BA9BC138E71BF00D9A7B9 /* CJSONScanner.h in Headers */,
+				EA1BA9BE138E71BF00D9A7B9 /* CJSONSerializer.h in Headers */,
+				EA1BA9C0138E71BF00D9A7B9 /* JSONRepresentation.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		EA6C92F5136DA457008AD709 /* WTMGlyph */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA6C9319136DA457008AD709 /* Build configuration list for PBXNativeTarget "WTMGlyph" */;
+			buildPhases = (
+				EA6C92F2136DA457008AD709 /* Sources */,
+				EA6C92F3136DA457008AD709 /* Frameworks */,
+				EA6C92F4136DA457008AD709 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WTMGlyph;
+			productName = WTMGlyph;
+			productReference = EA6C92F6136DA457008AD709 /* libWTMGlyph.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		EA6C9302136DA457008AD709 /* WTMGlyphTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EA6C931C136DA457008AD709 /* Build configuration list for PBXNativeTarget "WTMGlyphTests" */;
+			buildPhases = (
+				EA6C92FE136DA457008AD709 /* Sources */,
+				EA6C92FF136DA457008AD709 /* Frameworks */,
+				EA6C9300136DA457008AD709 /* Resources */,
+				EA6C9301136DA457008AD709 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EA6C930A136DA457008AD709 /* PBXTargetDependency */,
+			);
+			name = WTMGlyphTests;
+			productName = WTMGlyphTests;
+			productReference = EA6C9303136DA457008AD709 /* WTMGlyphTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EA6C92ED136DA457008AD709 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Warrior Thief Mage Studios";
+			};
+			buildConfigurationList = EA6C92F0136DA457008AD709 /* Build configuration list for PBXProject "WTMGlyph" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EA6C92EB136DA457008AD709;
+			productRefGroup = EA6C92F7136DA457008AD709 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EA6C92F5136DA457008AD709 /* WTMGlyph */,
+				EA6C9302136DA457008AD709 /* WTMGlyphTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EA6C9300136DA457008AD709 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6C9311136DA457008AD709 /* InfoPlist.strings in Resources */,
+				EA6C9314136DA457008AD709 /* WTMGlyphTests.h in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EA6C9301136DA457008AD709 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EA6C92F2136DA457008AD709 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6C9322136DA48E008AD709 /* WTMGlyph.m in Sources */,
+				EA6C9326136DA5CE008AD709 /* WTMGlyphDetector.m in Sources */,
+				EA278051136DB9D400E3065A /* WTMGlyphDefaults.m in Sources */,
+				EA5836FF137F6BDF0074BB72 /* WTMGlyphStroke.m in Sources */,
+				EA583704138015020074BB72 /* WTMGlyphTemplate.m in Sources */,
+				EA4860EE1380411900E40C6C /* WTMGlyphUtilities.m in Sources */,
+				EA1BA9AD138E71BF00D9A7B9 /* CDataScanner.m in Sources */,
+				EA1BA9AF138E71BF00D9A7B9 /* CFilteringJSONSerializer.m in Sources */,
+				EA1BA9B1138E71BF00D9A7B9 /* CJSONDeserializer_BlocksExtensions.m in Sources */,
+				EA1BA9B3138E71BF00D9A7B9 /* CJSONSerialization.m in Sources */,
+				EA1BA9B5138E71BF00D9A7B9 /* CJSONSerializedData.m in Sources */,
+				EA1BA9B7138E71BF00D9A7B9 /* CDataScanner_Extensions.m in Sources */,
+				EA1BA9B9138E71BF00D9A7B9 /* NSDictionary_JSONExtensions.m in Sources */,
+				EA1BA9BB138E71BF00D9A7B9 /* CJSONDeserializer.m in Sources */,
+				EA1BA9BD138E71BF00D9A7B9 /* CJSONScanner.m in Sources */,
+				EA1BA9BF138E71BF00D9A7B9 /* CJSONSerializer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA6C92FE136DA457008AD709 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EA6C9316136DA457008AD709 /* WTMGlyphTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EA6C930A136DA457008AD709 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EA6C92F5136DA457008AD709 /* WTMGlyph */;
+			targetProxy = EA6C9309136DA457008AD709 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EA6C930F136DA457008AD709 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EA6C9310136DA457008AD709 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EA6C9317136DA457008AD709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+			};
+			name = Debug;
+		};
+		EA6C9318136DA457008AD709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = NO;
+			};
+			name = Release;
+		};
+		EA6C931A136DA457008AD709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/WTMGlyph.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WTMGlyph/WTMGlyph-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = /tmp;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		EA6C931B136DA457008AD709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				DSTROOT = /tmp/WTMGlyph.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WTMGlyph/WTMGlyph-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = /tmp;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		EA6C931D136DA457008AD709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WTMGlyphTests/WTMGlyphTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "WTMGlyphTests/WTMGlyphTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		EA6C931E136DA457008AD709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WTMGlyphTests/WTMGlyphTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "WTMGlyphTests/WTMGlyphTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EA6C92F0136DA457008AD709 /* Build configuration list for PBXProject "WTMGlyph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA6C9317136DA457008AD709 /* Debug */,
+				EA6C9318136DA457008AD709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA6C9319136DA457008AD709 /* Build configuration list for PBXNativeTarget "WTMGlyph" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA6C931A136DA457008AD709 /* Debug */,
+				EA6C931B136DA457008AD709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EA6C931C136DA457008AD709 /* Build configuration list for PBXNativeTarget "WTMGlyphTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EA6C931D136DA457008AD709 /* Debug */,
+				EA6C931E136DA457008AD709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EA6C92ED136DA457008AD709 /* Project object */;
+}
