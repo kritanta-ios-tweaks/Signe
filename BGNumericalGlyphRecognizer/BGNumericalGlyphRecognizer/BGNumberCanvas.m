@@ -718,6 +718,7 @@
         [[n view] removeFromSuperview];
     [detectedNumbers removeAllObjects];
     prevDetectedNumber = nil;
+    [self setNeedsDisplay];
 }
 
 @end

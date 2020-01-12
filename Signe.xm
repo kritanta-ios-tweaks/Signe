@@ -226,10 +226,13 @@ static void preferencesChanged()
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
     //reloadPrefs();
 
+	[[SigneManager sharedManager] setBundleToOpen:@"com.spotify.client" forKey:@"1"]; //twitter
 	[[SigneManager sharedManager] setBundleToOpen:@"com.atebits.Tweetie2" forKey:@"2"]; //twitter
 	[[SigneManager sharedManager] setBundleToOpen:@"com.hammerandchisel.discord" forKey:@"3"]; //discord
+	[[SigneManager sharedManager] setBundleToOpen:@"com.apple.Preferences" forKey:@"4"]; //discord
 	[[SigneManager sharedManager] setURLToOpen:@"https://patreon.com/kritantadev" forKey:@"5"]; //krit patreon
 	[[SigneManager sharedManager] setURLToOpen:@"https://www.buymeacoff.ee/tr1fecta" forKey:@"6"]; //tr1 bmac
+	[[SigneManager sharedManager] setBundleToOpen:@"ws.hbang.Terminal" forKey:@"7"]; //discord
 	[[SigneManager sharedManager] setBundleToOpen:@"com.christianselig.Apollo" forKey:@"9"]; //rebbit
 
 	[[SigneManager sharedManager] setShouldDrawCharacters:YES];
