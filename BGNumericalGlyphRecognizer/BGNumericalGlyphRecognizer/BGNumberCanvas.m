@@ -507,7 +507,8 @@
 {
     //NSLog(@"[Signe] !!! %@", n.value); 
 
-    [self clear];
+    if ([[n value] isEqualToString:@"p"]) return;
+    if ([[n value] isEqualToString:@"0"]) return;
     dispatch_async(dispatch_get_main_queue(), ^{
 		[[UIApplication sharedApplication] activateTouchRecognizer];
     });

@@ -54,7 +54,8 @@ static BOOL activationStyle = 0;
 
 %new
 - (void)activateSigne
-{
+{	
+	[self.BGCanvas clear];
     [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
 	self.BGCanvas.hidden = NO;
 	//
@@ -231,7 +232,7 @@ static void preferencesChanged()
 	[[SigneManager sharedManager] setURLToOpen:@"https://www.buymeacoff.ee/tr1fecta" forKey:@"6"]; //tr1 bmac
 	[[SigneManager sharedManager] setBundleToOpen:@"com.christianselig.Apollo" forKey:@"9"]; //rebbit
 
-	[[SigneManager sharedManager] setShouldDrawCharacters:NO];
+	[[SigneManager sharedManager] setShouldDrawCharacters:YES];
 	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];
 	[[SigneManager sharedManager] setStrokeSize:10];
 }
