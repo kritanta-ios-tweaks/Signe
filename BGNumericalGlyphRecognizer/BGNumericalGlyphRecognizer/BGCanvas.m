@@ -41,11 +41,14 @@
 }
 
 - (void)clear
-{
-    CGContextRef c = CGLayerGetContext(paintLayer);
+{    CGContextRef c = CGLayerGetContext(paintLayer);
     CGContextClearRect(c, self.bounds);
     paintLayer = nil;
-    paintLayer = CGLayerCreateWithContext(c, [self bounds].size, NULL);
+    [self drawRect:self.bounds];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextClearRect(context, self.bounds);
+    CGContextFlush(c);
+    CGContextFlush(context);
     [self setNeedsDisplay];
 }
 
@@ -108,7 +111,7 @@
     CGPoint p = [[touches anyObject] previousLocationInView: self];
     CGPoint q = [[touches anyObject] locationInView: self];
     [self addStrokeFromPoint:p toPoint:q];
-    [self touchesMovedExtendStroke: q withTimestamp: [event timestamp]];
+    [self touchesMovedExtendStroke:q withTimestamp: [event timestamp]];
 }
 
 - (void)touchesMovedExtendStroke:(CGPoint)p withTimestamp:(NSTimeInterval)t

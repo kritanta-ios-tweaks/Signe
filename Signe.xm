@@ -10,6 +10,7 @@ static BOOL activationStyle = 0;
 
 @property (nonatomic, retain) BGNumberCanvas *BGCanvas;
 - (void)insertCanvas;
+@property (nonatomic, retain) NSData *initial;
 @property (nonatomic, assign) BOOL injected;
 @end
 
@@ -35,6 +36,7 @@ static BOOL activationStyle = 0;
 /* ([[[[UIApplication sharedApplication] volumeHardwareButton] buttonActions] _handleVolumeIncreaseUp] && [[[[UIApplication sharedApplication] volumeHardwareButton] buttonActions] _handleVolumeDecreaseUp]) */
 
 %property (nonatomic, retain) BGNumberCanvas *BGCanvas;
+%property (nonatomic, retain) NSData *initial;
 %property (nonatomic, assign) BOOL injected;  
 
 - (void)layoutSubviews
@@ -44,6 +46,7 @@ static BOOL activationStyle = 0;
     {
 		self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 		self.BGCanvas.hidden = YES;
+		self.initial = [NSKeyedArchiver archivedDataWithRootObject: self.BGCanvas];
 		[self addSubview:self.BGCanvas];
     	[self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
@@ -55,7 +58,6 @@ static BOOL activationStyle = 0;
 %new
 - (void)activateSigne
 {	
-	[self.BGCanvas clear];
     [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
 	self.BGCanvas.hidden = NO;
 	//
@@ -144,7 +146,7 @@ static BOOL activationStyle = 0;
 	// force = 0 -> button released
 	// force = 1 -> button pressed
 	if ([arg1.allPresses.allObjects count] <= 1) return %orig;
-	if (arg1.allPresses.allObjects[0].type == 103 && force == 1 && arg1.allPresses.allObjects[1].type == 104 && arg1.allPresses.allObjects[1].force == 1) //Power PRESSED
+	if (arg1.allPresses.allObjects[0].type >= 103 && force == 1 && arg1.allPresses.allObjects[1].type >= 103 && arg1.allPresses.allObjects[1].force == 1) //Power PRESSED
 	{
 		[self activateTouchRecognizer];
 		return NO;
@@ -235,7 +237,7 @@ static void preferencesChanged()
 	[[SigneManager sharedManager] setBundleToOpen:@"ws.hbang.Terminal" forKey:@"7"]; //discord
 	[[SigneManager sharedManager] setBundleToOpen:@"com.christianselig.Apollo" forKey:@"9"]; //rebbit
 
-	[[SigneManager sharedManager] setShouldDrawCharacters:YES];
+	[[SigneManager sharedManager] setShouldDrawCharacters:NO];
 	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];
 	[[SigneManager sharedManager] setStrokeSize:10];
 }

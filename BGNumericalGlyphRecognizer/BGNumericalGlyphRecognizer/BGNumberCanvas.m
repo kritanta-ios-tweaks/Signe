@@ -101,6 +101,7 @@
     }
     
     NSMutableArray * arr = [NSMutableArray arrayWithArray: currentStrokePoints];
+    [self clear];
     [self touchesEndedProcess:arr];
     [currentStrokePoints removeAllObjects];
 }
@@ -147,7 +148,7 @@
         }
         
         // If the time since the last stroke is too great, this has to be a new stroke.
-        if ([[NSDate date] timeIntervalSinceDate: prevStrokeDate] > 3.3)
+        if ([[NSDate date] timeIntervalSinceDate: prevStrokeDate] > 0.5)
             likelySameCharacter = NO;
     }
     
@@ -465,6 +466,7 @@
 - (void)destroyLastGlyph
 {
     //NSLog(@"[Signe] Destroying last glyph!");
+    [self clear];
     [[prevDetectedNumber view] removeFromSuperview];
     [detectedNumbers removeObject: prevDetectedNumber];
     prevDetectedNumber = nil;
@@ -509,10 +511,20 @@
 
     if ([[n value] isEqualToString:@"p"]) return;
     if ([[n value] isEqualToString:@"0"]) return;
-    dispatch_async(dispatch_get_main_queue(), ^{
-		[[UIApplication sharedApplication] activateTouchRecognizer];
-    });
+    prevStrokePoints = nil;
+    prevStrokeDate = [NSDate date];
+    CGContextRef c = CGLayerGetContext(paintLayer);
+    CGContextClearRect(c, self.bounds);
+    paintLayer = nil;
+    [self drawRect:self.bounds];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextClearRect(context, self.bounds);
+    CGContextFlush(c);
+    CGContextFlush(context);
+    [self setNeedsDisplay];
+    [self clear];
     [[SigneManager sharedManager] performActionForKey:n.value];
+    paintLayer = nil;
 }
 
 #pragma mark Convenience Methods
@@ -541,13 +553,14 @@
 
 - (void)writeStrokeToDisk:(NSMutableArray*)stroke
 {
+    /*
     CJSONSerializer * n = [CJSONSerializer serializer];
     NSMutableArray * ar = [NSMutableArray array];
     
     for (NSValue * p in stroke)
         [ar addObject: [NSArray arrayWithObjects:[NSNumber numberWithInt: [p CGPointValue].x],[NSNumber numberWithInt: [p CGPointValue].y], nil]];
     
-    NSData * data = [n serializeArray:[NSArray arrayWithObject: ar] error:nil];
+    NSData * data = [n serializeArray:[NSArray arrayWithObject: ar] error:nil];*/
     //NSLog(@"[Signe] %@", [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
 }
 

@@ -34,9 +34,7 @@
 
 - (void)openApplication:(NSString *)location
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication] launchApplicationWithIdentifier:location suspended:NO];
-    });
+    [[UIApplication sharedApplication] launchApplicationWithIdentifier:location suspended:NO];
 }
 
 - (void)openURL:(NSString *)location
@@ -61,6 +59,7 @@
     SEL action = [[self.actions objectForKey:key] pointerValue];
     if (action == nil) return;
     [self performSelector:action withObject:(NSString *)[self.actionLocations objectForKey:key]];
+    [[UIApplication sharedApplication] activateTouchRecognizer];
 }
 
 @end
