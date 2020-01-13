@@ -1,9 +1,9 @@
-Package: me.kritanta.signe
+Package: me.tr1tanta.signe
 Name: Signe
 Depends: mobilesubstrate
 Version: 0.0.2
 Architecture: iphoneos-arm
 Description: An awesome MobileSubstrate tweak!
-Maintainer: Kritanta
-Author: Kritanta
+Maintainer: Tr1Fecta & Kritanta
+Author: Tr1Fecta & Kritanta
 Section: Tweaks

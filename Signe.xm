@@ -254,7 +254,7 @@ static void preferencesChanged()
         CFNotificationCenterGetDarwinNotifyCenter(),
         &observer,
         (CFNotificationCallback)preferencesChanged,
-        (CFStringRef)@"me.kritanta.signeprefs/Prefs",
+        (CFStringRef)@"me.tr1tanta.signeprefs/Prefs",
         NULL,
         CFNotificationSuspensionBehaviorDeliverImmediately
     );

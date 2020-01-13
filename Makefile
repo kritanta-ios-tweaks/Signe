@@ -46,3 +46,5 @@ after-install:: # Fast respring!!
 	install.exec "sbreload"
 
 include $(THEOS_MAKE_PATH)/tweak.mk
+SUBPROJECTS += signeprefs
+include $(THEOS_MAKE_PATH)/aggregate.mk

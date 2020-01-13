@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Draw settings:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+			<string>me.tr1tanta.signeprefs</string>
+			<key>key</key>
+			<string>kDrawnNumber1</string>
+			<key>detail</key>
+            <string>PSListItemsController</string>
+			<key>label</key>
+			<string>Number 1:</string>
+			<key>validTitles</key>
+			<array>
+				<string>Option 1</string>
+				<string>Option 2</string>
+				<string>Option 3</string>
+				<string>Option 4</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>kOption1</string>
+				<string>kOption2</string>
+				<string>kOption3</string>
+				<string>kOption4</string>
+			</array>
+			<key>PostNotification</key>
+			<string>me.tr1tanta.signeprefs/Prefs</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Signe</string>
+</dict>
+</plist>
