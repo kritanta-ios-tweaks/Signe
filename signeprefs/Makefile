@@ -6,7 +6,6 @@ BUNDLE_NAME = SignePrefs
 
 SignePrefs_FILES = SIGRootListController.m SIGNumberController.m
 SignePrefs_INSTALL_PATH = /Library/PreferenceBundles
-SignePrefs_LIBRARIES = applist
 SignePrefs_FRAMEWORKS = UIKit
 SignePrefs_PRIVATE_FRAMEWORKS = Preferences
 SignePrefs_CFLAGS = -fobjc-arc

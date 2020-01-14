@@ -18,11 +18,11 @@
 			<key>defaults</key>
 			<string>me.tr1tanta.signeprefs</string>
 			<key>key</key>
-			<string>kSigneTweakEnabled</string>
+			<string>enabled</string>
 			<key>label</key>
 			<string>Enabled</string>
 			<key>PostNotification</key>
-			<string>me.tr1tanta.signeprefs/Prefs</string>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -32,11 +32,95 @@
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>label</key>
-			<string>Draw One</string>
-			<key>action</key>
-			<string>selectOneApp</string>
+			<string>PSEditTextCell</string>
+			<key>key</key>
+			<string>one</string>
+			<key>icon</key>
+			<string>1.png</string>
+			<key>isURL</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>2.png</string>
+			<key>key</key>
+			<string>two</string>
+			<key>isURL</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>3.png</string>
+			<key>key</key>
+			<string>three</string>
+			<key>isURL</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>4.png</string>
+			<key>key</key>
+			<string>four</string>
+			<key>isURL</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>5.png</string>
+			<key>key</key>
+			<string>five</string>
+			<key>isURL</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>6.png</string>
+			<key>key</key>
+			<string>six</string>
+			<key>isURL</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>7.png</string>
+			<key>key</key>
+			<string>seven</string>
+			<key>isURL</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>8.png</string>
+			<key>key</key>
+			<string>eight</string>
+			<key>isURL</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>icon</key>
+			<string>9.png</string>
+			<key>key</key>
+			<string>nine</string>
+			<key>isURL</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cell</key>

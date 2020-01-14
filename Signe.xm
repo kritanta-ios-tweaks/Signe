@@ -222,40 +222,42 @@ static BOOL boolValueForKey(NSString *key, BOOL defaultValue)
 {
     return (prefs && [prefs objectForKey:key]) ? [[prefs objectForKey:key] boolValue] : defaultValue;
 }
-@interface SparkAppItem : NSObject
-    @property (nonatomic, retain) NSString* bundleIdentifier;
-    @property (nonatomic, retain) NSString* displayName;
 
-@end
+static BOOL isURL(NSString *keyValue)
+{
+	return [keyValue containsString:@"http"];
+}
 
-@interface SparkAppList : NSObject
-
-+(BOOL)doesIdentifier:(NSString*)identifier andKey:(NSString*)key containBundleIdentifier:(NSString*)bundleIdentifier;
-
-@end
 static void preferencesChanged() 
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
-    //reloadPrefs();
-	NSArray *apps;
-	[SparkAppList getAppList:&apps];
-	for(SparkAppItem *bundleIdentifier in apps)
+    reloadPrefs();
+
+	NSString *one = [prefs objectForKey:@"one"];
+	NSString *two = [prefs objectForKey:@"two"];
+	NSString *three = [prefs objectForKey:@"three"];
+	NSString *four = [prefs objectForKey:@"four"];
+	NSString *five = [prefs objectForKey:@"five"];
+	NSString *six = [prefs objectForKey:@"six"];
+	NSString *seven = [prefs objectForKey:@"seven"];
+	NSString *eight = [prefs objectForKey:@"eight"];
+	NSString *nine = [prefs objectForKey:@"nine"];
+
+	NSArray *options = [NSArray arrayWithObjects:one,two,three,four,five,six,seven,eight,nine, nil];
+
+	int i = 1;
+	for (NSString *option in options)
 	{
-		if([SparkAppList doesIdentifier:@"com.spark.signeprefs" andKey:@"oneApp" containBundleIdentifier:[bundleIdentifier bundleIdentifier]])
+		if (isURL(option))
 		{
-			[[SigneManager sharedManager] setBundleToOpen:[bundleIdentifier bundleIdentifier] forKey:@"1"]; 
+			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 		}
+		else 
+		{
+			[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
+		}
+		i++;
 	}
-	/*
-	//twitter
-	[[SigneManager sharedManager] setBundleToOpen:@"com.atebits.Tweetie2" forKey:@"2"]; //twitter
-	[[SigneManager sharedManager] setBundleToOpen:@"com.hammerandchisel.discord" forKey:@"3"]; //discord
-	[[SigneManager sharedManager] setBundleToOpen:@"com.apple.Preferences" forKey:@"4"]; //discord
-	[[SigneManager sharedManager] setURLToOpen:@"https://patreon.com/kritantadev" forKey:@"5"]; //krit patreon
-	[[SigneManager sharedManager] setURLToOpen:@"https://www.buymeacoff.ee/tr1fecta" forKey:@"6"]; //tr1 bmac
-	[[SigneManager sharedManager] setBundleToOpen:@"ws.hbang.Terminal" forKey:@"7"]; //discord
-	[[SigneManager sharedManager] setBundleToOpen:@"com.christianselig.Apollo" forKey:@"9"]; //rebbit
-	*/
 
 	[[SigneManager sharedManager] setShouldDrawCharacters:NO];
 	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];
