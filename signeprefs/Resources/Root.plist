@@ -52,6 +52,20 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
+			<string>zero</string>
+			<key>icon</key>
+			<string>0.png</string>
+			<key>isURL</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>key</key>
 			<string>one</string>
 			<key>icon</key>
 			<string>1.png</string>
@@ -159,7 +173,7 @@
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
-			<key>cell</key>
+			<key>cell</key>           
 			<string>PSEditTextCell</string>
 			<key>icon</key>
 			<string>9.png</string>

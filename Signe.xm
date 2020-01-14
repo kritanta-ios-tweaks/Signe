@@ -228,12 +228,18 @@ static BOOL isURL(NSString *keyValue)
 	return [keyValue containsString:@"http"];
 }
 
+static BOOL isOtherCommand(NSString *keyValue) 
+{
+	return ([keyValue isEqualToString:@"sbreload"] || [keyValue isEqualToString:@"respring"] || [keyValue isEqualToString:@"safemode"] || [keyValue isEqualToString:@"uicache"]);
+}
+
 static void preferencesChanged() 
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
     reloadPrefs();
 	NSLog(@"Signe: Loading Preferences");
 
+	NSString *zero = [prefs objectForKey:@"zero"];
 	NSString *one = [prefs objectForKey:@"one"];
 	NSString *two = [prefs objectForKey:@"two"];
 	NSString *three = [prefs objectForKey:@"three"];
@@ -244,17 +250,23 @@ static void preferencesChanged()
 	NSString *eight = [prefs objectForKey:@"eight"];
 	NSString *nine = [prefs objectForKey:@"nine"];
 
-	NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", one, two, three, four, five, six, seven, eight, nine);
+	NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
-	NSArray *options = [NSArray arrayWithObjects:one,two,three,four,five,six,seven,eight,nine, nil];
+	NSArray *options = [NSArray arrayWithObjects:zero,one,two,three,four,five,six,seven,eight,nine, nil];
 
-	int i = 1;
+	int i = 0;
 	for (NSString *option in options)
 	{
 		NSLog(@"Signe: %@ - %d", option, i);
 		if (isURL(option))
 		{
+			NSLog(@"Signe: OPTION IS URL!");
 			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
+		}
+		else if (isOtherCommand(option))
+		{
+			NSLog(@"Signe: OPTION IS COMMAND!");
+			[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 		}
 		else 
 		{

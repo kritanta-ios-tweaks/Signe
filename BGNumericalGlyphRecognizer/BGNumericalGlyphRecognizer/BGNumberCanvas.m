@@ -507,11 +507,10 @@
 
 - (void)numberDetected:(DetectedNumber*)n inPaintRect:(CGRect)r
 {
-    //NSLog(@"[Signe] !!! %@", n.value); 
+    NSLog(@"[Signe] !!! NUMBER DETECTED: %@", n.value); 
 
     [[UIApplication sharedApplication] activateTouchRecognizer];
     if ([[n value] isEqualToString:@"p"]) return;
-    if ([[n value] isEqualToString:@"0"]) return;
     prevStrokePoints = nil;
     prevStrokeDate = [NSDate date];
     CGContextRef c = CGLayerGetContext(paintLayer);

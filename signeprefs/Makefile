@@ -4,7 +4,7 @@ ARCHS = arm64 arm64e
 
 BUNDLE_NAME = SignePrefs
 
-SignePrefs_FILES = SIGRootListController.m KRLinkCell.m KRTableCell.m KRTwitterCell.m
+SignePrefs_FILES = SIGRootListController.m KRLinkCell.m KRTableCell.m # KRTwitterCell.m
 SignePrefs_INSTALL_PATH = /Library/PreferenceBundles
 SignePrefs_FRAMEWORKS = UIKit
 SignePrefs_PRIVATE_FRAMEWORKS = Preferences
