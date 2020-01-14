@@ -1,4 +1,5 @@
 #import <Preferences/PSListController.h>
+    #import "SparkAppListTableViewController.h"
 
 @interface SIGRootListController : PSListController
 

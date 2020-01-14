@@ -222,13 +222,32 @@ static BOOL boolValueForKey(NSString *key, BOOL defaultValue)
 {
     return (prefs && [prefs objectForKey:key]) ? [[prefs objectForKey:key] boolValue] : defaultValue;
 }
+@interface SparkAppItem : NSObject
+    @property (nonatomic, retain) NSString* bundleIdentifier;
+    @property (nonatomic, retain) NSString* displayName;
 
+@end
+
+@interface SparkAppList : NSObject
+
++(BOOL)doesIdentifier:(NSString*)identifier andKey:(NSString*)key containBundleIdentifier:(NSString*)bundleIdentifier;
+
+@end
 static void preferencesChanged() 
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
     //reloadPrefs();
-
-	[[SigneManager sharedManager] setBundleToOpen:@"com.spotify.client" forKey:@"1"]; //twitter
+	NSArray *apps;
+	[SparkAppList getAppList:&apps];
+	for(SparkAppItem *bundleIdentifier in apps)
+	{
+		if([SparkAppList doesIdentifier:@"com.spark.signeprefs" andKey:@"oneApp" containBundleIdentifier:[bundleIdentifier bundleIdentifier]])
+		{
+			[[SigneManager sharedManager] setBundleToOpen:[bundleIdentifier bundleIdentifier] forKey:@"1"]; 
+		}
+	}
+	/*
+	//twitter
 	[[SigneManager sharedManager] setBundleToOpen:@"com.atebits.Tweetie2" forKey:@"2"]; //twitter
 	[[SigneManager sharedManager] setBundleToOpen:@"com.hammerandchisel.discord" forKey:@"3"]; //discord
 	[[SigneManager sharedManager] setBundleToOpen:@"com.apple.Preferences" forKey:@"4"]; //discord
@@ -236,6 +255,7 @@ static void preferencesChanged()
 	[[SigneManager sharedManager] setURLToOpen:@"https://www.buymeacoff.ee/tr1fecta" forKey:@"6"]; //tr1 bmac
 	[[SigneManager sharedManager] setBundleToOpen:@"ws.hbang.Terminal" forKey:@"7"]; //discord
 	[[SigneManager sharedManager] setBundleToOpen:@"com.christianselig.Apollo" forKey:@"9"]; //rebbit
+	*/
 
 	[[SigneManager sharedManager] setShouldDrawCharacters:NO];
 	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];

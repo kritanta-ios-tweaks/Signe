@@ -28,17 +28,21 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Settings:</string>
+			<string>Actions</string>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSLinkCell</string>
+			<string>PSButtonCell</string>
 			<key>label</key>
-			<string>Draw customization</string>
-			<key>detail</key>
-            <string>DrawCustomizationSettingsPrefs</string>
-            <key>isController</key>
-            <true/>
+			<string>Draw One</string>
+			<key>action</key>
+			<string>selectOneApp</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>The beginning of something more?</string>
 		</dict>
 	</array>
 	<key>title</key>

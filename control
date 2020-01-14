@@ -1,6 +1,6 @@
-Package: me.tr1tanta.signe
+Package: me.kritanta.signe
 Name: Signe
-Depends: mobilesubstrate
+Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 3.0), com.rpetrich.rocketbootstrap (>= 1.0.3) | firmware (<< 7.0)
 Version: 0.0.2
 Architecture: iphoneos-arm
 Description: An awesome MobileSubstrate tweak!

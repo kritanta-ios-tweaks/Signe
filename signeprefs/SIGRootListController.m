@@ -1,5 +1,4 @@
 #include "SIGRootListController.h"
-
 @implementation SIGRootListController
 
 - (NSArray *)specifiers {
@@ -9,7 +8,6 @@
 
 	return _specifiers;
 }
-
 @end
 
 

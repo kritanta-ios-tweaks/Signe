@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>me.kritanta.signe</string>
+			<key>key</key>
+			<string>rotationMode</string>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>Disabled</string>
+				<string>Open App</string>
+				<string>Open URL</string>
+			</array>
+			<key>PostNotification</key>
+			<string>me.kritanta.signe/ReloadPrefs</string>
+		</dict>
+        <dict>
+            <key>cell</key>
+            <string>PSButtonCell</string>
+            <key>label</key>
+            <string>Select app to open</string>
+            <key>action</key>
+            <string>selectAppShortCut</string>
+        </dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>URL</string>
+		</dict>
+        <dict>
+            <key>cell</key>
+            <string>PSEditTextCell</string>
+            <key>isURL</key>
+            <true/>
+			<key>PostNotification</key>
+			<string>me.kritanta.signe/ReloadPrefs</string>
+        <dict>
+	</array>
+	<key>title</key>
+	<string>5</string>
+</dict>
+</plist>
