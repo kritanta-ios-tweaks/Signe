@@ -232,6 +232,7 @@ static void preferencesChanged()
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
     reloadPrefs();
+	NSLog(@"Loading Preferences");
 
 	NSString *one = [prefs objectForKey:@"one"];
 	NSString *two = [prefs objectForKey:@"two"];
@@ -248,6 +249,7 @@ static void preferencesChanged()
 	int i = 1;
 	for (NSString *option in options)
 	{
+		NSLog(@"Signe: %@ - %d", option, i);
 		if (isURL(option))
 		{
 			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
@@ -276,7 +278,7 @@ static void preferencesChanged()
         CFNotificationCenterGetDarwinNotifyCenter(),
         &observer,
         (CFNotificationCallback)preferencesChanged,
-        (CFStringRef)@"me.tr1tanta.signeprefs/Prefs",
+        (CFStringRef)@"me.kritanta.signeprefs/Prefs",
         NULL,
         CFNotificationSuspensionBehaviorDeliverImmediately
     );

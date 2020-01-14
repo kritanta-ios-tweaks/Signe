@@ -16,7 +16,7 @@
 			<key>default</key>
 			<false/>
 			<key>defaults</key>
-			<string>me.tr1tanta.signeprefs</string>
+			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
 			<string>enabled</string>
 			<key>label</key>
@@ -33,6 +33,8 @@
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
 			<string>one</string>
 			<key>icon</key>

@@ -35,7 +35,6 @@ SOURCES += $(shell find Signemanager -name '*.m')
 
 
 Signe_FILES = Signe.xm ${SOURCES}
-Signe_LIBRARIES = applist
 Signe_CFLAGS += -fobjc-arc -w -Wno-deprecated-declarations $(IMPORTS)
 
 

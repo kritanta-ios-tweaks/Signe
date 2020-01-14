@@ -509,6 +509,7 @@
 {
     //NSLog(@"[Signe] !!! %@", n.value); 
 
+    [[UIApplication sharedApplication] activateTouchRecognizer];
     if ([[n value] isEqualToString:@"p"]) return;
     if ([[n value] isEqualToString:@"0"]) return;
     prevStrokePoints = nil;
