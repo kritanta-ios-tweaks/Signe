@@ -1,4 +1,4 @@
-#INSTALL_TARGET_PROCESSES = SpringBoard
+INSTALL_TARGET_PROCESSES = SpringBoard
 
 # Comment this out to enable debug versions
 #PACKAGE_VERSION=$(THEOS_PACKAGE_BASE_VERSION)
@@ -7,10 +7,9 @@ ARCHS = arm64 arm64e
 #ARCHS = x86_64 
 
 # Target iOS 10+ Devices, and use the iOS 11.2 SDK
-TARGET = iphone:clang:11.2:10.0
+#TARGET = iphone:clang:11.2:10.0
 
 # Declare the location of the (patched) SDK we use
-SYSROOT = $(THEOS)/sdks/iPhoneOS11.2.sdk
 
 include $(THEOS)/makefiles/common.mk
 
@@ -42,8 +41,8 @@ internal-stage::
 	$(ECHO_NOTHING)mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support/Signe.bundle/$(ECHO_END)
 	$(ECHO_NOTHING)cp -a BGNumericalGlyphRecognizer/Resources/. $(THEOS_STAGING_DIR)/Library/Application\ Support/Signe.bundle/$(ECHO_END)
 
-after-install:: # Fast respring!!
-	install.exec "sbreload"
+#after-install:: # Fast respring!!
+#	install.exec "sbreload"
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += signeprefs

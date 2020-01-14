@@ -232,7 +232,7 @@ static void preferencesChanged()
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
     reloadPrefs();
-	NSLog(@"Loading Preferences");
+	NSLog(@"Signe: Loading Preferences");
 
 	NSString *one = [prefs objectForKey:@"one"];
 	NSString *two = [prefs objectForKey:@"two"];
@@ -243,6 +243,8 @@ static void preferencesChanged()
 	NSString *seven = [prefs objectForKey:@"seven"];
 	NSString *eight = [prefs objectForKey:@"eight"];
 	NSString *nine = [prefs objectForKey:@"nine"];
+
+	NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", one, two, three, four, five, six, seven, eight, nine);
 
 	NSArray *options = [NSArray arrayWithObjects:one,two,three,four,five,six,seven,eight,nine, nil];
 
@@ -261,7 +263,7 @@ static void preferencesChanged()
 		i++;
 	}
 
-	[[SigneManager sharedManager] setShouldDrawCharacters:NO];
+	[[SigneManager sharedManager] setShouldDrawCharacters:YES];
 	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];
 	[[SigneManager sharedManager] setStrokeSize:10];
 }

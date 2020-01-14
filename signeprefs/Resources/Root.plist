@@ -5,6 +5,22 @@
 	<key>items</key>
 	<array>
 		<dict>
+			<key>cellClass</key>
+			<string>KRTwitterCell</string>
+			<key>label</key>
+			<string>Kritanta</string>
+			<key>accountName</key>
+			<string>_kritanta</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>KRTwitterCell</string>
+			<key>label</key>
+			<string>Tr1Fecta</string>
+			<key>accountName</key>
+			<string>FectaTr1</string>
+		</dict>
+		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
@@ -47,6 +63,10 @@
 		<dict>
 			<key>cell</key>
 			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 			<key>icon</key>
 			<string>2.png</string>
 			<key>key</key>
@@ -63,6 +83,10 @@
 			<string>three</string>
 			<key>isURL</key>
 			<true/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -73,6 +97,10 @@
 			<string>four</string>
 			<key>isURL</key>
 			<true/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -83,6 +111,10 @@
 			<string>five</string>
 			<key>isURL</key>
 			<true/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -93,6 +125,10 @@
 			<string>six</string>
 			<key>isURL</key>
 			<true/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -103,6 +139,10 @@
 			<string>seven</string>
 			<key>isURL</key>
 			<true/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -113,6 +153,10 @@
 			<string>eight</string>
 			<key>isURL</key>
 			<true/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -123,6 +167,10 @@
 			<string>nine</string>
 			<key>isURL</key>
 			<true/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
