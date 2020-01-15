@@ -273,14 +273,10 @@ static void preferencesChanged()
 			{
 				NSLog(@"Signe: OPTION IS URL!");
 				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 			}
 			else if (isCommand(option))
 			{
 				NSLog(@"Signe: OPTION IS COMMAND!");
-				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-			[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 			}
 			else 
