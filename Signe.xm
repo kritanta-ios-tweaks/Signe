@@ -261,6 +261,7 @@ static void preferencesChanged()
 		NSLog(@"Signe: %@ - %d", option, i);
 		if (isURL(option))
 		{
+<<<<<<< HEAD
 			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 		}
 		else if (isCommand(option))
@@ -270,6 +271,22 @@ static void preferencesChanged()
 		else 
 		{
 			[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
+=======
+			if (isURL(option))
+			{
+				NSLog(@"Signe: OPTION IS URL!");
+				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
+			}
+			else if (isCommand(option))
+			{
+				NSLog(@"Signe: OPTION IS COMMAND!");
+				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
+			}
+			else 
+			{
+				[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
+			}
+>>>>>>> 74563a97972b6426ded622c5cc1d442157bcc037
 		}
 		i++;
 	}
