@@ -110,6 +110,7 @@ static BOOL activationStyle = 0;
 {
     [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
 	self.BGCanvas.hidden = YES;
+	
 }
 
 
@@ -228,9 +229,14 @@ static BOOL isURL(NSString *keyValue)
 	return [keyValue containsString:@"http"];
 }
 
-static BOOL isOtherCommand(NSString *keyValue) 
+static BOOL isCommand(NSString *keyValue) 
 {
 	return ([keyValue isEqualToString:@"sbreload"] || [keyValue isEqualToString:@"respring"] || [keyValue isEqualToString:@"safemode"] || [keyValue isEqualToString:@"uicache"]);
+}
+
+static id objectOrNull(id object)
+{
+  return object ?: [NSNull null]; // Return object if its not nil
 }
 
 static void preferencesChanged() 
@@ -239,16 +245,18 @@ static void preferencesChanged()
     reloadPrefs();
 	NSLog(@"Signe: Loading Preferences");
 
-	NSString *zero = [prefs objectForKey:@"zero"];
-	NSString *one = [prefs objectForKey:@"one"];
-	NSString *two = [prefs objectForKey:@"two"];
-	NSString *three = [prefs objectForKey:@"three"];
-	NSString *four = [prefs objectForKey:@"four"];
-	NSString *five = [prefs objectForKey:@"five"];
-	NSString *six = [prefs objectForKey:@"six"];
-	NSString *seven = [prefs objectForKey:@"seven"];
-	NSString *eight = [prefs objectForKey:@"eight"];
-	NSString *nine = [prefs objectForKey:@"nine"];
+	// Setup the numbers and check if they are null (if yes then NSString will have [NSNull null] as value)
+	// Had to use NSNull null, because u can't put nil objects in arrays, this fixes the issue with not looping through the values when an object is nil
+	NSString *zero = objectOrNull([prefs objectForKey:@"zero"]);
+	NSString *one = objectOrNull([prefs objectForKey:@"one"]);
+	NSString *two = objectOrNull([prefs objectForKey:@"two"]);
+	NSString *three = objectOrNull([prefs objectForKey:@"three"]);
+	NSString *four = objectOrNull([prefs objectForKey:@"four"]);
+	NSString *five = objectOrNull([prefs objectForKey:@"five"]);
+	NSString *six = objectOrNull([prefs objectForKey:@"six"]);
+	NSString *seven = objectOrNull([prefs objectForKey:@"seven"]);
+	NSString *eight = objectOrNull([prefs objectForKey:@"eight"]);
+	NSString *nine = objectOrNull([prefs objectForKey:@"nine"]);
 
 	NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
@@ -257,20 +265,28 @@ static void preferencesChanged()
 	int i = 0;
 	for (NSString *option in options)
 	{
+		
 		NSLog(@"Signe: %@ - %d", option, i);
-		if (isURL(option))
+		if (![option isEqual:[NSNull null]]) // Check if the prefs value of the number is not [NSNull null]
 		{
-			NSLog(@"Signe: OPTION IS URL!");
+			if (isURL(option))
+			{
+				NSLog(@"Signe: OPTION IS URL!");
+				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-		}
-		else if (isOtherCommand(option))
-		{
-			NSLog(@"Signe: OPTION IS COMMAND!");
+				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
+			}
+			else if (isCommand(option))
+			{
+				NSLog(@"Signe: OPTION IS COMMAND!");
+				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 			[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-		}
-		else 
-		{
-			[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
+				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
+			}
+			else 
+			{
+				[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
+			}
 		}
 		i++;
 	}
