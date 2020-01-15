@@ -234,59 +234,42 @@ static BOOL isCommand(NSString *keyValue)
 	return ([keyValue isEqualToString:@"sbreload"] || [keyValue isEqualToString:@"respring"] || [keyValue isEqualToString:@"safemode"] || [keyValue isEqualToString:@"uicache"]);
 }
 
-static id objectOrNull(id object)
-{
-  return object ?: [NSNull null]; // Return object if its not nil
-}
-
 static void preferencesChanged() 
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
     reloadPrefs();
 	NSLog(@"Signe: Loading Preferences");
 
-	// Setup the numbers and check if they are null (if yes then NSString will have [NSNull null] as value)
-	// Had to use NSNull null, because u can't put nil objects in arrays, this fixes the issue with not looping through the values when an object is nil
-	NSString *zero = objectOrNull([prefs objectForKey:@"zero"]);
-	NSString *one = objectOrNull([prefs objectForKey:@"one"]);
-	NSString *two = objectOrNull([prefs objectForKey:@"two"]);
-	NSString *three = objectOrNull([prefs objectForKey:@"three"]);
-	NSString *four = objectOrNull([prefs objectForKey:@"four"]);
-	NSString *five = objectOrNull([prefs objectForKey:@"five"]);
-	NSString *six = objectOrNull([prefs objectForKey:@"six"]);
-	NSString *seven = objectOrNull([prefs objectForKey:@"seven"]);
-	NSString *eight = objectOrNull([prefs objectForKey:@"eight"]);
-	NSString *nine = objectOrNull([prefs objectForKey:@"nine"]);
+	NSString *zero = [prefs objectForKey:@"zero"]?:@"";
+	NSString *one = [prefs objectForKey:@"one"]?:@"";
+	NSString *two = [prefs objectForKey:@"two"]?:@"";
+	NSString *three = [prefs objectForKey:@"three"]?:@"";
+	NSString *four = [prefs objectForKey:@"four"]?:@"";
+	NSString *five = [prefs objectForKey:@"five"]?:@"";
+	NSString *six = [prefs objectForKey:@"six"]?:@"";
+	NSString *seven = [prefs objectForKey:@"seven"]?:@"";
+	NSString *eight = [prefs objectForKey:@"eight"]?:@"";
+	NSString *nine = [prefs objectForKey:@"nine"]?:@"";
 
-	NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
+	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
 	NSArray *options = [NSArray arrayWithObjects:zero,one,two,three,four,five,six,seven,eight,nine, nil];
 
 	int i = 0;
 	for (NSString *option in options)
 	{
-		
 		NSLog(@"Signe: %@ - %d", option, i);
-		if (![option isEqual:[NSNull null]]) // Check if the prefs value of the number is not [NSNull null]
+		if (isURL(option))
 		{
-			if (isURL(option))
-			{
-				NSLog(@"Signe: OPTION IS URL!");
-				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-			}
-			else if (isCommand(option))
-			{
-				NSLog(@"Signe: OPTION IS COMMAND!");
-				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-			[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-			}
-			else 
-			{
-				[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
-			}
+		}
+		else if (isCommand(option))
+		{
+			[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]];
+		}
+		else 
+		{
+			[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
 		}
 		i++;
 	}
