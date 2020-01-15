@@ -148,7 +148,7 @@
         }
         
         // If the time since the last stroke is too great, this has to be a new stroke.
-        if ([[NSDate date] timeIntervalSinceDate: prevStrokeDate] > 0.5)
+        if ([[NSDate date] timeIntervalSinceDate: prevStrokeDate] > 0.0001)
             likelySameCharacter = NO;
     }
     

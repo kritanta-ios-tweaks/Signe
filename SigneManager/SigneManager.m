@@ -34,39 +34,6 @@
     return self;
 }
 
--(void)showAlertController:(NSString *)alertMessage selector:(SEL)method withObject:(id)object
-{
-    // Setup a UIWindow to show the Alert Controller, because this class does not subclass UIViewController
-    UIWindow *topWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    topWindow.rootViewController = [UIViewController new];
-    topWindow.windowLevel = UIWindowLevelAlert + 1;
-
-
-    // Setup the Alert Controller and its actions
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"WARNING" 
-                                message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
-
-    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault
-         handler:^(UIAlertAction *action) {
-            self.shouldContinueAfterAlert = YES;
-            // Call the method that has been passed, if the user clicks yes.
-            // Might not be the best way?
-            [self performSelector:method withObject:object];
-    }];
-
-    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
-         handler:^(UIAlertAction *action) {
-            self.shouldContinueAfterAlert = NO;
-    }];
-
-    [alertController addAction:yesAction];
-    [alertController addAction:cancelAction];
-
-    // Show the top window and present our view controller
-    [topWindow makeKeyAndVisible];
-    [topWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
-
-}
 
 - (void)openApplication:(NSString *)location
 {
@@ -190,4 +157,38 @@
     [self performSelector:action withObject:(NSString *)[self.actionLocations objectForKey:key]];
 }
 
+
+-(void)showAlertController:(NSString *)alertMessage selector:(SEL)method withObject:(id)object
+{
+    // Setup a UIWindow to show the Alert Controller, because this class does not subclass UIViewController
+    UIWindow *topWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    topWindow.rootViewController = [UIViewController new];
+    topWindow.windowLevel = UIWindowLevelAlert + 1;
+
+
+    // Setup the Alert Controller and its actions
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"WARNING" 
+                                message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault
+         handler:^(UIAlertAction *action) {
+            self.shouldContinueAfterAlert = YES;
+            // Call the method that has been passed, if the user clicks yes.
+            // Might not be the best way?
+            [self performSelector:method withObject:object];
+    }];
+
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+         handler:^(UIAlertAction *action) {
+            self.shouldContinueAfterAlert = NO;
+    }];
+
+    [alertController addAction:yesAction];
+    [alertController addAction:cancelAction];
+
+    // Show the top window and present our view controller
+    [topWindow makeKeyAndVisible];
+    [topWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+
+}
 @end

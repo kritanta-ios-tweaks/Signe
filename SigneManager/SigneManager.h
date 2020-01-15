@@ -12,8 +12,8 @@
 @property (nonatomic, retain) NSMutableDictionary *actionLocations;
 
 @property (nonatomic, assign) BOOL shouldContinueAfterAlert;
-+ (instancetype)sharedManager;
 
++ (instancetype)sharedManager;
 
 - (void)showAlertController:(NSString *)alertMessage selector:(SEL)method withObject:(id)object;
 - (void)setBundleToOpen:(NSString *)bundle forKey:(NSString *)key;
