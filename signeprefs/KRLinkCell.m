@@ -24,7 +24,7 @@
 		self.textLabel.textColor = (kCFCoreFoundationVersionNumber < 1600) ? [UIColor blackColor] : [UIColor blackColor];
 		if (@available(iOS 13, *)) 
 		{
-			//self.tintColor = [UIColor labelColor];
+			self.tintColor = [UIColor labelColor];
 		} 
 		else 
 		{
@@ -48,8 +48,7 @@
 			_avatarView.layer.borderWidth = 2;
 			if (@available(iOS 13, *)) 
 			{
-				// _avatarView.layer.borderColor = [[UIColor tertiaryLabelColor] CGColor];
-				_avatarView.layer.borderColor = [[UIColor colorWithWhite:1 alpha:0.3] CGColor];
+				_avatarView.layer.borderColor = [[UIColor tertiaryLabelColor] CGColor];
 			} 
 			else 
 			{

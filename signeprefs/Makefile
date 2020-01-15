@@ -8,7 +8,7 @@ SignePrefs_FILES = SIGRootListController.m KRLinkCell.m KRTableCell.m KRTwitterC
 SignePrefs_INSTALL_PATH = /Library/PreferenceBundles
 SignePrefs_FRAMEWORKS = UIKit
 SignePrefs_PRIVATE_FRAMEWORKS = Preferences
-SignePrefs_CFLAGS = -fobjc-arc
+SignePrefs_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 

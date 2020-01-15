@@ -5,6 +5,7 @@
 
 static NSDictionary *prefs;
 static BOOL activationStyle = 0;
+static BOOL _pfTweakEnabled = YES;
 
 @interface UISystemGestureView : UIView
 
@@ -28,6 +29,8 @@ static BOOL activationStyle = 0;
 @interface UIApplication (Signe)
 -(volb *)volumeHardwareButton;
 @end
+
+%group Signe
 
 %hook UISystemGestureView 
 
@@ -133,6 +136,7 @@ static BOOL activationStyle = 0;
 
 -(_Bool)_handlePhysicalButtonEvent:(UIPressesEvent *)arg1 
 {
+	if (!_pfTweakEnabled) return %orig;
 	int type = arg1.allPresses.allObjects[0].type; 
 	int force = arg1.allPresses.allObjects[0].force;
 
@@ -191,7 +195,7 @@ static BOOL activationStyle = 0;
 
 %end
 
-
+%end
 
 static void *observer = NULL;
 
@@ -240,6 +244,9 @@ static void preferencesChanged()
     reloadPrefs();
 	NSLog(@"Signe: Loading Preferences");
 
+	BOOL _pfDrawingEnabled = boolValueForKey(@"drawingEnabled", YES);
+	_pfTweakEnabled = boolValueForKey(@"enabled", YES);
+
 	NSString *zero = [prefs objectForKey:@"zero"]?:@"";
 	NSString *one = [prefs objectForKey:@"one"]?:@"";
 	NSString *two = [prefs objectForKey:@"two"]?:@"";
@@ -261,7 +268,6 @@ static void preferencesChanged()
 		NSLog(@"Signe: %@ - %d", option, i);
 		if (isURL(option))
 		{
-<<<<<<< HEAD
 			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
 		}
 		else if (isCommand(option))
@@ -271,27 +277,11 @@ static void preferencesChanged()
 		else 
 		{
 			[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
-=======
-			if (isURL(option))
-			{
-				NSLog(@"Signe: OPTION IS URL!");
-				[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-			}
-			else if (isCommand(option))
-			{
-				NSLog(@"Signe: OPTION IS COMMAND!");
-				[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-			}
-			else 
-			{
-				[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
-			}
->>>>>>> 74563a97972b6426ded622c5cc1d442157bcc037
 		}
 		i++;
 	}
 
-	[[SigneManager sharedManager] setShouldDrawCharacters:YES];
+	[[SigneManager sharedManager] setShouldDrawCharacters:_pfDrawingEnabled];
 	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];
 	[[SigneManager sharedManager] setStrokeSize:10];
 }
@@ -312,5 +302,6 @@ static void preferencesChanged()
         NULL,
         CFNotificationSuspensionBehaviorDeliverImmediately
     );
-
+	if (_pfTweakEnabled) 
+		%init(Signe);
 }
