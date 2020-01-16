@@ -262,6 +262,8 @@ static void preferencesChanged()
 
 	NSArray *options = [NSArray arrayWithObjects:zero,one,two,three,four,five,six,seven,eight,nine, nil];
 
+	NSDictionary *characterMap = []
+
 	int i = 0;
 	for (NSString *option in options)
 	{
@@ -280,6 +282,8 @@ static void preferencesChanged()
 		}
 		i++;
 	}
+
+	[[SigneManager sharedManager] setURLToOpen:@"https://patreon.com/KritantaDev" forKey:@"V"]; 
 
 	[[SigneManager sharedManager] setShouldDrawCharacters:_pfDrawingEnabled];
 	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];

@@ -96,7 +96,6 @@
 		NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/%@/profile_image?size=%@", username, size]]] returningResponse:nil error:&error];
 
 		if (error) {
-			HBLogError(@"error loading twitter avatar: %@", error);
 			return;
 		}
 
