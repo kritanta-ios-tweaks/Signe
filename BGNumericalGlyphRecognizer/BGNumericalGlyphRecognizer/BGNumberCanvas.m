@@ -7,6 +7,7 @@
 //
 
 #include "SigneManager.h"
+#include "SigneUtilities.h"
 #import "BGNumberCanvas.h"
 #import "DetectedNumber.h"
 #import "CJSONSerializer.h"
@@ -523,7 +524,18 @@
     CGContextFlush(context);
     [self setNeedsDisplay];
     [self clear];
-    [[SigneManager sharedManager] performActionForKey:n.value];
+    if ([[SigneUtilities sharedUtilities] keyHasCommand:n.value]) // Check if the detected number (key) has a command set for it 
+    {   
+        // Get the command that has been set for the key (numbers 0-9) and perform the command
+        NSString *commandKey = [[SigneUtilities sharedUtilities] getCommandForKey:n.value];
+        [[SigneUtilities sharedUtilities] performCommandForKey:commandKey];
+    }
+    else
+    {
+        // If a command has not been found, perform an action.
+        [[SigneManager sharedManager] performActionForKey:n.value];
+    }
+
     paintLayer = nil;
 }
 

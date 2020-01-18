@@ -1,6 +1,7 @@
 #include "BGNumberCanvas.h"
 #include "Signe.h"
 #include "SigneManager.h"
+#include "SigneUtilities.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 static NSDictionary *prefs;
@@ -262,7 +263,7 @@ static void preferencesChanged()
 
 	NSArray *options = [NSArray arrayWithObjects:zero,one,two,three,four,five,six,seven,eight,nine, nil];
 
-	NSDictionary *characterMap = []
+	//NSDictionary *characterMap = [];
 
 	int i = 0;
 	for (NSString *option in options)
@@ -274,7 +275,7 @@ static void preferencesChanged()
 		}
 		else if (isCommand(option))
 		{
-			[[SigneManager sharedManager] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]];
+			[[SigneUtilities sharedUtilities] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]];
 		}
 		else 
 		{

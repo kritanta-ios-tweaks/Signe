@@ -1,0 +1,177 @@
+#include "SigneUtilities.h"
+
+
+@implementation SigneUtilities
+
+
++ (instancetype)sharedUtilities
+{
+    static SigneUtilities *sharedUtilities = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedUtilities = [[[self class] alloc] init];
+    });
+    return sharedUtilities;
+}
+
+
+- (instancetype)init
+{
+    self = [super init];
+
+    if (self) {
+        // Setup our commands, commandKeys initialization and shouldContinueAfterAlert set to NO (false)
+        self.commands = @{
+            @"sbreload": [NSValue valueWithPointer:@selector(sbreload)],
+            @"respring": [NSValue valueWithPointer:@selector(respring)],
+            @"safemode": [NSValue valueWithPointer:@selector(enterSafeMode)],
+            @"uicache": [NSValue valueWithPointer:@selector(runUICache)]
+        };
+        self.commandKeys = [[NSMutableDictionary alloc] init];
+        self.shouldContinueAfterAlert = NO;
+
+    }
+
+    return self;
+}
+
+
+-(BOOL)keyHasCommand:(NSString *)key {
+    // Return YES if the command exists for our key (numbers 0-9)
+    return [self.commandKeys objectForKey:key] ? YES : NO;
+}
+
+
+- (void)sbreload 
+{
+    if (self.shouldContinueAfterAlert) {
+        pid_t pid;
+        int status;
+
+        const char *args[] = {"sbreload", NULL, NULL, NULL};
+        posix_spawn(&pid, "usr/bin/sbreload", NULL, NULL, (char *const *)args, NULL);
+        waitpid(pid, &status, WEXITED);
+    }
+    else 
+    {
+        [self showAlertController:@"Are you sure u want to respring?" selector:@selector(sbreload)];
+    }
+}
+
+
+- (void)respring
+{
+    if (self.shouldContinueAfterAlert) 
+    {
+        pid_t pid;
+        int status;
+
+        const char* args[] = {"killall", "-9", "backboardd", NULL};
+        posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
+        waitpid(pid, &status, WEXITED);
+    }
+    else 
+    {
+        // Show the alert, pass the selector to this method
+        [self showAlertController:@"Are you sure u want to respring?" selector:@selector(respring)];
+    }
+    
+}
+
+
+
+- (void)enterSafeMode 
+{
+    if (self.shouldContinueAfterAlert)
+    {
+        pid_t pid;
+        int status;
+
+        const char* args[] = {"killall", "-SEGV", "SpringBoard", NULL};
+        posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
+        waitpid(pid, &status, WEXITED);
+    }
+    else 
+    {
+        // Show the alert, pass the selector to this method
+        [self showAlertController:@"Are you sure u want to enter safe mode?" selector:@selector(enterSafeMode)];
+    }
+    
+}
+
+- (void)runUICache 
+{
+    if (self.shouldContinueAfterAlert) 
+    {
+        pid_t pid;
+        int status;
+
+        const char* args[] = {"uicache", "-a", "-r", NULL};
+        posix_spawn(&pid, "/usr/bin/uicache", NULL, NULL, (char* const*)args, NULL);
+        waitpid(pid, &status, WEXITED);
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 20.0, false);
+    }
+    else 
+    {
+        // Show the alert, pass the selector to this method
+        [self showAlertController:@"Are you sure u want to run uicache? Your device will respring after a moment." selector:@selector(runUICache)];
+    }
+}
+
+- (void)setCommandToRun:(NSString *)command forKey:(NSString *)key
+{
+    // Set the command for the key (numbers 0-9)
+    [self.commandKeys setValue:command forKey:key];
+}
+
+- (NSString *)getCommandForKey:(NSString *)key
+{
+    // Get the actual command by the key (numbers 0-9) and return it
+    NSString *commandKey = [self.commandKeys objectForKey:key] ?: nil;
+
+    return commandKey;
+}
+
+- (void)performCommandForKey:(NSString *)commandKey
+{
+    // Get the selector for our command by the commandKey and perform the command's selector
+    SEL commandToRun = [[self.commands objectForKey:commandKey] pointerValue];
+    if (commandToRun == nil) return;
+    [self performSelector:commandToRun];
+}
+
+- (void)showAlertController:(NSString *)alertMessage selector:(SEL)method
+{
+    // Setup a UIWindow to show the Alert Controller, because this class does not subclass UIViewController
+    UIWindow *topWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    topWindow.rootViewController = [UIViewController new];
+    topWindow.windowLevel = UIWindowLevelAlert + 1;
+
+
+    // Setup the Alert Controller and its actions
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"WARNING" 
+                                message:alertMessage preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault
+         handler:^(UIAlertAction *action) {
+            self.shouldContinueAfterAlert = YES;
+            // Call the method that has been passed as selector, if the user clicks yes.
+            // Might not be the best way?
+            [self performSelector:method];
+    }];
+
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault
+         handler:^(UIAlertAction *action) {
+            self.shouldContinueAfterAlert = NO;
+    }];
+
+    [alertController addAction:yesAction];
+    [alertController addAction:cancelAction];
+
+    // Show the top window and present our view controller
+    [topWindow makeKeyAndVisible];
+    [topWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
+
+}
+
+@end
