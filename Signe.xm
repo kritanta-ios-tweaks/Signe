@@ -5,6 +5,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 static NSDictionary *prefs;
+static NSArray *utilityCommands;
 static BOOL activationStyle = 0;
 static BOOL _pfTweakEnabled = YES;
 
@@ -236,7 +237,7 @@ static BOOL isURL(NSString *keyValue)
 
 static BOOL isCommand(NSString *keyValue) 
 {
-	return ([keyValue isEqualToString:@"sbreload"] || [keyValue isEqualToString:@"respring"] || [keyValue isEqualToString:@"safemode"] || [keyValue isEqualToString:@"uicache"]);
+	return [utilityCommands containsObject:keyValue] ?: NO;
 }
 
 static void preferencesChanged() 
@@ -262,8 +263,7 @@ static void preferencesChanged()
 	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
 	NSArray *options = [NSArray arrayWithObjects:zero,one,two,three,four,five,six,seven,eight,nine, nil];
-
-	//NSDictionary *characterMap = [];
+	utilityCommands = [NSArray arrayWithObjects:@"sbreload", @"respring", @"safemode", @"uicache", @"wifi", @"bluetooth"];
 
 	int i = 0;
 	for (NSString *option in options)

@@ -1,5 +1,6 @@
 #include "SigneUtilities.h"
 
+#include "Signe.h"
 
 @implementation SigneUtilities
 
@@ -7,7 +8,7 @@
 + (instancetype)sharedUtilities
 {
     static SigneUtilities *sharedUtilities = nil;
-    static dispatch_once_t onceToken;
+    static dispatch_once_t onceToken = 0;
     dispatch_once(&onceToken, ^{
         sharedUtilities = [[[self class] alloc] init];
     });
@@ -25,10 +26,15 @@
             @"sbreload": [NSValue valueWithPointer:@selector(sbreload)],
             @"respring": [NSValue valueWithPointer:@selector(respring)],
             @"safemode": [NSValue valueWithPointer:@selector(enterSafeMode)],
-            @"uicache": [NSValue valueWithPointer:@selector(runUICache)]
+            @"uicache": [NSValue valueWithPointer:@selector(runUICache)],
+            @"wifi": [NSValue valueWithPointer:@selector(setWifiStatus)],
+            @"bluetooth": [NSValue valueWithPointer:@selector(setBTStatus)]
         };
         self.commandKeys = [[NSMutableDictionary alloc] init];
         self.shouldContinueAfterAlert = NO;
+
+        self.wifiEnabled = [[objc_getClass("SBWiFiManager") sharedInstance] wiFiEnabled];
+        self.bluetoothEnabled = [[objc_getClass("BluetoothManager") sharedInstance] enabled];
 
     }
 
@@ -41,6 +47,8 @@
     return [self.commandKeys objectForKey:key] ? YES : NO;
 }
 
+
+#pragma mark Commands
 
 - (void)sbreload 
 {
@@ -79,7 +87,6 @@
 }
 
 
-
 - (void)enterSafeMode 
 {
     if (self.shouldContinueAfterAlert)
@@ -99,6 +106,7 @@
     
 }
 
+
 - (void)runUICache 
 {
     if (self.shouldContinueAfterAlert) 
@@ -117,6 +125,40 @@
         [self showAlertController:@"Are you sure u want to run uicache? Your device will respring after a moment." selector:@selector(runUICache)];
     }
 }
+
+- (void)setWifiStatus
+{
+    if (self.wifiEnabled)
+    {
+        [[objc_getClass("SBWiFiManager") sharedInstance] setWiFiEnabled:NO];
+        self.wifiEnabled = NO;
+    }
+    else
+    {
+        [[objc_getClass("SBWiFiManager") sharedInstance] setWiFiEnabled:YES];
+        self.wifiEnabled = YES;
+    }
+}
+
+-(void)setBTStatus 
+{   
+    BluetoothManager *bManager = (BluetoothManager *)[objc_getClass("BluetoothManager") sharedInstance];
+    if (self.bluetoothEnabled)
+    {
+        [bManager setEnabled:NO];
+        [bManager setPowered:NO];
+        self.bluetoothEnabled = NO;
+    }
+    else 
+    {
+        [bManager setEnabled:YES];
+        [bManager setPowered:YES];
+        self.bluetoothEnabled = YES;
+    }
+
+}
+
+#pragma mark Set Commands
 
 - (void)setCommandToRun:(NSString *)command forKey:(NSString *)key
 {

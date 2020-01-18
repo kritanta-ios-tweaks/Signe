@@ -13,7 +13,7 @@
 + (instancetype)sharedManager
 {
     static SigneManager *sharedManager = nil;
-    static dispatch_once_t onceToken;
+    static dispatch_once_t onceToken = 0;
     dispatch_once(&onceToken, ^{
         sharedManager = [[[self class] alloc] init];
     });
