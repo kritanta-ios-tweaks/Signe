@@ -18,7 +18,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>rotationMode3</string>
+			<string>rotationMode0</string>
 			<key>label</key>
 			<string></string>
 			<key>validValues</key>
@@ -36,7 +36,7 @@
 				<string>Command</string>
 			</array>
 			<key>id</key>
-			<string>rotationMode3ID</string>
+			<string>rotationMode1ID</string>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
@@ -74,7 +74,7 @@
 			<true/>
 
 			<key>ALSettingsKey</key>
-			<string>threeEnabledApp</string>
+			<string>zeroEnabledApp</string>
 
 			<key>ALAllowsSelection</key>
 			<true/>
@@ -83,7 +83,7 @@
 			<string>me.kritanta.signeprefs/Prefs</string>
 
 			<key>id</key>
-			<string>threeChooseAppsList</string>
+			<string>zeroChooseAppsList</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -99,7 +99,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>threeURL</string>
+			<string>zeroURL</string>
 			<key>isURL</key>
 			<true/>
 			<key>PostNotification</key>
@@ -121,7 +121,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>threeCMD</string>
+			<string>zeroCMD</string>
 			<label>Command:</label>
 			<key>detail</key>
             <string>PSListItemsController</string>

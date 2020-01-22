@@ -260,6 +260,8 @@ static void preferencesChanged()
 	NSString *eight = [prefs objectForKey:@"eight"]?:@"";
 	NSString *nine = [prefs objectForKey:@"nine"]?:@"";
 
+	
+
 	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
 	NSArray *options = [NSArray arrayWithObjects:zero,one,two,three,four,five,six,seven,eight,nine, nil];

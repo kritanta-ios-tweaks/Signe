@@ -64,6 +64,18 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>1:</string>
+			<key>icon</key>
+			<string>1.png</string>
+			<key>detail</key>
+            <string>SIGNumberOneController</string>
+            <key>isController</key>
+            <true/>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSEditTextCell</string>
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
@@ -76,89 +88,66 @@
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
+
 		<dict>
 			<key>cell</key>
-			<string>PSEditTextCell</string>
-			<key>defaults</key>
-			<string>me.kritanta.signeprefs</string>
-			<key>key</key>
-			<string>one</string>
-			<key>icon</key>
-			<string>1.png</string>
-			<key>isURL</key>
-			<true/>
-			<key>PostNotification</key>
-			<string>me.kritanta.signeprefs/Prefs</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSEditTextCell</string>
-			<key>defaults</key>
-			<string>me.kritanta.signeprefs</string>
-			<key>PostNotification</key>
-			<string>me.kritanta.signeprefs/Prefs</string>
-			<key>icon</key>
-			<string>2.png</string>
-			<key>key</key>
-			<string>two</string>
-			<key>isURL</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSEditTextCell</string>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>2:</string>
 			<key>icon</key>
 			<string>3.png</string>
-			<key>key</key>
-			<string>three</string>
-			<key>isURL</key>
-			<true/>
-			<key>defaults</key>
-			<string>me.kritanta.signeprefs</string>
-			<key>PostNotification</key>
-			<string>me.kritanta.signeprefs/Prefs</string>
+			<key>detail</key>
+            <string>SIGNumberTwoController</string>
+            <key>isController</key>
+            <true/>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSEditTextCell</string>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>3:</string>
+			<key>icon</key>
+			<string>3.png</string>
+			<key>detail</key>
+            <string>SIGNumberThreeController</string>
+            <key>isController</key>
+            <true/>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>4:</string>
 			<key>icon</key>
 			<string>4.png</string>
-			<key>key</key>
-			<string>four</string>
-			<key>isURL</key>
-			<true/>
-			<key>defaults</key>
-			<string>me.kritanta.signeprefs</string>
-			<key>PostNotification</key>
-			<string>me.kritanta.signeprefs/Prefs</string>
+			<key>detail</key>
+            <string>SIGNumberFourController</string>
+            <key>isController</key>
+            <true/>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSEditTextCell</string>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>5:</string>
 			<key>icon</key>
 			<string>5.png</string>
-			<key>key</key>
-			<string>five</string>
-			<key>isURL</key>
-			<true/>
-			<key>defaults</key>
-			<string>me.kritanta.signeprefs</string>
-			<key>PostNotification</key>
-			<string>me.kritanta.signeprefs/Prefs</string>
+			<key>detail</key>
+            <string>SIGNumberFiveController</string>
+            <key>isController</key>
+            <true/>
 		</dict>
 		<dict>
 			<key>cell</key>
-			<string>PSEditTextCell</string>
+			<string>PSLinkCell</string>
+			<key>label</key>
+			<string>6:</string>
 			<key>icon</key>
 			<string>6.png</string>
-			<key>key</key>
-			<string>six</string>
-			<key>isURL</key>
-			<true/>
-			<key>defaults</key>
-			<string>me.kritanta.signeprefs</string>
-			<key>PostNotification</key>
-			<string>me.kritanta.signeprefs/Prefs</string>
+			<key>detail</key>
+            <string>SIGNumberSixController</string>
+            <key>isController</key>
+            <true/>
 		</dict>
 		<dict>
 			<key>cell</key>
