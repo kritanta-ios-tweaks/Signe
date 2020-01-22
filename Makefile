@@ -8,7 +8,7 @@ ARCHS = arm64 arm64e
 #ARCHS = x86_64 
 
 # Target iOS 10+ Devices, and use the iOS 11.2 SDK
-TARGET = iphone:clang:13.2:10.0
+TARGET = iphone:clang:12.0:10.0
 
 # Declare the location of the (patched) SDK we use
 
@@ -36,6 +36,7 @@ SOURCES += $(shell find Signemanager -name '*.m')
 
 Signe_FILES = Signe.xm ${SOURCES}
 Signe_LIBRARIES = applist
+Signe_PRIVATE_FRAMEWORKS = MediaRemote
 Signe_CFLAGS += -fobjc-arc -w -Wno-deprecated-declarations $(IMPORTS)
 
 

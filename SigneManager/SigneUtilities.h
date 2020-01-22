@@ -2,6 +2,7 @@
 #include <objc/runtime.h>
 #include <dlfcn.h>
 
+
 @interface SigneUtilities : NSObject
 
 @property (nonatomic, retain) NSMutableDictionary *commands;
@@ -10,7 +11,8 @@
 
 @property (nonatomic, assign) BOOL wifiEnabled;
 @property (nonatomic, assign) BOOL bluetoothEnabled;
-
+@property (nonatomic, assign) BOOL airplaneModeEnabled;
+@property (nonatomic, assign) BOOL cellularEnabled;
 + (instancetype)sharedUtilities;
 
 - (BOOL)keyHasCommand:(NSString *)key;
@@ -33,6 +35,7 @@
 - (void)setWifiStatus;
 - (void)setBTStatus;
 
+
 @end
 
 @interface SBWiFiManager : NSObject
@@ -51,4 +54,22 @@
 -(void)setPowered:(BOOL)powered;
 -(bool)powered;
 
+@end
+
+@interface RadiosPreferences : NSObject
+-(BOOL)airplaneMode;
+-(void)setAirplaneMode:(BOOL)arg1;
+
+@end
+
+@interface VideosPlaybackSettings : NSObject
++(id)sharedSettings;
+-(void)setCellularDataEnabled:(BOOL)arg1 ;
+-(BOOL)isCellularDataEnabled;
+@end
+
+@interface SBAssistantController : NSObject
++(id)sharedInstance;
+-(BOOL)handleSiriButtonDownEventFromSource:(int)arg1 activationEvent:(int)arg2;
+-(void)handleSiriButtonUpEventFromSource:(int)arg1;
 @end

@@ -1,6 +1,7 @@
 #include "SigneUtilities.h"
 #include "SigneManager.h"
 #include "Signe.h"
+#import "MediaRemote.h"
 
 @implementation SigneUtilities
 
@@ -22,20 +23,36 @@
 
     if (self) {
         // Setup our commands, commandKeys initialization and shouldContinueAfterAlert set to NO (false)
+        /*
+        Play Song(?) / check
+        Pause Song / check
+        Skip song
+        Previous Song
+        Airplane mode / check
+        Turn on data / check*/
+
         self.commands = @{
             @"sbreload": [NSValue valueWithPointer:@selector(sbreload)],
             @"respring": [NSValue valueWithPointer:@selector(respring)],
             @"safemode": [NSValue valueWithPointer:@selector(enterSafeMode)],
             @"uicache": [NSValue valueWithPointer:@selector(runUICache)],
             @"wifi": [NSValue valueWithPointer:@selector(setWifiStatus)],
-            @"bluetooth": [NSValue valueWithPointer:@selector(setBTStatus)]
+            @"bluetooth": [NSValue valueWithPointer:@selector(setBTStatus)],
+            @"cellular": [NSValue valueWithPointer:@selector(setCellularStatus)],
+            @"airplane": [NSValue valueWithPointer:@selector(setAirplaneMode)],
+            @"playPauseMedia": [NSValue valueWithPointer:@selector(playPauseMedia)],
+            @"skipMedia": [NSValue valueWithPointer:@selector(skipMedia)],
+            @"previousMedia":[NSValue valueWithPointer:@selector(previousMedia)],
+            @"siri": [NSValue valueWithPointer:@selector(toggleSiri)]
         };
         self.commandKeys = [[NSMutableDictionary alloc] init];
         self.shouldContinueAfterAlert = NO;
 
         self.wifiEnabled = [[objc_getClass("SBWiFiManager") sharedInstance] wiFiEnabled];
         self.bluetoothEnabled = [[objc_getClass("BluetoothManager") sharedInstance] enabled];
-
+        self.cellularEnabled = [[objc_getClass("VideosPlaybackSettings") sharedSettings] isCellularDataEnabled];
+        self.airplaneModeEnabled = [[[objc_getClass("RadiosPreferences") alloc] init] airplaneMode];
+        
     }
 
     return self;
@@ -156,6 +173,59 @@
         self.bluetoothEnabled = YES;
     }
 
+}
+
+-(void)setCellularStatus 
+{
+    if (self.cellularEnabled)
+    {
+        [[objc_getClass("VideosPlaybackSettings") sharedSettings] setCellularDataEnabled:NO];
+        self.cellularEnabled = NO;
+
+    }
+    else
+    {
+        [[objc_getClass("VideosPlaybackSettings") sharedSettings] setCellularDataEnabled:YES];
+        self.cellularEnabled = YES;
+
+    }
+}
+
+-(void)setAirplaneMode 
+{
+    if (self.airplaneModeEnabled) 
+    {
+        [[[objc_getClass("RadiosPreferences") alloc] init] setAirplaneMode:NO];
+        self.airplaneModeEnabled = NO;
+    }
+    else 
+    {
+        [[[objc_getClass("RadiosPreferences") alloc] init] setAirplaneMode:YES];
+        self.airplaneModeEnabled = YES;
+    }
+}
+
+
+-(void)playPauseMedia 
+{
+    MRMediaRemoteSendCommand(kMRTogglePlayPause, 0);
+}
+
+-(void)skipMedia 
+{
+    MRMediaRemoteSendCommand(kMRNextTrack, 0);
+}
+
+-(void)previousMedia
+{
+    MRMediaRemoteSendCommand(kMRPreviousTrack, 0);
+}
+
+-(void)toggleSiri 
+{
+    SBAssistantController *ac = [objc_getClass("SBAssistantController")sharedInstance];
+    [ac handleSiriButtonDownEventFromSource:1 activationEvent:1];
+    [ac handleSiriButtonUpEventFromSource:1];
 }
 
 #pragma mark Set Commands

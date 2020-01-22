@@ -134,15 +134,27 @@
 				<string>Run UICache</string>
 				<string>Enable/Disable WiFi</string>
 				<string>Enable/Disable Bluetooth</string>
+				<string>Enable/Disable Cellular</string>
+				<string>Enable/Disable Airplane Mode</string>
+				<string>Play/Pause Media</string>
+				<string>Skip Media</string>
+				<string>Previous Media</string>
+				<string>Activate Siri</string>
 			</array>
 			<key>validValues</key>
 			<array>
 				<string>sbreload</string>
 				<string>respring</string>
 				<string>safemode</string>
-				<string>kWatermarkRotate90Right</string>
+				<string>uicache</string>
 				<string>wifi</string>
 				<string>bluetooth</string>
+				<string>cellular</string>
+				<string>airplane</string>
+				<string>playPauseMedia</string>
+				<string>skipMedia</string>
+				<string>previousMedia</string>
+				<string>siri</string>
 			</array>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
