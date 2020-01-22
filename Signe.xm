@@ -230,14 +230,27 @@ static BOOL boolValueForKey(NSString *key, BOOL defaultValue)
     return (prefs && [prefs objectForKey:key]) ? [[prefs objectForKey:key] boolValue] : defaultValue;
 }
 
-static BOOL isURL(NSString *keyValue)
+static void processNumber(NSString *number, NSString *numberButLessVerbose) // I'm sorry, this needs fixed -kr
 {
-	return [keyValue containsString:@"http"];
-}
+	NSInteger numberMode = [[prefs objectForKey:[NSString stringWithFormat:@"actionMode%@", number]] intValue] ?:0;
+	if (numberMode == 0)
+		return;
 
-static BOOL isCommand(NSString *keyValue) 
-{
-	return [utilityCommands containsObject:keyValue] ?: NO;
+	if (numberMode == 1)
+		{
+			NSString *option = [prefs objectForKey:[NSString stringWithFormat:@"%@EnabledApp", number]]?:@"";
+			[[SigneManager sharedManager] setBundleToOpen:option forKey:numberButLessVerbose];
+		}
+		else if (numberMode == 2)
+		{
+			NSString *option = [prefs objectForKey:[NSString stringWithFormat:@"%@URL", number]]?:@"";
+			[[SigneManager sharedManager] setURLToOpen:option forKey:numberButLessVerbose]; 
+		}
+		else 
+		{
+			NSString *option = [prefs objectForKey:[NSString stringWithFormat:@"%@CMD", number]]?:@"";
+			[[SigneUtilities sharedUtilities] setCommandToRun:option forKey:numberButLessVerbose];
+		}
 }
 
 static void preferencesChanged() 
@@ -249,42 +262,18 @@ static void preferencesChanged()
 	BOOL _pfDrawingEnabled = boolValueForKey(@"drawingEnabled", YES);
 	_pfTweakEnabled = boolValueForKey(@"enabled", YES);
 
-	NSString *zero = [prefs objectForKey:@"zero"]?:@"";
-	NSString *one = [prefs objectForKey:@"one"]?:@"";
-	NSString *two = [prefs objectForKey:@"two"]?:@"";
-	NSString *three = [prefs objectForKey:@"three"]?:@"";
-	NSString *four = [prefs objectForKey:@"four"]?:@"";
-	NSString *five = [prefs objectForKey:@"five"]?:@"";
-	NSString *six = [prefs objectForKey:@"six"]?:@"";
-	NSString *seven = [prefs objectForKey:@"seven"]?:@"";
-	NSString *eight = [prefs objectForKey:@"eight"]?:@"";
-	NSString *nine = [prefs objectForKey:@"nine"]?:@"";
-
-	
-
 	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
-	NSArray *options = [NSArray arrayWithObjects:zero,one,two,three,four,five,six,seven,eight,nine, nil];
-	utilityCommands = [NSArray arrayWithObjects:@"sbreload", @"respring", @"safemode", @"uicache", @"wifi", @"bluetooth"];
-
-	int i = 0;
-	for (NSString *option in options)
-	{
-		NSLog(@"Signe: %@ - %d", option, i);
-		if (isURL(option))
-		{
-			[[SigneManager sharedManager] setURLToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]]; 
-		}
-		else if (isCommand(option))
-		{
-			[[SigneUtilities sharedUtilities] setCommandToRun:option forKey:[[NSNumber numberWithInt:i] stringValue]];
-		}
-		else 
-		{
-			[[SigneManager sharedManager] setBundleToOpen:option forKey:[[NSNumber numberWithInt:i] stringValue]];
-		}
-		i++;
-	}
+	processNumber(@"Zero", @"0");
+	processNumber(@"One", @"1");
+	processNumber(@"Two", @"2");
+	processNumber(@"Three", @"3");
+	processNumber(@"Four", @"4");
+	processNumber(@"Five", @"5");
+	processNumber(@"Six", @"6");
+	processNumber(@"Seven", @"7");
+	processNumber(@"Eight", @"8");
+	processNumber(@"Nine", @"9");
 
 	[[SigneManager sharedManager] setURLToOpen:@"https://patreon.com/KritantaDev" forKey:@"V"]; 
 

@@ -1,3 +1,12 @@
+//
+// KRTwitterCell.m
+// Twitter cell that locally loads pfps 
+//		based on Cephei Framework
+//
+// Apache 2.0 License for code used in KRPrefsLicense located in preference bundle
+//
+
+
 #import "KRTwitterCell.h"
 #import <Preferences/PSSpecifier.h>
 #import <UIKit/UIImage+Private.h>
@@ -19,7 +28,7 @@
 
 + (NSString *)_urlForUsername:(NSString *)user {
 
-	user = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)user, NULL, CFSTR(":/?&=;+!@#$()',*"), kCFStringEncodingUTF8));
+	user = [user stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 
 	if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"aphelion://"]]) {
 		return [@"aphelion://profile/" stringByAppendingString:user];
@@ -71,6 +80,8 @@
 #pragma mark - Avatar
 
 - (BOOL)shouldShowAvatar {
+	// HBLinkTableCell doesn’t want avatars by default, but we do. override its check method so that
+	// if showAvatar is unset, we return YES
 	return YES;
 }
 
@@ -82,29 +93,18 @@
 	if (self.avatarImage) {
 		return;
 	}
-
-	static dispatch_queue_t queue;
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		queue = dispatch_queue_create("me.kritanta.krprefs.twitter-avatar-queue", DISPATCH_QUEUE_SERIAL);
-	});
-
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		NSError *error = nil;
-		NSString *username = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)_user, NULL, CFSTR(":/?&=;+!@#$()',*"), kCFStringEncodingUTF8)); //TODO: r
-		NSString *size = [UIScreen mainScreen].scale > 2 ? @"original" : @"bigger";
-		NSData *data = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/%@/profile_image?size=%@", username, size]]] returningResponse:nil error:&error];
-
-		if (error) {
+	// TODO: fix this
+	self.avatarImage = [UIImage imageNamed:[NSString stringWithFormat:@"/Library/PreferenceBundles/SignePrefs.bundle/%@.png", _user]];
+	/*
+	dispatch_async(dispatch_get_global_queue(0,0), ^{
+		NSData * data = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/%@/profile_image?size=original", _user]]];
+		if ( data == nil )
 			return;
-		}
-
-		UIImage *image = [UIImage imageWithData:data];
-
 		dispatch_async(dispatch_get_main_queue(), ^{
-			self.avatarImage = image;
+			self.avatarImage = [UIImage imageWithData: data];
 		});
-	});
+		[data release];
+	});*/
 }
 
 @end

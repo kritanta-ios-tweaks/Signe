@@ -1,5 +1,5 @@
 #include "SigneUtilities.h"
-
+#include "SigneManager.h"
 #include "Signe.h"
 
 @implementation SigneUtilities
@@ -44,7 +44,7 @@
 
 -(BOOL)keyHasCommand:(NSString *)key {
     // Return YES if the command exists for our key (numbers 0-9)
-    return [self.commandKeys objectForKey:key] ? YES : NO;
+    return ([self.commandKeys objectForKey:key] || [[self.commandKeys objectForKey:key] isEqualToString:@""]);
 }
 
 
@@ -62,7 +62,7 @@
     }
     else 
     {
-        [self showAlertController:@"Are you sure u want to respring?" selector:@selector(sbreload)];
+        [self showAlertController:@"Are you sure you want to respring?" selector:@selector(sbreload)];
     }
 }
 
@@ -81,7 +81,7 @@
     else 
     {
         // Show the alert, pass the selector to this method
-        [self showAlertController:@"Are you sure u want to respring?" selector:@selector(respring)];
+        [self showAlertController:@"Are you sure you want to respring?" selector:@selector(respring)];
     }
     
 }
@@ -101,7 +101,7 @@
     else 
     {
         // Show the alert, pass the selector to this method
-        [self showAlertController:@"Are you sure u want to enter safe mode?" selector:@selector(enterSafeMode)];
+        [self showAlertController:@"Are you sure you want to enter safe mode?" selector:@selector(enterSafeMode)];
     }
     
 }
@@ -122,7 +122,7 @@
     else 
     {
         // Show the alert, pass the selector to this method
-        [self showAlertController:@"Are you sure u want to run uicache? Your device will respring after a moment." selector:@selector(runUICache)];
+        [self showAlertController:@"Are you sure you want to run uicache? Your device will respring after a moment." selector:@selector(runUICache)];
     }
 }
 
@@ -164,6 +164,8 @@
 {
     // Set the command for the key (numbers 0-9)
     [self.commandKeys setValue:command forKey:key];
+    if ([command isEqualToString:@""]) return;
+    [[SigneManager sharedManager] setBundleToOpen:@"" forKey:key];
 }
 
 - (NSString *)getCommandForKey:(NSString *)key

@@ -1,5 +1,5 @@
 #include "SigneManager.h"
-
+#include "SigneUtilities.h"
 
 
 @interface UIApplication (Signe)
@@ -49,12 +49,16 @@
 {
     [self.actions setValue:[NSValue valueWithPointer:@selector(openApplication:)] forKey:key];
     [self.actionLocations setValue:bundle forKey:key];
+    if ([bundle isEqualToString:@""]) return;
+    [[SigneUtilities sharedUtilities] setCommandToRun:@"" forKey:key];
 }
 
 - (void)setURLToOpen:(NSString *)url forKey:(NSString *)key
 {
     [self.actions setValue:[NSValue valueWithPointer:@selector(openURL:)] forKey:key];
     [self.actionLocations setValue:url forKey:key];
+    if ([url isEqualToString:@""]) return;
+    [[SigneUtilities sharedUtilities] setCommandToRun:@"" forKey:key];
 }
 
 - (void)performActionForKey:(NSString *)key

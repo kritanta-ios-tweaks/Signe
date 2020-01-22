@@ -18,7 +18,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>rotationMode6</string>
+			<string>actionModeSix</string>
 			<key>label</key>
 			<string></string>
 			<key>validValues</key>
@@ -36,7 +36,7 @@
 				<string>Command</string>
 			</array>
 			<key>id</key>
-			<string>rotationMode1ID</string>
+			<string>rotationMode6ID</string>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
@@ -74,7 +74,7 @@
 			<true/>
 
 			<key>ALSettingsKey</key>
-			<string>sixEnabledApp</string>
+			<string>SixEnabledApp</string>
 
 			<key>ALAllowsSelection</key>
 			<true/>
@@ -99,7 +99,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>sixURL</string>
+			<string>SixURL</string>
 			<key>isURL</key>
 			<true/>
 			<key>PostNotification</key>
@@ -121,8 +121,9 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>sixCMD</string>
-			<label>Command:</label>
+			<string>SixCMD</string>
+			<key>label</key>
+			<string>Command:</string>
 			<key>detail</key>
             <string>PSListItemsController</string>
 			<key>validTitles</key>
@@ -150,6 +151,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>Signe</string>
+	<string>Actions: Six</string>
 </dict>
 </plist>

@@ -18,7 +18,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>rotationMode3</string>
+			<string>actionModeThree</string>
 			<key>label</key>
 			<string></string>
 			<key>validValues</key>
@@ -74,7 +74,7 @@
 			<true/>
 
 			<key>ALSettingsKey</key>
-			<string>threeEnabledApp</string>
+			<string>ThreeEnabledApp</string>
 
 			<key>ALAllowsSelection</key>
 			<true/>
@@ -99,7 +99,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>threeURL</string>
+			<string>ThreeURL</string>
 			<key>isURL</key>
 			<true/>
 			<key>PostNotification</key>
@@ -121,8 +121,9 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>threeCMD</string>
-			<label>Command:</label>
+			<string>ThreeCMD</string>
+			<key>label</key>
+			<string>Command:</string>
 			<key>detail</key>
             <string>PSListItemsController</string>
 			<key>validTitles</key>
@@ -150,6 +151,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>Signe</string>
+	<string>Actions: Three</string>
 </dict>
 </plist>

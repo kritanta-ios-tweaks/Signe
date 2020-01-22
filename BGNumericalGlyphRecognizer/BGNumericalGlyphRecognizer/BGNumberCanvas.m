@@ -508,7 +508,7 @@
 
 - (void)numberDetected:(DetectedNumber*)n inPaintRect:(CGRect)r
 {
-    NSLog(@"[Signe] !!! NUMBER DETECTED: %@", n.value); 
+    NSLog(@"[Signe] NUMBER DETECTED: %@", n.value); 
 
     [[UIApplication sharedApplication] activateTouchRecognizer];
     if ([[n value] isEqualToString:@"p"]) return;
@@ -524,17 +524,13 @@
     CGContextFlush(context);
     [self setNeedsDisplay];
     [self clear];
-    if ([[SigneUtilities sharedUtilities] keyHasCommand:n.value]) // Check if the detected number (key) has a command set for it 
-    {   
         // Get the command that has been set for the key (numbers 0-9) and perform the command
-        NSString *commandKey = [[SigneUtilities sharedUtilities] getCommandForKey:n.value];
-        [[SigneUtilities sharedUtilities] performCommandForKey:commandKey];
-    }
-    else
-    {
-        // If a command has not been found, perform an action.
-        [[SigneManager sharedManager] performActionForKey:n.value];
-    }
+    NSString *commandKey = [[SigneUtilities sharedUtilities] getCommandForKey:n.value];
+    [[SigneUtilities sharedUtilities] performCommandForKey:commandKey];
+
+    // If a command has not been found, perform an action.
+    [[SigneManager sharedManager] performActionForKey:n.value];
+    
 
     paintLayer = nil;
 }

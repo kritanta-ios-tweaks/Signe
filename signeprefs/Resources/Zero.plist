@@ -18,7 +18,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>rotationMode0</string>
+			<string>actionModeZero</string>
 			<key>label</key>
 			<string></string>
 			<key>validValues</key>
@@ -36,7 +36,7 @@
 				<string>Command</string>
 			</array>
 			<key>id</key>
-			<string>rotationMode1ID</string>
+			<string>rotationMode0ID</string>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
@@ -74,7 +74,7 @@
 			<true/>
 
 			<key>ALSettingsKey</key>
-			<string>zeroEnabledApp</string>
+			<string>ZeroEnabledApp</string>
 
 			<key>ALAllowsSelection</key>
 			<true/>
@@ -99,7 +99,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>zeroURL</string>
+			<string>ZeroURL</string>
 			<key>isURL</key>
 			<true/>
 			<key>PostNotification</key>
@@ -121,8 +121,9 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>zeroCMD</string>
-			<label>Command:</label>
+			<string>ZeroCMD</string>
+			<key>label</key>
+			<string>Command:</string>
 			<key>detail</key>
             <string>PSListItemsController</string>
 			<key>validTitles</key>
@@ -150,6 +151,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>Signe</string>
+	<string>Actions: Zero</string>
 </dict>
 </plist>

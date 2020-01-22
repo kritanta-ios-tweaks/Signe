@@ -14,7 +14,7 @@
 -(void)removeAllSavedSpecifiers;
 
 @end
-/*
+
 
 @interface SIGNumberZeroController : SIGRootListController
 
@@ -63,4 +63,30 @@
 -(void)removeAllSavedSpecifiers;
 
 @end
-*/
+
+
+@interface SIGNumberSevenController : SIGRootListController
+
+@property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
+
+-(void)removeAllSavedSpecifiers;
+
+@end
+
+
+@interface SIGNumberEightController : SIGRootListController
+
+@property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
+
+-(void)removeAllSavedSpecifiers;
+
+@end
+
+
+@interface SIGNumberNineController : SIGRootListController
+
+@property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
+
+-(void)removeAllSavedSpecifiers;
+
+@end

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Choose the draw command</string>
+			<key>id</key>
+			<string>drawSettingsID</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>key</key>
+			<string>actionModeEight</string>
+			<key>label</key>
+			<string></string>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+				<integer>2</integer>
+				<integer>3</integer>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>Disabled</string>
+				<string>Open App</string>
+				<string>Open URL</string>
+				<string>Command</string>
+			</array>
+			<key>id</key>
+			<string>rotationMode8ID</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Application Settings</string>
+			<key>id</key>
+			<string>appGroupSettingsID</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkCell</string>
+
+			<key>bundle</key>
+			<string>AppList</string>
+
+			<key>ALNavigationTitle</key>
+			<string>Applications List</string>
+
+			<key>enabled</key>
+			<true/>
+
+			<key>isController</key>
+			<true/>
+
+			<key>label</key>
+			<string>Applications List</string>
+
+			<key>ALSettingsPath</key>
+			<string>/var/mobile/Library/Preferences/me.kritanta.signeprefs.plist</string>
+
+			<key>ALSingleEnabledMode</key>
+			<true/>
+
+			<key>ALSettingsKey</key>
+			<string>EightEnabledApp</string>
+
+			<key>ALAllowsSelection</key>
+			<true/>
+
+			<key>ALChangeNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+
+			<key>id</key>
+			<string>eightChooseAppsList</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>URL Options</string>
+			<key>id</key>
+			<string>urlGroupSettingsID</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSEditTextCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>key</key>
+			<string>EightURL</string>
+			<key>isURL</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+			<key>id</key>
+			<string>urlTextboxID</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Command Options</string>
+			<key>id</key>
+			<string>cmdGroupSettingsID</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>key</key>
+			<string>EightCMD</string>
+			<key>label</key>
+			<string>Command:</string>
+			<key>detail</key>
+            <string>PSListItemsController</string>
+			<key>validTitles</key>
+			<array>
+				<string>Fast Respring (sbreload)</string>
+				<string>Normal Respring</string>
+				<string>Safe Mode</string>
+				<string>Run UICache</string>
+				<string>Enable/Disable WiFi</string>
+				<string>Enable/Disable Bluetooth</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>sbreload</string>
+				<string>respring</string>
+				<string>safemode</string>
+				<string>kWatermarkRotate90Right</string>
+				<string>wifi</string>
+				<string>bluetooth</string>
+			</array>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+			<key>id</key>
+			<string>cmdListID</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>Actions: Eight</string>
+</dict>
+</plist>

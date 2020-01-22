@@ -1,3 +1,9 @@
+//
+// KRLinkCell.m
+// Based on Cephei's link cell
+//
+// Apache 2.0 License for code used in KRPrefsLicense located in preference bundle
+//
 #import "KRLinkCell.h"
 #import <Preferences/PSSpecifier.h>
 #import <UIKit/UIColor+Private.h>
@@ -104,6 +110,13 @@
 			}
 		];
 	}
+}
+- (void)setSelected:(BOOL)arg1 animated:(BOOL)arg2
+{
+	[super setSelected:arg1 animated:arg2];
+
+	if (!arg1) return;
+    //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://github.com/KritantaDev/Axon"] options:@{} completionHandler:nil];
 }
 
 - (BOOL)shouldShowAvatar 

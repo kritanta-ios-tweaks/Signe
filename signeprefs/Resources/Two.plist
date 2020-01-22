@@ -18,7 +18,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>rotationMode1</string>
+			<string>actionModeTwo</string>
 			<key>label</key>
 			<string></string>
 			<key>validValues</key>
@@ -74,7 +74,7 @@
 			<true/>
 
 			<key>ALSettingsKey</key>
-			<string>twoEnabledApp</string>
+			<string>TwoEnabledApp</string>
 
 			<key>ALAllowsSelection</key>
 			<true/>
@@ -99,7 +99,7 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>twoURL</string>
+			<string>TwoURL</string>
 			<key>isURL</key>
 			<true/>
 			<key>PostNotification</key>
@@ -121,8 +121,9 @@
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
-			<string>CMD</string>
-			<label>Command:</label>
+			<string>TwoCMD</string>
+			<key>label</key>
+			<string>Command:</string>
 			<key>detail</key>
             <string>PSListItemsController</string>
 			<key>validTitles</key>
@@ -150,6 +151,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>Signe</string>
+	<string>Actions: Two</string>
 </dict>
 </plist>
