@@ -138,7 +138,7 @@
                 yp = yp2;
                 
                 if (d <= 24) {
-                    likelySameCharacter = YES;
+                    //likelySameCharacter = YES;
                     closePrevPoint = x;
                     closeCurrentPoint = y;
                     break;
@@ -149,7 +149,7 @@
         }
         
         // If the time since the last stroke is too great, this has to be a new stroke.
-        if ([[NSDate date] timeIntervalSinceDate: prevStrokeDate] > 0.0001)
+        //if ([[NSDate date] timeIntervalSinceDate: prevStrokeDate] > 0.0001)
             likelySameCharacter = NO;
     }
     
@@ -351,8 +351,8 @@
         //NSLog(@"[Signe] New Character %@", detected);
         
         // Write the glyph points to disk, just so we can see them.
-        if (SHOW_LETTERS) [self writeStrokeToDisk: [self mirroredStroke: newStrokePoints]];
-        
+        //if (SHOW_LETTERS) [self writeStrokeToDisk: [self mirroredStroke: newStrokePoints]];
+        [self destroyLastGlyph];
         // If this is a new character and we haven't found a 0, 1, or - yet, let's
         // run the detector! If we did find one of those, just create the DetectedNumber synchronously.
         if (detected == nil) {
@@ -511,7 +511,7 @@
     NSLog(@"[Signe] NUMBER DETECTED: %@", n.value); 
 
     [[UIApplication sharedApplication] activateTouchRecognizer];
-    if ([[n value] isEqualToString:@"p"]) return;
+    if ([[n value] containsString:@"p"]) return;
     prevStrokePoints = nil;
     prevStrokeDate = [NSDate date];
     CGContextRef c = CGLayerGetContext(paintLayer);
