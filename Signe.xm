@@ -5,9 +5,14 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 static NSDictionary *prefs;
-static NSArray *utilityCommands;
+static NSString *_activationGesture;
+
 static BOOL activationStyle = 0;
 static BOOL _pfTweakEnabled = YES;
+static BOOL _pfSiriReplaced = NO;
+static CALayer *borderLayer;
+#define kBorderWidth 3.0
+#define kCornerRadius 5.0
 
 @interface UISystemGestureView : UIView
 
@@ -15,22 +20,15 @@ static BOOL _pfTweakEnabled = YES;
 - (void)insertCanvas;
 @property (nonatomic, retain) NSData *initial;
 @property (nonatomic, assign) BOOL injected;
+@property (nonatomic, retain) CALayer *borderLayer;
 @end
 
 @interface FBSystemGestureView : UISystemGestureView
 @end
 
 
-@interface bac 
--(BOOL)_handleVolumeDecreaseUp;
--(BOOL)_handleVolumeIncreaseUp;
-@end
-@interface volb
--(bac *)buttonActions;
-@end
-@interface UIApplication (Signe)
--(volb *)volumeHardwareButton;
-@end
+@interface SBAssistantWindow : UIView
+@end 
 
 %group Signe
 
@@ -100,14 +98,29 @@ static BOOL _pfTweakEnabled = YES;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
 		self.injected = YES;
+
+		borderLayer = [CALayer layer];
+		CGRect borderFrame = CGRectMake(0, 0, (self.frame.size.width),(self.frame.size.height));
+		[borderLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
+		[borderLayer setFrame:borderFrame];
+		[borderLayer setCornerRadius:kCornerRadius];
+		[borderLayer setBorderWidth:kBorderWidth];
+		[borderLayer setBorderColor:[[UIColor redColor] CGColor]];
+		[self.layer addSublayer:borderLayer];
+		borderLayer.hidden = YES;
     }
 }
+
+
 
 %new
 - (void)activateSigne
 {
     [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
 	self.BGCanvas.hidden = NO;
+	borderLayer.hidden = NO;
+	
+	
 }
 
 %new
@@ -115,6 +128,7 @@ static BOOL _pfTweakEnabled = YES;
 {
     [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
 	self.BGCanvas.hidden = YES;
+	borderLayer.hidden = YES;
 	
 }
 
@@ -153,11 +167,26 @@ static BOOL _pfTweakEnabled = YES;
 	// force = 0 -> button released
 	// force = 1 -> button pressed
 	if ([arg1.allPresses.allObjects count] <= 1) return %orig;
-	if (arg1.allPresses.allObjects[0].type >= 103 && force == 1 && arg1.allPresses.allObjects[1].type >= 103 && arg1.allPresses.allObjects[1].force == 1) //Power PRESSED
+	// If volume up + down or volume down + up has been pressed
+	if ([_activationGesture isEqualToString:@"volUpAndDown"]) 
 	{
-		[self activateTouchRecognizer];
-		return NO;
+		if (arg1.allPresses.allObjects[0].type == 102 && force == 1 && arg1.allPresses.allObjects[1].type == 103 && arg1.allPresses.allObjects[1].force == 1 || arg1.allPresses.allObjects[0].type == 103 && force == 1 && arg1.allPresses.allObjects[1].type == 102 && arg1.allPresses.allObjects[1].force == 1) 
+		{
+			[self activateTouchRecognizer];
+			return NO;
+		}
 	}
+	else if ([_activationGesture isEqualToString:@"volDownPower"])
+	{
+		if (arg1.allPresses.allObjects[0].type >= 103 && force == 1 && arg1.allPresses.allObjects[1].type >= 103 && arg1.allPresses.allObjects[1].force == 1) //Power PRESSED
+		{
+			[self activateTouchRecognizer];
+			return NO;
+		}
+	}
+	
+	
+	 
 
 	/* 	if (type == 103 && force == 1) //Power PRESSED
 	{
@@ -261,7 +290,9 @@ static void preferencesChanged()
 
 	BOOL _pfDrawingEnabled = boolValueForKey(@"drawingEnabled", YES);
 	_pfTweakEnabled = boolValueForKey(@"enabled", YES);
-
+	_pfSiriReplaced = boolValueForKey(@"siriReplaced", NO);
+	_activationGesture = [prefs objectForKey:@"activationGestureKey"] ?: @"";
+	NSLog(@"[Signe]: ACT GESTURE: %@", _activationGesture);
 	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
 	processNumber(@"Zero", @"0");

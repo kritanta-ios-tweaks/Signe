@@ -43,7 +43,10 @@
             @"playPauseMedia": [NSValue valueWithPointer:@selector(playPauseMedia)],
             @"skipMedia": [NSValue valueWithPointer:@selector(skipMedia)],
             @"previousMedia":[NSValue valueWithPointer:@selector(previousMedia)],
-            @"siri": [NSValue valueWithPointer:@selector(toggleSiri)]
+            @"siri": [NSValue valueWithPointer:@selector(toggleSiri)],
+            @"controlCenter": [NSValue valueWithPointer:@selector(presentControlCenter)],
+            @"notificationCenter": [NSValue valueWithPointer:@selector(presentNotificationCenter)],
+            @"flashlight": [NSValue valueWithPointer:@selector(toggleFlashlight)],
         };
         self.commandKeys = [[NSMutableDictionary alloc] init];
         self.shouldContinueAfterAlert = NO;
@@ -52,6 +55,8 @@
         self.bluetoothEnabled = [[objc_getClass("BluetoothManager") sharedInstance] enabled];
         self.cellularEnabled = [[objc_getClass("VideosPlaybackSettings") sharedSettings] isCellularDataEnabled];
         self.airplaneModeEnabled = [[[objc_getClass("RadiosPreferences") alloc] init] airplaneMode];
+        self.flashlight = [[AVFlashlight alloc] init];
+        self.flashlightEnabled = NO;
         
     }
 
@@ -226,6 +231,46 @@
     SBAssistantController *ac = [objc_getClass("SBAssistantController")sharedInstance];
     [ac handleSiriButtonDownEventFromSource:1 activationEvent:1];
     [ac handleSiriButtonUpEventFromSource:1];
+}
+
+-(void)presentControlCenter
+{
+    if ([[objc_getClass("SBControlCenterController") sharedInstance] isVisible]) 
+    {
+        [[objc_getClass("SBControlCenterController") sharedInstance] dismissAnimated:YES];
+    }
+    else 
+    {
+        [[objc_getClass("SBControlCenterController") sharedInstance] presentAnimated:YES];
+    }
+    
+}
+
+-(void)presentNotificationCenter 
+{   
+    if ([[objc_getClass("SBCoverSheetPresentationManager") sharedInstance] isVisible]) 
+    { // If visibile
+        [[objc_getClass("SBCoverSheetPresentationManager") sharedInstance] setCoverSheetPresented:NO animated:YES withCompletion:nil];
+    }
+    else 
+    { // If not visible
+        [[objc_getClass("SBCoverSheetPresentationManager") sharedInstance] setCoverSheetPresented:YES animated:YES withCompletion:nil];
+    }
+    
+}
+
+-(void)toggleFlashlight
+{
+    if (self.flashlightEnabled) // if on
+    {
+        [self.flashlight setFlashlightLevel:0 withError:nil];
+        self.flashlightEnabled = NO;
+    }
+    else // if off
+    {
+        [self.flashlight setFlashlightLevel:1 withError:nil];
+        self.flashlightEnabled = YES;
+    }
 }
 
 #pragma mark Set Commands

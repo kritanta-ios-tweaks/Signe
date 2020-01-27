@@ -140,6 +140,9 @@
 				<string>Skip Media</string>
 				<string>Previous Media</string>
 				<string>Activate Siri</string>
+				<string>Open/Close Control Center</string>
+				<string>Open/Close Notification Center</string>
+				<string>Toggle Flashlight</string>
 			</array>
 			<key>validValues</key>
 			<array>
@@ -155,6 +158,9 @@
 				<string>skipMedia</string>
 				<string>previousMedia</string>
 				<string>siri</string>
+				<string>controlCenter</string>
+				<string>notificationCenter</string>
+				<string>flashlight</string>
 			</array>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>

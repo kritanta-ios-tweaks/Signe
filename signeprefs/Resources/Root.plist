@@ -30,7 +30,21 @@
 			<key>key</key>
 			<string>enabled</string>
 			<key>label</key>
-			<string>Enabled</string>
+			<string>Tweak Enabled</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<false/>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>key</key>
+			<string>siriReplaced</string>
+			<key>label</key>
+			<string>Replace Siri - not work yet u can remove</string>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
@@ -51,6 +65,30 @@
 			<string>drawingEnabled</string>
 			<key>label</key>
 			<string>Show Drawing</string>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>key</key>
+			<string>activationGestureKey</string>
+			<key>label</key>
+			<string>Activation Gestures</string>
+			<key>detail</key>
+            <string>PSListItemsController</string>
+			<key>validTitles</key>
+			<array>
+				<string>Volume Down + Power</string>
+				<string>Volume Up/Down + Volume Down/Up</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<string>volDownPower</string>
+				<string>volUpAndDown</string>
+			</array>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
