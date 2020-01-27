@@ -9,8 +9,9 @@ static NSString *_activationGesture;
 
 static BOOL activationStyle = 0;
 static BOOL _pfTweakEnabled = YES;
-static BOOL _pfSiriReplaced = NO;
+//static BOOL _pfSiriReplaced = NO;
 static CALayer *borderLayer;
+
 #define kBorderWidth 3.0
 #define kCornerRadius 5.0
 
@@ -26,9 +27,6 @@ static CALayer *borderLayer;
 @interface FBSystemGestureView : UISystemGestureView
 @end
 
-
-@interface SBAssistantWindow : UIView
-@end 
 
 %group Signe
 
@@ -290,9 +288,10 @@ static void preferencesChanged()
 
 	BOOL _pfDrawingEnabled = boolValueForKey(@"drawingEnabled", YES);
 	_pfTweakEnabled = boolValueForKey(@"enabled", YES);
-	_pfSiriReplaced = boolValueForKey(@"siriReplaced", NO);
 	_activationGesture = [prefs objectForKey:@"activationGestureKey"] ?: @"";
-	NSLog(@"[Signe]: ACT GESTURE: %@", _activationGesture);
+	
+	//_pfSiriReplaced = boolValueForKey(@"siriReplaced", NO);
+	//NSLog(@"Signe: ACTIVATION GESTURE: %@", _activationGesture);
 	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
 	processNumber(@"Zero", @"0");
