@@ -54,11 +54,11 @@
 			_avatarView.layer.borderWidth = 2;
 			if (@available(iOS 13, *)) 
 			{
-				_avatarView.layer.borderColor = [[UIColor tertiaryLabelColor] CGColor];
+				_avatarView.layer.borderColor = [[UIColor colorWithWhite:0.2 alpha:0.3] CGColor];
 			} 
 			else 
 			{
-				_avatarView.layer.borderColor = [[UIColor colorWithWhite:1 alpha:0.3] CGColor];
+				_avatarView.layer.borderColor = [[UIColor colorWithWhite:0.2 alpha:0.3] CGColor];
 			}
 			[self.imageView addSubview:_avatarView];
 

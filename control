@@ -1,7 +1,7 @@
 Package: me.kritanta.signe
 Name: Signe
 Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 3.0), com.rpetrich.rocketbootstrap (>= 1.0.3) | firmware (<< 7.0)
-Version: 0.2.3-beta
+Version: 0.2.4-beta
 Architecture: iphoneos-arm
 Description: Numeric Gestures to Open Apps and Websites
 Maintainer: Tr1Fecta & Kritanta

@@ -2,7 +2,19 @@
 #import <Preferences/PSSpecifier.h>
 #import <AppList/AppList.h>
 
-@interface SIGRootListController : PSListController
+@interface SIGRootListController : PSListController{
+    UITableView * _table;
+}
+
+@property (nonatomic, retain) UIView *headerView;
+@property (nonatomic, retain) UIView *overflowView;
+@property (nonatomic, assign) CGFloat startContentOffset;
+@property (nonatomic, assign) BOOL kick;
+@property (nonatomic, assign) BOOL showHeader;
+
+@property (nonatomic, retain) UIBarButtonItem *respringButton;
+@property (nonatomic, retain) UIImageView *titleLabel;
+@property (nonatomic, retain) UIImageView *iconView;
 
 @end
 

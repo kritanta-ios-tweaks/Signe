@@ -1,102 +1,86 @@
-#include "BGNumberCanvas.h"
+
 #include "Signe.h"
 #include "SigneManager.h"
 #include "SigneUtilities.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 static NSDictionary *prefs;
-static NSString *_activationGesture;
 
 static BOOL activationStyle = 0;
 static BOOL _pfTweakEnabled = YES;
-//static BOOL _pfSiriReplaced = NO;
-static CALayer *borderLayer;
 
-#define kBorderWidth 3.0
-#define kCornerRadius 5.0
+static BOOL signeActive = NO;
 
-@interface UISystemGestureView : UIView
-
-@property (nonatomic, retain) BGNumberCanvas *BGCanvas;
-- (void)insertCanvas;
-@property (nonatomic, retain) NSData *initial;
-@property (nonatomic, assign) BOOL injected;
-@property (nonatomic, retain) CALayer *borderLayer;
-@end
-
-@interface FBSystemGestureView : UISystemGestureView
-@end
-
+//=======================================
+//
+//	Main Group
+//	#pragma Signe
+//	
+//  Hooks to get Signe working. 
+//
+//=======================================
 
 %group Signe
 
-%hook UISystemGestureView 
-
-// iOS 13+ Support
-
-/* ([[[[UIApplication sharedApplication] volumeHardwareButton] buttonActions] _handleVolumeIncreaseUp] && [[[[UIApplication sharedApplication] volumeHardwareButton] buttonActions] _handleVolumeDecreaseUp]) */
-
-%property (nonatomic, retain) BGNumberCanvas *BGCanvas;
-%property (nonatomic, retain) NSData *initial;
-%property (nonatomic, assign) BOOL injected;  
-
-- (void)layoutSubviews
+void toggleSigne()
 {
-    %orig;
-    if (!self.injected) 
-    {
-		self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-		self.BGCanvas.hidden = YES;
-		self.initial = [NSKeyedArchiver archivedDataWithRootObject: self.BGCanvas];
-		[self addSubview:self.BGCanvas];
-    	[self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
-		self.injected = YES;
-    }
+	// Intra-tweak method to toggle the editor.
+
+	if (signeActive)
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"DeactivateSigne" object:nil];
+		AudioServicesPlaySystemSound(1519);
+	} 
+	else 
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"ActivateSigne" object:nil];
+		AudioServicesPlaySystemSound(1519);
+	}
+	signeActive = !signeActive;
 }
 
-%new
-- (void)activateSigne
-{	
-    [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
-	self.BGCanvas.hidden = NO;
-	//
-}
 
-%new
-- (void)deactivateSigne
+%hook SBHomeGrabberView
+
+// Currently not working; Find a way to listen for tap on this bad boy and
+// 		make it work as an activation method. 
+
+-(void)_bounce
 {
-    [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-	self.BGCanvas.hidden = YES;
+	%orig;
+	if (activationStyle != 2) return;
+	toggleSigne();
 }
-
 
 %end
 
+%hook SystemGestureView 
 
+// "SystemGestureView" is not a real class. 
+// This represents "FBSystemGestureView" on iOS 12 and "UISystemGestureView on iOS 13 Respectively". 
+// We define the proper one in the %ctor. 
+//
+// Seeing as these classes are identical, there may be a better way to cast self and such. 
+// 		It may end up just being a limitation of logos, though :p
 
-%hook FBSystemGestureView 
-
-// <= iOS 12 Support
-
-
-%property (nonatomic, retain) BGNumberCanvas *BGCanvas;
+%property (nonatomic, retain) BGNumberCanvas *recognitionCanvas;
 %property (nonatomic, assign) BOOL injected; 
 
 - (void)layoutSubviews
 {
     %orig;
-    if (!self.injected) 
-    {
-		self.BGCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-		self.BGCanvas.hidden = YES;
-		[self addSubview:self.BGCanvas];
-    	[self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
-		self.injected = YES;
 
+	FBSystemGestureView *selfView = (((FBSystemGestureView *)self));
+    if (!selfView.injected) 
+    {
+		selfView.recognitionCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+		selfView.recognitionCanvas.hidden = YES;
+		[selfView addSubview:selfView.recognitionCanvas];
+    	[selfView.recognitionCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
+        [[NSNotificationCenter defaultCenter] addObserver:selfView selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:selfView selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
+		selfView.injected = YES;
+		/*
 		borderLayer = [CALayer layer];
 		CGRect borderFrame = CGRectMake(0, 0, (self.frame.size.width),(self.frame.size.height));
 		[borderLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
@@ -106,30 +90,23 @@ static CALayer *borderLayer;
 		[borderLayer setBorderColor:[[UIColor redColor] CGColor]];
 		[self.layer addSublayer:borderLayer];
 		borderLayer.hidden = YES;
+		*/
     }
 }
-
-
 
 %new
 - (void)activateSigne
 {
-    [self.BGCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
-	self.BGCanvas.hidden = NO;
-	borderLayer.hidden = NO;
-	
-	
+    [((FBSystemGestureView *)self).recognitionCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
+	((FBSystemGestureView *)self).recognitionCanvas.hidden = NO;
 }
 
 %new
 - (void)deactivateSigne
 {
-    [self.BGCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-	self.BGCanvas.hidden = YES;
-	borderLayer.hidden = YES;
-	
+    [((FBSystemGestureView *)self).recognitionCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
+	((FBSystemGestureView *)self).recognitionCanvas.hidden = YES;
 }
-
 
 %end
 
@@ -154,8 +131,6 @@ static CALayer *borderLayer;
 	int type = arg1.allPresses.allObjects[0].type; 
 	int force = arg1.allPresses.allObjects[0].force;
 
-	NSLog(@"Signe: %d - %d", type, force);
-
 	// type = 101 -> Home button
 	// type = 102 -> vol up
 	// type = 103 -> vol down
@@ -165,39 +140,26 @@ static CALayer *borderLayer;
 	// force = 0 -> button released
 	// force = 1 -> button pressed
 	if ([arg1.allPresses.allObjects count] <= 1) return %orig;
+	UIPress *press0 = arg1.allPresses.allObjects[0];
+	UIPress *press1 = arg1.allPresses.allObjects[1];
 	// If volume up + down or volume down + up has been pressed
-	if ([_activationGesture isEqualToString:@"volUpAndDown"]) 
+	;
+	if (activationStyle == 1) 
 	{
-		if (arg1.allPresses.allObjects[0].type == 102 && force == 1 && arg1.allPresses.allObjects[1].type == 103 && arg1.allPresses.allObjects[1].force == 1 || arg1.allPresses.allObjects[0].type == 103 && force == 1 && arg1.allPresses.allObjects[1].type == 102 && arg1.allPresses.allObjects[1].force == 1) 
+		if (((unsigned)((press1.type) - 102)) <= 1 && ((unsigned)((press0.type) - 102)) <= 1 && press0.force + press1.force == 2) 
 		{
-			[self activateTouchRecognizer];
+			toggleSigne();
 			return NO;
 		}
 	}
-	else if ([_activationGesture isEqualToString:@"volDownPower"])
+	else if (activationStyle == 0)
 	{
-		if (arg1.allPresses.allObjects[0].type >= 103 && force == 1 && arg1.allPresses.allObjects[1].type >= 103 && arg1.allPresses.allObjects[1].force == 1) //Power PRESSED
+		if (press0.type + press1.type == 207 && press1.force + press0.force == 2) 
 		{
-			[self activateTouchRecognizer];
+			toggleSigne();
 			return NO;
 		}
 	}
-	
-	
-	 
-
-	/* 	if (type == 103 && force == 1) //Power PRESSED
-	{
-		if (self.pressedTimer == nil) self.pressedTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(activateTouchRecognizer) userInfo:nil repeats:NO];
-	}
-
-	if (type == 103 && force == 0) //Power RELEASED
-	{
-		if (self.pressedTimer != nil) {
-			[self.pressedTimer invalidate];
-			self.pressedTimer = nil;
-		}
-	} */
 
 	return %orig;
 }
@@ -205,21 +167,16 @@ static CALayer *borderLayer;
 %new 
 -(void)volup{}
 
-%new 
-- (void)activateTouchRecognizer
+%end
+
+%hook SigneManager
+
+// This is either genius or horrible. 
+
+-(void)toggleEditor
 {
-	if (!self.signeActive || self.signeActive == nil) // If signe not active
-	{
-		self.signeActive = YES;
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"ActivateSigne" object:nil];
-		AudioServicesPlaySystemSound(1519);
-	}
-	else // If signe is active
-	{
-		self.signeActive = NO;
-		[[NSNotificationCenter defaultCenter] postNotificationName:@"DeactivateSigne" object:nil];
-		AudioServicesPlaySystemSound(1519);
-	}
+	%orig;
+	toggleSigne();
 }
 
 %end
@@ -257,7 +214,7 @@ static BOOL boolValueForKey(NSString *key, BOOL defaultValue)
     return (prefs && [prefs objectForKey:key]) ? [[prefs objectForKey:key] boolValue] : defaultValue;
 }
 
-static void processNumber(NSString *number, NSString *numberButLessVerbose) // I'm sorry, this needs fixed -kr
+static void processNumber(NSString *number, NSString *numberButLessVerbose) // TODO: Find a better way to do this
 {
 	NSInteger numberMode = [[prefs objectForKey:[NSString stringWithFormat:@"actionMode%@", number]] intValue] ?:0;
 	if (numberMode == 0)
@@ -288,7 +245,7 @@ static void preferencesChanged()
 
 	BOOL _pfDrawingEnabled = boolValueForKey(@"drawingEnabled", YES);
 	_pfTweakEnabled = boolValueForKey(@"enabled", YES);
-	_activationGesture = [prefs objectForKey:@"activationGestureKey"] ?: @"";
+	activationStyle = [[prefs objectForKey:@"activationStyle"] intValue] ?: 0;
 	
 	//_pfSiriReplaced = boolValueForKey(@"siriReplaced", NO);
 	//NSLog(@"Signe: ACTIVATION GESTURE: %@", _activationGesture);
@@ -328,6 +285,13 @@ static void preferencesChanged()
         NULL,
         CFNotificationSuspensionBehaviorDeliverImmediately
     );
+	Class gestureWindow;
+    if (@available(iOS 13, *)) {
+        gestureWindow = NSClassFromString(@"UISystemGestureView");
+    }
+    else {
+        gestureWindow = NSClassFromString(@"FBSystemGestureView");
+    }
 	if (_pfTweakEnabled) 
-		%init(Signe);
+		%init(Signe, SystemGestureView=gestureWindow);
 }

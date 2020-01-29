@@ -510,7 +510,8 @@
 {
     NSLog(@"[Signe] NUMBER DETECTED: %@", n.value); 
 
-    [[UIApplication sharedApplication] activateTouchRecognizer];
+    [[SigneManager sharedManager] toggleEditor];
+
     if ([[n value] containsString:@"p"]) return;
     prevStrokePoints = nil;
     prevStrokeDate = [NSDate date];
@@ -525,12 +526,10 @@
     [self setNeedsDisplay];
     [self clear];
         // Get the command that has been set for the key (numbers 0-9) and perform the command
-    NSString *commandKey = [[SigneUtilities sharedUtilities] getCommandForKey:n.value];
-    [[SigneUtilities sharedUtilities] performCommandForKey:commandKey];
+    [[SigneUtilities sharedUtilities] performCommandForKey:[[SigneUtilities sharedUtilities] getCommandForKey:n.value]];
 
     // If a command has not been found, perform an action.
     [[SigneManager sharedManager] performActionForKey:n.value];
-    
 
     paintLayer = nil;
 }

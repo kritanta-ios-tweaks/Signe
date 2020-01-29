@@ -34,6 +34,11 @@
     return self;
 }
 
+- (void)toggleEditor
+{
+    // stub
+}
+
 
 - (void)openApplication:(NSString *)location
 {

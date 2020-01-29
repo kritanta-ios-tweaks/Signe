@@ -6,18 +6,14 @@
 	<array>
 		<dict>
 			<key>cellClass</key>
-			<string>KRTwitterCell</string>
-			<key>label</key>
+			<string>DuoKRTwitterCell</string>
+			<key>firstLabel</key>
 			<string>Kritanta</string>
-			<key>accountName</key>
+			<key>firstAccount</key>
 			<string>_kritanta</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>KRTwitterCell</string>
-			<key>label</key>
+			<key>secondLabel</key>
 			<string>Tr1Fecta</string>
-			<key>accountName</key>
+			<key>secondAccount</key>
 			<string>FectaTr1</string>
 		</dict>
 		<dict>
@@ -59,8 +55,10 @@
 			<string>PSLinkListCell</string>
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
+			<key>default</key>
+			<real>0</real>
 			<key>key</key>
-			<string>activationGestureKey</string>
+			<string>activationStyle</string>
 			<key>label</key>
 			<string>Activation Gestures</string>
 			<key>detail</key>
@@ -68,12 +66,14 @@
 			<key>validTitles</key>
 			<array>
 				<string>Volume Down + Power</string>
-				<string>Volume Up/Down + Volume Down/Up</string>
+				<string>Volume Up + Volume Down</string>
+				<string>Tap Home Bar</string>
 			</array>
 			<key>validValues</key>
 			<array>
-				<string>volDownPower</string>
-				<string>volUpAndDown</string>
+				<real>0</real>
+				<real>1</real>
+				<real>2</real>
 			</array>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>

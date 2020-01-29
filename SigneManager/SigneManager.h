@@ -15,6 +15,9 @@
 
 + (instancetype)sharedManager;
 
+
+- (void)toggleEditor;
+
 - (void)showAlertController:(NSString *)alertMessage selector:(SEL)method withObject:(id)object;
 - (void)setBundleToOpen:(NSString *)bundle forKey:(NSString *)key;
 - (void)setURLToOpen:(NSString *)url forKey:(NSString *)key;
