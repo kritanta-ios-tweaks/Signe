@@ -83,8 +83,8 @@
 
 	self.headerView = [[UIView alloc] initWithFrame:CGRectMake(0,280,[[UIScreen mainScreen] bounds].size.width, 200)];
 	self.headerView.backgroundColor = [UIColor colorWithRed:0.00 green:0.31 blue:0.39 alpha:0.0];
-	UILabel *signeLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 70, 100, 50)];
-	signeLabel.font=[UIFont boldSystemFontOfSize:35];
+	UILabel *signeLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 70, 300, 50)];
+	signeLabel.font=[UIFont boldSystemFontOfSize:38];
 	signeLabel.textColor = [UIColor whiteColor];
 	signeLabel.text = @"Signe";
 	[self.headerView addSubview:signeLabel];

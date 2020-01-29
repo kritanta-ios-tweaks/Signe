@@ -17,3 +17,12 @@
 
 @interface FBSystemGestureView : UISystemGestureView
 @end
+
+
+@interface SpringBoard : UIApplication
+-(BOOL)_handlePhysicalButtonEvent:(id)arg1;
+- (void)activateTouchRecognizer;
+@property (nonatomic, assign) BOOL signeActive;
+@property (nonatomic, assign) BOOL volDownActive;
+@property (nonatomic, retain) NSTimer *pressedTimer;
+@end

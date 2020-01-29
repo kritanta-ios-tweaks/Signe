@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>cellClass</key>
-			<string>DuoKRTwitterCell</string>
+			<string>DuoTwitterCell</string>
 			<key>firstLabel</key>
 			<string>Kritanta</string>
 			<key>firstAccount</key>
@@ -15,6 +15,8 @@
 			<string>Tr1Fecta</string>
 			<key>secondAccount</key>
 			<string>FectaTr1</string>
+			<key>height</key>
+			<real>57</real>
 		</dict>
 		<dict>
 			<key>cell</key>

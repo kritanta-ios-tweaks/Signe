@@ -4,12 +4,12 @@ ARCHS = arm64 arm64e
 
 BUNDLE_NAME = SignePrefs
 
-SignePrefs_FILES = SIGRootListController.m KRLinkCell.m KRTableCell.m KRTwitterCell.m
+SignePrefs_FILES = SIGRootListController.m KRLinkCell.m KRTableCell.m KRTwitterCell.m DuoTwitterCell.m
 SignePrefs_INSTALL_PATH = /Library/PreferenceBundles
 SignePrefs_LIBRARIES = applist
 SignePrefs_FRAMEWORKS = UIKit
 SignePrefs_PRIVATE_FRAMEWORKS = Preferences
-SignePrefs_CFLAGS = -fobjc-arc -Wno-deprecated-declarations
+SignePrefs_CFLAGS = -fobjc-arc -Wno-deprecated-declarations 
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 
