@@ -69,13 +69,11 @@
 			<array>
 				<string>Volume Down + Power</string>
 				<string>Volume Up + Volume Down</string>
-				<string>Tap Home Bar</string>
 			</array>
 			<key>validValues</key>
 			<array>
 				<real>0</real>
 				<real>1</real>
-				<real>2</real>
 			</array>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
