@@ -3,6 +3,7 @@
 #include "SigneManager.h"
 #include "SigneUtilities.h"
 #import <AudioToolbox/AudioToolbox.h>
+#include "libcolorpicker.h"
 
 static NSDictionary *prefs;
 
@@ -237,6 +238,15 @@ static void processNumber(NSString *number, NSString *numberButLessVerbose) // T
 		}
 }
 
+static NSString* hexStringForColor(UIColor *color) {
+      const CGFloat *components = CGColorGetComponents(color.CGColor);
+      CGFloat r = components[0];
+      CGFloat g = components[1];
+      CGFloat b = components[2];
+      NSString *hexString=[NSString stringWithFormat:@"%02X%02X%02X", (int)(r * 255), (int)(g * 255), (int)(b * 255)];
+      return hexString;
+}
+
 static void preferencesChanged() 
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
@@ -246,7 +256,14 @@ static void preferencesChanged()
 	BOOL _pfDrawingEnabled = boolValueForKey(@"drawingEnabled", YES);
 	_pfTweakEnabled = boolValueForKey(@"enabled", YES);
 	activationStyle = [[prefs objectForKey:@"activationStyle"] intValue] ?: 0;
-	
+
+	NSString *colorFromKey = [prefs objectForKey:@"strokeColor"]; 
+	UIColor *strokeColor = LCPParseColorString(colorFromKey, @"#47CCA3"); // colorFromKey, Fallback <-- arguments
+	NSLog(@"Signe: color: %@ ", strokeColor); 
+	//NSLog(@"[Signe]: HEX: %@", hexStringForColor([UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]));
+
+	int strokeSize = [[prefs objectForKey:@"strokeSize"] intValue] ?: 10;
+	NSLog(@"Signe: Stroke: %d", strokeSize);
 	//_pfSiriReplaced = boolValueForKey(@"siriReplaced", NO);
 	//NSLog(@"Signe: ACTIVATION GESTURE: %@", _activationGesture);
 	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
@@ -265,9 +282,12 @@ static void preferencesChanged()
 	[[SigneManager sharedManager] setURLToOpen:@"https://patreon.com/KritantaDev" forKey:@"V"]; 
 
 	[[SigneManager sharedManager] setShouldDrawCharacters:_pfDrawingEnabled];
-	[[SigneManager sharedManager] setStrokeColor:[UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]];
-	[[SigneManager sharedManager] setStrokeSize:10];
+	[[SigneManager sharedManager] setStrokeColor:strokeColor];
+	[[SigneManager sharedManager] setStrokeSize:strokeSize];
+	
 }
+
+
 
 #pragma mark ctor
 
