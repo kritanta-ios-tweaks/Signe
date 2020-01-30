@@ -67,7 +67,7 @@
         [self.templates addObject:newTemplate];
     }
     NSLog(@"Templates %@", self.templates);
-    NSLog(@"Template count %i", [self.templates count]);
+    NSLog(@"Template count %lu", (unsigned long)[self.templates count]);
 }
 
 - (void)createTemplatesFromJSONData:(NSData *)jsonData {

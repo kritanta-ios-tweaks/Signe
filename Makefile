@@ -1,9 +1,11 @@
-#INSTALL_TARGET_PROCESSES = SpringBoard
+INSTALL_TARGET_PROCESSES = SpringBoard
 
 # Comment this out to enable debug versions
 PACKAGE_VERSION=$(THEOS_PACKAGE_BASE_VERSION)
 
-ARCHS = arm64 arm64e 
+FINALPACKAGE = 1
+
+ARCHS = armv7 arm64 arm64e 
 
 #ARCHS = x86_64 
 
@@ -37,15 +39,13 @@ SOURCES += $(shell find Signemanager -name '*.m')
 Signe_FILES = Signe.xm ${SOURCES}
 Signe_LIBRARIES = applist colorpicker
 Signe_PRIVATE_FRAMEWORKS = MediaRemote
-Signe_CFLAGS += -fobjc-arc -w -Wno-deprecated-declarations $(IMPORTS)
+Signe_CFLAGS += -fobjc-arc -Wno-deprecated-declarations $(IMPORTS)
 
 
 internal-stage::
 	$(ECHO_NOTHING)mkdir -p $(THEOS_STAGING_DIR)/Library/Application\ Support/Signe.bundle/$(ECHO_END)
 	$(ECHO_NOTHING)cp -a BGNumericalGlyphRecognizer/Resources/. $(THEOS_STAGING_DIR)/Library/Application\ Support/Signe.bundle/$(ECHO_END)
 
-after-install:: # Fast respring!!
-	install.exec "sbreload"
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += signeprefs

@@ -31,7 +31,7 @@
         Airplane mode / check
         Turn on data / check*/
 
-        self.commands = @{
+        self.commands = [@{
             @"sbreload": [NSValue valueWithPointer:@selector(sbreload)],
             @"respring": [NSValue valueWithPointer:@selector(respring)],
             @"safemode": [NSValue valueWithPointer:@selector(enterSafeMode)],
@@ -47,7 +47,7 @@
             @"controlCenter": [NSValue valueWithPointer:@selector(presentControlCenter)],
             @"notificationCenter": [NSValue valueWithPointer:@selector(presentNotificationCenter)],
             @"flashlight": [NSValue valueWithPointer:@selector(toggleFlashlight)],
-        };
+        } mutableCopy];
         self.commandKeys = [[NSMutableDictionary alloc] init];
         self.shouldContinueAfterAlert = NO;
 
@@ -296,7 +296,7 @@
     // Get the selector for our command by the commandKey and perform the command's selector
     SEL commandToRun = [[self.commands objectForKey:commandKey] pointerValue];
     if (commandToRun == nil) return;
-    [self performSelector:commandToRun];
+    SuppressPerformSelectorLeakWarning([self performSelector:commandToRun]);
 }
 
 - (void)showAlertController:(NSString *)alertMessage selector:(SEL)method
@@ -316,7 +316,7 @@
             self.shouldContinueAfterAlert = YES;
             // Call the method that has been passed as selector, if the user clicks yes.
             // Might not be the best way?
-            [self performSelector:method];
+            SuppressPerformSelectorLeakWarning([self performSelector:method]);
     }];
 
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault

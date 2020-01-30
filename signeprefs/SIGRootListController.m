@@ -9,6 +9,7 @@
 
 #include "SIGRootListController.h"
 #import <AppList/AppList.h>
+#import <spawn.h>
 
 @implementation SIGRootListController
 
@@ -50,7 +51,7 @@
 	if (!self.showHeader) return;
 
 	self.navigationController.navigationController.navigationBar.translucent = YES;
-	self.navigationController.navigationBar.tintColor = [UIColor systemBlueColor];
+	//self.navigationController.navigationBar.tintColor = [UIColor systemBlueColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -147,6 +148,14 @@
 	CGFloat adesiredY = 0.60 * aheight;
 	self.headerView.subviews[1].frame = CGRectMake(15, adesiredY, 300, 50);
 }
+
+
+- (void)respring:(id)sender {
+	  pid_t pid;
+    const char* args[] = {"killall", "backboardd", NULL};
+    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char* const*)args, NULL);
+}
+
 @end
 
 @implementation SIGNumberOneController
@@ -200,6 +209,8 @@
 
 	NSLog(@"[Signe]: Set Prefs value: %@ and specifier: %@", value, specifier);
 }
+
+
 
 @end
 

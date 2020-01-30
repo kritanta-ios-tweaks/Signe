@@ -1,9 +1,12 @@
 //
-// DuoTwitterCell.m
-// With this, my bastardization of CepheiPrefs is complete
-// Witness me
+//	DuoTwitterCell.m
+//	With this, my bastardization of CepheiPrefs is complete
+//	Witness me
 //
-// Apache 2.0 License for cephei code used in KRPrefsLicense located in preference bundle
+//	The way this checks screen width is flawed, so dont use this till this 
+//	message is no longer here :)
+//
+//	Apache 2.0 License for cephei code used in KRPrefsLicense located in preference bundle
 //
 
 

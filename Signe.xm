@@ -15,10 +15,12 @@
 
 static NSDictionary *prefs;
 
-static BOOL activationStyle = 0;
+static int activationStyle = 0;
 static BOOL _pfTweakEnabled = YES;
 
 static BOOL signeActive = NO;
+
+static BGNumberCanvas *canvas;
 
 //=======================================
 //
@@ -101,6 +103,7 @@ void toggleSigne()
     {
 		// See the README for information on what BGNumberCanvas is and how we use it. 
 		selfView.recognitionCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+		canvas = selfView.recognitionCanvas;
 		selfView.recognitionCanvas.hidden = YES;
 		[selfView addSubview:selfView.recognitionCanvas];
     	[selfView.recognitionCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
@@ -138,8 +141,6 @@ void toggleSigne()
 	// Although the tweak isn't injected in the first place when disabled, if a user toggles enable, immediately stop listening for
 	//		the activation gestures. 
 	if (!_pfTweakEnabled) return %orig;
-	int type = arg1.allPresses.allObjects[0].type; 
-	int force = arg1.allPresses.allObjects[0].force;
 
 	// type = 101 -> Home button
 	// type = 102 -> Vol up
@@ -274,15 +275,6 @@ static void processNumber(NSString *number, NSString *numberButLessVerbose) // T
 		}
 }
 
-static NSString* hexStringForColor(UIColor *color) {
-      const CGFloat *components = CGColorGetComponents(color.CGColor);
-      CGFloat r = components[0];
-      CGFloat g = components[1];
-      CGFloat b = components[2];
-      NSString *hexString=[NSString stringWithFormat:@"%02X%02X%02X", (int)(r * 255), (int)(g * 255), (int)(b * 255)];
-      return hexString;
-}
-
 static void preferencesChanged() 
 {
     CFPreferencesAppSynchronize((CFStringRef)kIdentifier);
@@ -293,16 +285,11 @@ static void preferencesChanged()
 	_pfTweakEnabled = boolValueForKey(@"enabled", YES);
 	activationStyle = [[prefs objectForKey:@"activationStyle"] intValue] ?: 0;
 
-	NSString *colorFromKey = [prefs objectForKey:@"strokeColor"]; 
-	UIColor *strokeColor = LCPParseColorString(colorFromKey, @"#47CCA3"); // colorFromKey, Fallback <-- arguments
-	NSLog(@"Signe: color: %@ ", strokeColor); 
-	//NSLog(@"[Signe]: HEX: %@", hexStringForColor([UIColor colorWithRed:0.28 green:0.80 blue:0.64 alpha:1.0]));
+	NSString *colorFromKey = [[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.kritanta.signecolors.plist"] objectForKey:@"strokeColor"]; 
+
+	UIColor *strokeColor = LCPParseColorString(colorFromKey, @"#626ECC");
 
 	int strokeSize = [[prefs objectForKey:@"strokeSize"] intValue] ?: 10;
-	NSLog(@"Signe: Stroke: %d", strokeSize);
-	//_pfSiriReplaced = boolValueForKey(@"siriReplaced", NO);
-	//NSLog(@"Signe: ACTIVATION GESTURE: %@", _activationGesture);
-	//NSLog(@"Signe: %@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -%@ -", zero, one, two, three, four, five, six, seven, eight, nine);
 
 	processNumber(@"Zero", @"0");
 	processNumber(@"One", @"1");
@@ -320,6 +307,11 @@ static void preferencesChanged()
 	[[SigneManager sharedManager] setShouldDrawCharacters:_pfDrawingEnabled];
 	[[SigneManager sharedManager] setStrokeColor:strokeColor];
 	[[SigneManager sharedManager] setStrokeSize:strokeSize];
+
+	if (canvas)
+	{
+		[canvas setup];
+	}
 	
 }
 

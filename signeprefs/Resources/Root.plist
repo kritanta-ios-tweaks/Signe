@@ -34,6 +34,34 @@
 		</dict>
 		<dict>
 			<key>cell</key>
+			<string>PSLinkListCell</string>
+			<key>defaults</key>
+			<string>me.kritanta.signeprefs</string>
+			<key>default</key>
+			<real>0</real>
+			<key>key</key>
+			<string>activationStyle</string>
+			<key>label</key>
+			<string>Activation Gestures</string>
+			<key>detail</key>
+            <string>PSListItemsController</string>
+			<key>validTitles</key>
+			<array>
+				<string>Volume Down + Power</string>
+				<string>Volume Up + Volume Down</string>
+				<string>Tap Home Bar</string>
+			</array>
+			<key>validValues</key>
+			<array>
+				<real>0</real>
+				<real>1</real>
+				<real>2</real>
+			</array>
+			<key>PostNotification</key>
+			<string>me.kritanta.signeprefs/Prefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Appearance</string>
@@ -53,8 +81,8 @@
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
-			<key>cell</key>
-			<string>PSSliderCell</string>
+			<key>cellClass</key>
+			<string>KRLabeledSliderCell</string>
 			<key>default</key>
 			<integer>10</integer>
 			<key>defaults</key>
@@ -64,17 +92,19 @@
 			<key>key</key>
 			<string>strokeSize</string>
 			<key>label</key>
-			<string>Size</string>
+			<string>Stroke Size</string>
 			<key>min</key>
 			<integer>1</integer>
 			<key>max</key>
-			<integer>10</integer>
+			<integer>15</integer>
 			<key>showValue</key>
 			<true/>
 			<key>isSegmented</key>
 			<true/>
 			<key>segmentCount</key>
-			<integer>10</integer>
+			<integer>15</integer>
+			<key>height</key>
+			<real>80</real>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
@@ -86,11 +116,11 @@
 			<key>libcolorpicker</key>
 			<dict>
 				<key>defaults</key>
-				<string>me.kritanta.signeprefs</string>
+				<string>me.kritanta.signecolors</string>
 				<key>key</key>
 				<string>strokeColor</string>
 				<key>fallback</key>
-				<string>#47CCA3</string>
+				<string>#626ECC</string>
 				<key>alpha</key>
 				<true/> 
 				<key>PostNotification</key>
@@ -98,38 +128,6 @@
 			</dict>
 			<key>label</key>
 			<string>Stroke Color</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>Gesture Settings</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSLinkListCell</string>
-			<key>defaults</key>
-			<string>me.kritanta.signeprefs</string>
-			<key>default</key>
-			<real>0</real>
-			<key>key</key>
-			<string>activationStyle</string>
-			<key>label</key>
-			<string>Activation Gestures</string>
-			<key>detail</key>
-            <string>PSListItemsController</string>
-			<key>validTitles</key>
-			<array>
-				<string>Volume Down + Power</string>
-				<string>Volume Up + Volume Down</string>
-			</array>
-			<key>validValues</key>
-			<array>
-				<real>0</real>
-				<real>1</real>
-			</array>
-			<key>PostNotification</key>
-			<string>me.kritanta.signeprefs/Prefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>

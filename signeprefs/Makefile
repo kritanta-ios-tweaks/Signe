@@ -1,10 +1,10 @@
-export TARGET = iphone:clang::11.0
+TARGET = iphone:clang::9.0
 include $(THEOS)/makefiles/common.mk
-ARCHS = arm64 arm64e
+ARCHS = armv7 arm64 arm64e
 
 BUNDLE_NAME = SignePrefs
 
-SignePrefs_FILES = SIGRootListController.m KRLinkCell.m KRTableCell.m KRTwitterCell.m DuoTwitterCell.m
+SignePrefs_FILES = SIGRootListController.m KRLinkCell.m KRTableCell.m KRTwitterCell.m DuoTwitterCell.m KRLabeledSliderCell.m
 SignePrefs_INSTALL_PATH = /Library/PreferenceBundles
 SignePrefs_LIBRARIES = applist colorpicker
 SignePrefs_FRAMEWORKS = UIKit

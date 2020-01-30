@@ -70,7 +70,9 @@
 {
     SEL action = [[self.actions objectForKey:key] pointerValue];
     if (action == nil) return;
-    [self performSelector:action withObject:(NSString *)[self.actionLocations objectForKey:key]];
+    SuppressPerformSelectorLeakWarning(
+        [self performSelector:action withObject:(NSString *)[self.actionLocations objectForKey:key]]
+    );
 }
 
 @end

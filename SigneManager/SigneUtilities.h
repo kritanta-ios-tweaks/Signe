@@ -5,6 +5,14 @@
 #import <AVFoundation/AVFoundation.h>
 
 
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+    do { \
+        _Pragma("clang diagnostic push") \
+        _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+        Stuff; \
+        _Pragma("clang diagnostic pop") \
+    } while (0)
+    
 @interface SigneUtilities : NSObject
 
 @property (nonatomic, retain) NSMutableDictionary *commands;
@@ -22,7 +30,6 @@
 
 - (BOOL)keyHasCommand:(NSString *)key;
 - (void)setCommandToRun:(NSString *)command forKey:(NSString *)key;
-- (void)runCommand:(NSString *)commandName;
 - (NSString *)getCommandForKey:(NSString *)key;
 - (void)performCommandForKey:(NSString *)commandKey;
 - (void)showAlertController:(NSString *)alertMessage selector:(SEL)method;
