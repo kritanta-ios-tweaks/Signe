@@ -30,9 +30,9 @@
 	return _specifiers;
 }
 - (void)viewWillAppear:(BOOL)animated {
-	[UISegmentedControl appearanceWhenContainedInInstancesOfClasses:@[self.class]].tintColor = [UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0];
-    [[UISwitch appearanceWhenContainedInInstancesOfClasses:@[self.class]] setOnTintColor:[UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0]];
-    [[UISlider appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTintColor:[UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0]];
+	[UISegmentedControl appearanceWhenContainedInInstancesOfClasses:@[self.class]].tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];
+    [[UISwitch appearanceWhenContainedInInstancesOfClasses:@[self.class]] setOnTintColor:[UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0]];
+    [[UISlider appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTintColor:[UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0]];
     
     [super viewWillAppear:animated];
 
@@ -40,7 +40,7 @@
 	if (!self.showHeader) return;
 
 	self.navigationController.navigationController.navigationBar.translucent = NO;
-	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0];
+	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];
 
 	//[self scrollViewDidScroll:self.scrollView];
 }
@@ -61,7 +61,7 @@
 	if (!self.showHeader) return;
 
     self.navigationController.navigationController.navigationBar.translucent = NO;
-	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0];
+	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];
 }
 - (void)viewDidLoad
 {
@@ -73,7 +73,7 @@
 								style:UIBarButtonItemStylePlain
 								target:self
 								action:@selector(respring:)];
-	self.respringButton.tintColor = [UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0];
+	self.respringButton.tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];
 	self.navigationItem.rightBarButtonItem = self.respringButton;
 
 	self.iconView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/SignePrefs.bundle/icon@2x.png"]];
@@ -103,11 +103,11 @@
 	if (!self.overflowView)
 	{
 		self.overflowView = [[UIView alloc] initWithFrame:CGRectMake(0,-310,[[UIScreen mainScreen] bounds].size.width,480)];
-		self.overflowView.backgroundColor = [UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0];
+		self.overflowView.backgroundColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];;
 		CAGradientLayer *gradient = [CAGradientLayer layer];
 
 		gradient.frame = self.overflowView.bounds;
-		gradient.colors = @[(id)[UIColor colorWithRed:0.26 green:0.52 blue:0.64 alpha:1.0].CGColor, (id)[UIColor colorWithRed:0.00 green:0.11 blue:0.18 alpha:1.0].CGColor];
+		gradient.colors = @[(id)[UIColor colorWithRed:0.29 green:0.28 blue:0.49 alpha:1.0].CGColor, (id)[UIColor colorWithRed:0.11 green:0.11 blue:0.20 alpha:1.0].CGColor];
 
 		[self.overflowView.layer insertSublayer:gradient atIndex:0];
 		[self.overflowView addSubview:self.headerView];

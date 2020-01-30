@@ -13,6 +13,14 @@
 #import "CJSONSerializer.h"
 #import "WTMGlyphDetector.h"
 
+@interface SBLockScreenManager
+
++(SBLockScreenManager *)sharedInstance;
+
+-(void)lockScreenViewControllerRequestsUnlock;
+
+@end
+
 #define SHOW_LETTERS YES
 
 @interface BGNumberCanvas (Private)
@@ -531,7 +539,11 @@
     // If a command has not been found, perform an action.
     [[SigneManager sharedManager] performActionForKey:n.value];
 
+    [[NSClassFromString(@"SBLockScreenManager") sharedInstance] lockScreenViewControllerRequestsUnlock];
+
     paintLayer = nil;
+
+
 }
 
 #pragma mark Convenience Methods
