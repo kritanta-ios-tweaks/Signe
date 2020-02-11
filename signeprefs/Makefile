@@ -1,6 +1,6 @@
-TARGET = iphone:clang::9.0
+TARGET = iphone:clang::13.1
 include $(THEOS)/makefiles/common.mk
-ARCHS = armv7 arm64 arm64e
+ARCHS = arm64 arm64e
 
 BUNDLE_NAME = SignePrefs
 

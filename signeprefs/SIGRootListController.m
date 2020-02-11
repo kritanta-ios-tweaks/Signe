@@ -23,8 +23,15 @@
 	return self;
 }
 - (NSArray *)specifiers {
+
+	BOOL _tcFDPInstalled = [[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/com.p2kdev.floatingdockplus13.list"];
+	_tcFDPInstalled = _tcFDPInstalled || [[NSFileManager defaultManager] fileExistsAtPath:@"/var/lib/dpkg/info/com.imkpatil.floatingdockplus.list"];
+
 	if (!_specifiers) {
 		_specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];
+	}
+	for (PSSpecifier *specifier in _specifiers) {
+		if([[specifier propertyForKey:@"id"] isEqualToString:@"APGH"] && _tcFDPInstalled) [specifier setProperty:@"!! Note: It looks like you're using FloatingDockPlus; This tweak has been known to cause issues with drawings being invisible." forKey:@"footerText"];
 	}
 
 	return _specifiers;

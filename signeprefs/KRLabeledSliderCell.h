@@ -1,4 +1,4 @@
-#include <Preferences/PSSliderTableCell.h>
+#include "PSSliderTableCell.h"
 
 @interface KRLabeledSliderCell : PSSliderTableCell
 @end

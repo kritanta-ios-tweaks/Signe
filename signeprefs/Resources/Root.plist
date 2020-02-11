@@ -65,6 +65,10 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Appearance</string>
+			<key>id</key>
+			<string>APGH</string>
+			<key>footerText</key>
+			<string></string>
 		</dict>
 		<dict>
 			<key>cell</key>

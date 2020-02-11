@@ -1,7 +1,7 @@
 #include "SigneUtilities.h"
 #include "SigneManager.h"
-#include "Signe.h"
-#import "MediaRemote.h"
+#include "../Signe.h"
+#import "../MediaRemote.h"
 
 @implementation SigneUtilities
 

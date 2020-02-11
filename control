@@ -1,7 +1,7 @@
 Package: me.kritanta.signe
 Name: Signe
 Depends: mobilesubstrate (>= 0.9.5000), firmware (>= 3.0), com.rpetrich.rocketbootstrap (>= 1.0.3) | firmware (<< 7.0), org.thebigboss.libcolorpicker
-Version: 0.3.1-alpha
+Version: 0.3.2-alpha
 Architecture: iphoneos-arm
 Description: Numeric Gestures to Open Apps and Websites
 Depiction: https://repo.openpack.io/depictions/?id=me.kritanta.signe

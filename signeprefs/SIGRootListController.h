@@ -1,5 +1,7 @@
-#import <Preferences/PSListController.h>
-#import <Preferences/PSSpecifier.h>
+#import "PSListController.h"
+#include <Foundation/Foundation.h>
+#include <UIKit/UIKit.h>
+#import "PSSpecifier.h"
 #import <AppList/AppList.h>
 
 @interface SIGRootListController : PSListController{

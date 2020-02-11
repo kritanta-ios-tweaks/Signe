@@ -1,4 +1,4 @@
-#import <Preferences/PSTableCell.h>
+#import "PSTableCell.h"
 
 @interface KRTableCell : PSTableCell
 @end

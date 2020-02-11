@@ -1,5 +1,5 @@
 #include "KRLabeledSliderCell.h"
-#import <Preferences/PSSpecifier.h>
+#import "PSSpecifier.h"
 
 @implementation KRLabeledSliderCell
 

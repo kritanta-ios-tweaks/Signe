@@ -8,7 +8,7 @@
 
 
 #import "KRTwitterCell.h"
-#import <Preferences/PSSpecifier.h>
+#import "PSSpecifier.h"
 #import <UIKit/UIImage+Private.h>
 #import <Foundation/Foundation.h>
 
