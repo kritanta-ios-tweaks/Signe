@@ -65,10 +65,6 @@ void toggleSigne()
 
 %end
 
-// DISCUSS(_kritanta): I personally think this might be better off manually calling libsubstrate
-//							I dislike how convoluted and unclear this is with logos, when not using logos
-//							can simplify it significantly and make it clear what is going on. 
-
 %hook SystemGestureView 
 
 // "SystemGestureView" is not a real class. 
@@ -102,11 +98,7 @@ void toggleSigne()
     if (!selfView.injected) 
     {
 		// See the README for information on what BGNumberCanvas is and how we use it. 
-		selfView.recognitionCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-		canvas = selfView.recognitionCanvas;
-		selfView.recognitionCanvas.hidden = YES;
-		[selfView addSubview:selfView.recognitionCanvas];
-    	[selfView.recognitionCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
+		
         [[NSNotificationCenter defaultCenter] addObserver:selfView selector:@selector(activateSigne) name:@"ActivateSigne" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:selfView selector:@selector(deactivateSigne) name:@"DeactivateSigne" object:nil];
 		selfView.injected = YES;
@@ -116,6 +108,11 @@ void toggleSigne()
 %new
 - (void)activateSigne
 {
+	FBSystemGestureView *selfView = (((FBSystemGestureView *)self));
+	selfView.recognitionCanvas = [[BGNumberCanvas alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	canvas = selfView.recognitionCanvas;
+	selfView.recognitionCanvas.hidden = NO;
+	[selfView addSubview:selfView.recognitionCanvas];
     [((FBSystemGestureView *)self).recognitionCanvas setValue:@NO forKey:@"deliversTouchesForGesturesToSuperview"];
 	((FBSystemGestureView *)self).recognitionCanvas.hidden = NO;
 }
@@ -123,8 +120,8 @@ void toggleSigne()
 %new
 - (void)deactivateSigne
 {
-    [((FBSystemGestureView *)self).recognitionCanvas setValue:@YES forKey:@"deliversTouchesForGesturesToSuperview"];
-	((FBSystemGestureView *)self).recognitionCanvas.hidden = YES;
+	[((FBSystemGestureView *)self).recognitionCanvas removeFromSuperview];
+    ((FBSystemGestureView *)self).recognitionCanvas = nil;
 }
 
 %end
@@ -199,8 +196,24 @@ void toggleSigne()
 	return %orig;
 }
 
+
 %new 
 -(void)volup{}
+
+%end
+
+
+%hook SBReachabilityManager
+
+-(void)_activateReachability:(id)arg
+{
+    (activationStyle == 3) ? toggleSigne() : %orig;
+}
+
+-(void)toggleReachability
+{
+    (activationStyle == 3) ? toggleSigne() : %orig;
+}
 
 %end
 
@@ -321,6 +334,8 @@ static void preferencesChanged()
 
 %ctor 
 {
+	//  TODO: SHIT IN CTOR IS BAD
+	//     NEED TO REMOVE LIKE, ALL OF THIS
     [SigneManager sharedManager];
 
     preferencesChanged();

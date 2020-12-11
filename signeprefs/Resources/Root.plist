@@ -2,15 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- hello there -->
+	<!-- https://github.com/kritantadev/signe -->
+	<!-- enjoy your stay ami -->
 	<key>items</key>
 	<array>
 		<dict>
 			<key>cellClass</key>
 			<string>DuoTwitterCell</string>
 			<key>firstLabel</key>
-			<string>Kritanta</string>
+			<string>kritanta</string>
 			<key>firstAccount</key>
-			<string>_kritanta</string>
+			<string>arm64e</string>
 			<key>secondLabel</key>
 			<string>Tr1Fecta</string>
 			<key>secondAccount</key>
@@ -50,12 +53,14 @@
 				<string>Volume Down + Power</string>
 				<string>Volume Up + Volume Down</string>
 				<string>Tap Home Bar</string>
+				<string>Reachability Gesture</string>
 			</array>
 			<key>validValues</key>
 			<array>
 				<real>0</real>
 				<real>1</real>
 				<real>2</real>
+				<real>3</real>
 			</array>
 			<key>PostNotification</key>
 			<string>me.kritanta.signeprefs/Prefs</string>
@@ -263,7 +268,7 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>footerText</key>
-			<string>The beginning of something more?</string>
+			<string>it's nice to see you again :)</string>
 		</dict>
 	</array>
 	<key>title</key>

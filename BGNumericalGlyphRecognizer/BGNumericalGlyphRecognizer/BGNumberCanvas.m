@@ -71,21 +71,30 @@
     prevDetectedNumber = nil;
     
     // initialize the glyph detector
-    self.glyphDetector = [WTMGlyphDetector detector];
-    self.glyphDetectorLock = [[NSLock alloc] init];
-    
-    // Add initial glyph templates from JSON files
-    // Rinse and repeat for each of the gestures you want to detect
-    NSArray * items = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/Library/Application Support/Signe.bundle/Glyphs/" error:nil];
-    for (NSString * item in items){
-        if ([[item pathExtension] isEqualToString:@"json"]) {
-            NSString * symbol = [item stringByDeletingPathExtension];
-            NSData *jsonData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"/Library/Application Support/Signe.bundle/Glyphs/%@.json", symbol]];
-            [glyphDetector addGlyphFromJSON:jsonData name:symbol];
+    if (![WTMGlyphDetector initialized])
+    {
+        self.glyphDetector = [WTMGlyphDetector sharedDetector];
+        self.glyphDetectorLock = [[NSLock alloc] init];
+        
+        // Add initial glyph templates from JSON files
+        // Rinse and repeat for each of the gestures you want to detect
+        NSArray * items = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/Library/Application Support/Signe.bundle/Glyphs/" error:nil];
+        for (NSString * item in items){
+            if ([[item pathExtension] isEqualToString:@"json"]) {
+                NSString * symbol = [item stringByDeletingPathExtension];
+                NSData *jsonData = [NSData dataWithContentsOfFile:[NSString stringWithFormat:@"/Library/Application Support/Signe.bundle/Glyphs/%@.json", symbol]];
+                [glyphDetector addGlyphFromJSON:jsonData name:symbol];
+            }
         }
     }
-
-    glyphDetector.delegate = self;
+    else 
+    {
+        self.glyphDetector = [WTMGlyphDetector sharedDetector];
+        self.glyphDetectorLock = [[NSLock alloc] init];
+    }
+    
+    __weak __typeof__(self) weakSelf = self;
+    glyphDetector.delegate = weakSelf;
 }
 
 #pragma mark Touch Handling
@@ -542,8 +551,7 @@
     [[NSClassFromString(@"SBLockScreenManager") sharedInstance] lockScreenViewControllerRequestsUnlock];
 
     paintLayer = nil;
-
-
+    [self removeFromSuperview];
 }
 
 #pragma mark Convenience Methods

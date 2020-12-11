@@ -1,19 +1,37 @@
-# DragonMake, named after sharing similarities with GNU Make Makefiles; does not use GNU Make.
+---
+name: Signe
+icmd: killall -9 SpringBoard
 
-# What will our generated dylib be named?
-TWEAK_NAME="Signe"
-# What type of project is this? (Tweak | Library | Prefs | SubTweak)
-TWEAK_TYPE="Tweak"
-# What files should we preprocess into .m files?
-LOGOS_FILE="Signe.xm"
-# Rest of the shit we need?
-TWEAK_FILES="$(find . -name "*.m" ! -path "./signeprefs/*" | xargs)"
-# What do we run over ssh after the deb has been installed?
-INSTALL_CMD="sbreload"
-# Libraries to link
-# libobjc and libc++ are included by default
-LIBS="applist colorpicker"
-# Frameworks
-# CoreFoundation, Foundation, UIKit, CoreGraphics, and QuartzCore are included by default
-FRAMEWORKS="MediaRemote"
-SUBPROJECTS="SignePrefs"
+Signe:
+  type: tweak
+  cflags: -include $dragondir/include/PrefixShim.h 
+  include:
+    - BGNumericalGlyphRecognizer
+    - BGNumericalGlyphRecognizer/BGNumericalGlyphRecognizer
+    - BGNumericalGlyphRecognizer/Submodules/MultistrokeGestureRecognizer-iOS/WTMGlyph
+    - BGNumericalGlyphRecognizer/Submodules/MultistrokeGestureRecognizer-iOS/WTMGlyph/Experimental
+    - BGNumericalGlyphRecognizer/Submodules/MultistrokeGestureRecognizer-iOS/WTMGlyph/Extensions
+    - BGNumericalGlyphRecognizer/Submodules/MultistrokeGestureRecognizer-iOS/WTMGlyph/JSON
+    - SigneManager
+  files:
+    - Signe.xm
+    - "SigneManager/*.m"
+    - "BGNumericalGlyphRecognizer/**/*.m"
+  frameworks:
+    - MediaRemote
+  libs:
+    - applist
+    - colorpicker
+  stage:
+    - mkdir -p .dragon/_/Library/Application\ Support/Signe.bundle/
+    - cp -a BGNumericalGlyphRecognizer/Resources/. .dragon/_/Library/Application\ Support/Signe.bundle/
+
+SignePrefs:
+  type: prefs
+  dir: signeprefs
+  files:
+    - "*.m"
+  libs:
+    - applist
+    - colorpicker
+  

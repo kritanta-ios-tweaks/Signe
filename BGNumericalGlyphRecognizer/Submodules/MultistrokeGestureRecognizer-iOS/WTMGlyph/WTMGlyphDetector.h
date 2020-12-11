@@ -13,7 +13,7 @@
 
 @interface WTMGlyphDetector : NSObject {
     
-    id<WTMGlyphDelegate> __unsafe_unretained delegate;
+    id<WTMGlyphDelegate> __weak delegate;
     
     NSMutableArray *points;
     NSMutableArray *glyphs;
@@ -23,13 +23,15 @@
     
 }
 
-@property (nonatomic, unsafe_unretained) id delegate;
+@property (nonatomic, weak) id delegate;
 @property (nonatomic, strong) NSMutableArray *points;
 @property (nonatomic, strong) NSMutableArray *glyphs;
 @property (nonatomic, assign) NSInteger timeoutSeconds;
 
 + (id)detector;
++ (id)sharedDetector;
 + (id)defaultDetector;
++ (BOOL)initialized;
 - (id)init;
 - (id)initWithGlyphs:(NSArray *)_glyphs;
 - (id)initWithDefaultGlyphs;

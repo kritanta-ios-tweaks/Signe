@@ -25,6 +25,23 @@
     return [[WTMGlyphDetector alloc] init];
 }
 
+static WTMGlyphDetector *sharedManager = nil;
+
++ (instancetype)sharedDetector
+{
+    static dispatch_once_t onceToken = 0;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[[self class] alloc] init];
+    });
+    return sharedManager;
+}
+
++ (BOOL)initialized
+{
+    return (sharedManager != nil);
+    
+}
+
 + (id)defaultDetector 
 {
     return [[WTMGlyphDetector alloc] initWithDefaultGlyphs];
