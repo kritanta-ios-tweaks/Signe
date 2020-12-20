@@ -11,6 +11,7 @@
 #import <AppList/AppList.h>
 #import <spawn.h>
 
+#include "libcolorpicker.h"
 @implementation SIGRootListController
 
 - (instancetype)init 
@@ -37,9 +38,12 @@
 	return _specifiers;
 }
 - (void)viewWillAppear:(BOOL)animated {
-	[UISegmentedControl appearanceWhenContainedInInstancesOfClasses:@[self.class]].tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];
-    [[UISwitch appearanceWhenContainedInInstancesOfClasses:@[self.class]] setOnTintColor:[UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0]];
-    [[UISlider appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTintColor:[UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0]];
+		NSString *colorFromKey = [[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.kritanta.signecolors.plist"] objectForKey:@"strokeColor"]; 
+
+	UIColor *strokeColor = LCPParseColorString(colorFromKey, @"#626ECC");
+	[UISegmentedControl appearanceWhenContainedInInstancesOfClasses:@[self.class]].tintColor = strokeColor;
+    [[UISwitch appearanceWhenContainedInInstancesOfClasses:@[self.class]] setOnTintColor:strokeColor];
+    [[UISlider appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTintColor:strokeColor];
     
     [super viewWillAppear:animated];
 
@@ -47,7 +51,7 @@
 	if (!self.showHeader) return;
 
 	self.navigationController.navigationController.navigationBar.translucent = NO;
-	self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];
+	self.navigationController.navigationBar.tintColor = strokeColor;
 
 	//[self scrollViewDidScroll:self.scrollView];
 }
@@ -76,11 +80,14 @@
 	// [UIColor colorWithRed:0.00 green:0.27 blue:0.35 alpha:1.0];
 	if (!self.showHeader) return;
 
+		NSString *colorFromKey = [[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.kritanta.signecolors.plist"] objectForKey:@"strokeColor"]; 
+
+	UIColor *strokeColor = LCPParseColorString(colorFromKey, @"#626ECC");
 	self.respringButton = [[UIBarButtonItem alloc] initWithTitle:@"Respring"
 								style:UIBarButtonItemStylePlain
 								target:self
 								action:@selector(respring:)];
-	self.respringButton.tintColor = [UIColor colorWithRed:0.25 green:0.25 blue:0.38 alpha:1.0];
+	self.respringButton.tintColor = strokeColor;
 	self.navigationItem.rightBarButtonItem = self.respringButton;
 
 	self.iconView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:@"/Library/PreferenceBundles/SignePrefs.bundle/icon@2x.png"]];
@@ -104,6 +111,16 @@
 	//[self.view addSubview:self.headerView];
 	//[self.view sendSubviewToBack:self.headerView];
 }
+- (UIColor *)darkerColorForColor:(UIColor *)c
+{
+    CGFloat r, g, b, a;
+    if ([c getRed:&r green:&g blue:&b alpha:&a])
+        return [UIColor colorWithRed:MAX(r - 0.1, 0.0)
+                               green:MAX(g - 0.1, 0.0)
+                                blue:MAX(b - 0.1, 0.0)
+                               alpha:a];
+    return nil;
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (!self.showHeader) return [super tableView:tableView cellForRowAtIndexPath:indexPath];
     tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0,0,[[UIScreen mainScreen] bounds].size.width, 170)];
@@ -120,6 +137,13 @@
 		[self.overflowView addSubview:self.headerView];
 		[tableView addSubview:self.overflowView];
 	}
+	
+	NSString *colorFromKey = [[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/me.kritanta.signecolors.plist"] objectForKey:@"strokeColor"]; 
+
+	UIColor *strokeColor = LCPParseColorString(colorFromKey, @"#626ECC");
+
+	CAGradientLayer *grad = (CAGradientLayer *)self.overflowView.layer.sublayers[0];
+	grad.colors = @[(id)strokeColor.CGColor, (id)([self darkerColorForColor:strokeColor].CGColor)];
 
 	//[tableView setContentInset:UIEdgeInsetsMake(150+tableView.contentInset.top, 0, 0, 0)];
 	//self.automaticallyAdjustsScrollViewInsets = false;
