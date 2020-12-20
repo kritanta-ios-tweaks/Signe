@@ -1,6 +1,15 @@
 ---
 name: Signe
+id: me.kritanta.signe
 icmd: killall -9 SpringBoard
+depends: mobilesubstrate (>= 0.9.5000), firmware (>= 3.0), com.rpetrich.rocketbootstrap (>= 1.0.3) | firmware (<< 7.0), ws.hbang.alderis
+version: 1.0.1
+architecture: iphoneos-arm
+desc: gesture recognition across iOS
+mtn: kritanta
+author: Tr1Fecta & kritanta
+section: Tweaks
+
 
 Signe:
   type: tweak
