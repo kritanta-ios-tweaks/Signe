@@ -25,7 +25,7 @@
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
-			<false/>
+			<true/>
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
@@ -79,7 +79,7 @@
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>default</key>
-			<false/>
+			<true/>
 			<key>defaults</key>
 			<string>me.kritanta.signeprefs</string>
 			<key>key</key>
@@ -269,6 +269,12 @@
 			<string>PSGroupCell</string>
 			<key>footerText</key>
 			<string>it's nice to see you again :)</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>build 20.12.2020 v1.0.1</string>
 		</dict>
 	</array>
 	<key>title</key>

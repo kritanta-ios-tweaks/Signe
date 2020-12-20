@@ -106,7 +106,7 @@
 	UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 120, 300, 50)];
 	versionLabel.font=[UIFont systemFontOfSize:15 weight:UIFontWeightThin];
 	versionLabel.textColor = [UIColor whiteColor];
-	versionLabel.text = @"dynamic gesture recognition anywhere in iOS";
+	versionLabel.text = @"gesture recognition across iOS";
 	[self.headerView addSubview:versionLabel];
 	//[self.view addSubview:self.headerView];
 	//[self.view sendSubviewToBack:self.headerView];
