@@ -1,11 +1,10 @@
 //
+// SIGRootListController.m
+// copyright (c) 2020 kritanta 
 //
-//
-//
-//
-//
-//
-//
+// see the included LICENSE file.
+// 
+
 
 #include "SIGRootListController.h"
 #import <AppList/AppList.h>

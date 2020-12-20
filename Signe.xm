@@ -1,11 +1,9 @@
 //
-// 	Signe.xm 
-//	Signe - Numeric Gesture Recognition anywhere on your phone.
+// Signe.xm 
+// copyright (c) 2020 kritanta 
 //
-//	Read the README.md for more general information on this project
-//
-// 	This file contains the collection of hooks needed to get it working
-//
+// see the included LICENSE file.
+// 
 
 #include "Signe.h"
 #include "SigneManager.h"

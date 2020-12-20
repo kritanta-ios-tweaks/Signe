@@ -1,3 +1,8 @@
+#
+# This should still work, however using dragon is reccomended
+# You'll need to re-create the control file, all of the values are in DragonMake
+#
+
 INSTALL_TARGET_PROCESSES = SpringBoard
 
 # Comment this out to enable debug versions
