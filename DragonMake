@@ -13,7 +13,7 @@ section: Tweaks
 
 Signe:
   type: tweak
-  cflags: -include $dragondir/include/PrefixShim.h 
+  cflags: -include $dragon_root_dir/include/PrefixShim.h 
   include:
     - BGNumericalGlyphRecognizer
     - BGNumericalGlyphRecognizer/BGNumericalGlyphRecognizer
